@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import { Route, Routes } from 'react-router-dom';
+import UpdateInfo from "./pages/UpdateInfo";
+import Stamp from "./pages/Stamp";
+import Favorite from "./pages/Favorite";
+import MyCourse from "./pages/MyCourse";
+import RequestInfo from "./pages/RequestInfo"
+
+import Scrap from './pages/Scrap';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Routes>
+            <Route path="/updateinfo" element={<UpdateInfo />} />
+            <Route path="/stamp" element={<Stamp />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/requestinfo" element={<RequestInfo />} />
+            <Route path="/updateinfo" element={<UpdateInfo />} />
+            <Route path="/updateinfo" element={<UpdateInfo />} />
+        </Routes>
+    );
 }
 
 export default App;
