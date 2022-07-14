@@ -1,0 +1,8 @@
+-- AUTO_INCREMENT 초기화 방법
+-- ALTER TABLE 테이블명 AUTO_INCREMENT=1;
+-- SET @COUNT = 0;
+-- UPDATE 테이블명 SET 바꿀 열 이름 = @COUNT:=@COUNT+1;
+
+ALTER TABLE test.place AUTO_INCREMENT=1;
+SET @COUNT = 0;
+UPDATE test.place SET p_num = @COUNT:=@COUNT+1;
