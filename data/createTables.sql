@@ -45,7 +45,7 @@ CREATE TABLE `test`.`community` (
   `cm_content` TEXT NOT NULL,
   `writer` VARCHAR(45) NOT NULL,
   `cm_type` VARCHAR(45) NOT NULL,
-  `wr_date` DATETIME NOT NULL,
+  `wr_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cm_image` VARCHAR(255) NULL,
   `cm_likeCount` INT NULL,
   `cm_commentCount` INT NULL,
@@ -64,8 +64,8 @@ CREATE TABLE `test`.`likelist` (
     REFERENCES location(l_num) ON UPDATE CASCADE ON DELETE RESTRICT);
 
 -- puzzle 테이블 생성
-CREATE TABLE `test`.`puzzle` (
-  `pz_num` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `test`.`stamp` (
+  `s_num` INT NOT NULL AUTO_INCREMENT,
   `id` VARCHAR(45) NOT NULL,
   `m_num` INT NOT NULL,
   `poster` VARCHAR(255) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `test`.`puzzle` (
   `record_image4` VARCHAR(255) NOT NULL,
   `record_title4` VARCHAR(45) NOT NULL,
   `record_content4` TEXT NOT NULL,
-  PRIMARY KEY (`pz_num`),
+  PRIMARY KEY (`s_num`),
   FOREIGN KEY (id)
     REFERENCES user(id) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (m_num)
