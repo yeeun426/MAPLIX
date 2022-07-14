@@ -1,11 +1,16 @@
-import React from 'react';
+// src/pages/Home.js
+import Layout from '../components/Layout';
 
-function LikeList(){
-    return(
+function MyPage() {
+    console.log("마이페이지");
+  return (
+    
+    <Layout activeMenu="mypage">
       <div>
-        <h2>에러방지</h2>
+        <div>즐겨찾기</div>
       </div>
-    )
-  }
+    </Layout>
+  );
+}
 
-export default LikeList;
+export default MyPage;
