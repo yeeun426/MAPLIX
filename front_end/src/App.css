@@ -6,13 +6,13 @@ body {
   font-family:'nanumsquare';
 }
 
-.Main_Search{
+.first_container{
   list-style: none;
   background-color: #E0E3E8;
   padding: 80px;
 }
 
-.Main_Search a{
+.first_container a{
   font-size: 13px;
 }
 
@@ -20,10 +20,11 @@ body {
   font-size: 40px;
 }
 
-.Main_Search input{
+.first_container input{
   width: 600px;
   height: 30px;
   border-style: none;
+  border-radius: 5px;
 }
 
 .Search_Category {

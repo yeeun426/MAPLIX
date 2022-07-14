@@ -1,0 +1,72 @@
+.second_container {
+    padding: 20px 80px;
+    height: 150px;
+    background-color:#EFF1F0;
+
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-flow: column;
+}
+
+.second_container img {
+    height: 110px;
+    max-width: fit-content;
+    align-self: center;
+    margin-top: 18px;
+}
+
+.third_container {
+    padding: 20px 80px;
+    height: 550px;
+    background-color: #E0E3E8;
+}
+
+.third_container img{
+    width: 200px;
+    height: 200px;
+    margin-top: 30px;
+}
+
+.third_list{
+    padding: 0px 100px 0px 100px;
+    display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.fourth_container{
+    display: flex;
+    height: 600px;
+    background-color: #E0DBD8;
+}
+
+.fourth_container img {
+    width: 50%;
+    object-fit: contain;
+    padding-left: 100px;
+}
+
+.fourth_item {
+    padding: 0 50px 0 50px;
+    width: 50%;
+    background-color: #F9F2C3;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#txt_course {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.Make_btn {
+    margin-top: 30px;
+    border : 1px solid black;
+    width: fit-content;
+
+    font-size: 16px;
+    padding: 10px 20px;
+}
