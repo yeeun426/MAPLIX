@@ -1,0 +1,29 @@
+.Search{
+    background-color: #E0E3E8;
+    padding: 30px 50px;
+    list-style: none;
+}
+
+.Filter{
+    display: flex;
+    place-content: center;
+    margin-bottom: 20px;
+}
+
+.FilterIcons{
+    margin : 0px auto;
+}
+
+.FilterIcons{
+    font-size : 13px;
+}
+
+.FilterIcons img {
+    width : 50px;
+}
+
+.test{
+    border: 1px solid black;
+    width: 30px;
+    height: 200px;
+}

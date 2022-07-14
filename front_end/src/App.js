@@ -1,31 +1,29 @@
-/* eslint-disable */
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import { Route, Link } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
+import Search from './pages/SearchMain'
+import Course from "./pages/Course";
+import Recommend from "./pages/SearchPage"; //추천 코스 만들면 경로 변경
+import Community from "./pages/Community";
+import Mypage from "./pages/LikeList";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
-  const onChange = (e) => {
-    console.log(e.target.value);
-  }
+
   return (
     <div className="App">
       <Navbar />
-      <div className='Main_Search'>
-        <li><a id="title">Maplix</a></li>
-        <li><a>영화, 드라마, 예능을 보면서 가고 싶은 곳을 지금 바로 찾아보세요!</a></li>
+      <Routes>
+          <Route exact path='/' element={<Search/>}></Route>
+          <Route path='/course' element={<Course/>}></Route>
+          <Route path='/recommend' element={<Recommend/>}></Route>
+          <Route path='/community' element={<Community/>}></Route>
+          <Route path='/mypage' element={<Mypage/>}></Route>
 
-        <div className='Search_Category'>
-          <li><a>title</a></li>
-          <li><a>area</a></li>
-        </div>
-  
-        <input 
-          onChange={onChange}
-          placeholder="Search"
-        />
-        
-      </div>
+          <Route path='/Search' element={<SearchPage/>}></Route>
+      </Routes>
+    
     </div>
   );
 }
