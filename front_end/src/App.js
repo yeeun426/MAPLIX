@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import { Routes, Route } from 'react-router-dom';
 import Search from './pages/SearchMain'
 import Course from "./pages/Course";
-import Recommend from "./pages/SearchPage"; //추천 코스 만들면 경로 변경
+import Recommend from "./pages/RecommendCourse";
 import Community from "./pages/Community";
 import Mypage from "./pages/LikeList";
 import SearchPage from "./pages/SearchPage";
@@ -14,6 +14,8 @@ import Stamp from './pages/Stamp';
 import MyCourse from './pages/MyCourse';
 import Request from './pages/Request';
 import UpdateInfo from './pages/UpdateInfo';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 
 function App() {
 
@@ -35,7 +37,9 @@ function App() {
           <Route path="/mypage/updateinfo" element={<UpdateInfo />} />
           
           
-          
+          <Route path='/signup' element={<SignUp/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+
           <Route path='/Search' element={<SearchPage/>}></Route>
       </Routes>
     

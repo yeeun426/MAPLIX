@@ -33,12 +33,7 @@ import styles from '../components/Community.module.css';
 
 
 import { useEffect, useState} from 'react';
-import 'C:/Users/033/Documents/관광공모전/MAPLIX/front_end/src/App.css';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import ReactHtmlParser from 'node-html-parser';
-import Axios from 'axios';
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -62,7 +57,7 @@ const WritePost = () => {
     e.preventDefault();
 
     if (!cm_title || !cm_content || !writer || !cm_type || !cm_image) {
-      toast.error("Please provide value into each input field");
+      // toast.error("Please provide value into each input field");
     } else {
       axios
       .post("http://localhost:8000/community/writepost", {
@@ -75,7 +70,7 @@ const WritePost = () => {
       .then(() => {
         setState({cm_title: "", cm_content: "", writer: "", cm_type: "", cm_image: ""});
       })
-      .catch((err) => toast.error(err.response.data));
+      // .catch((err) => toast.error(err.response.data));
     setTimeout(() => history.push("/community"), 500);
     }
   };
