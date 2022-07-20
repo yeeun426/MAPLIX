@@ -46,15 +46,7 @@ app.get("/api/community", (req, res) => {
 // SELECT * FROM test.community WHERE cm_type = "질문";
 // SELECT * FROM test.community WHERE cm_type = "자유";
 
-app.post("/api/post", (req, res) => {
-  const {cm_num, cm_title, cm_content} = req.body;
-  const sqlInsert = "INSERT INTO test.community (cm_title, cm_name) VALUES (?, ?)";
-  db.query(sqlInsert, [cm_title, cm_content], (error, result) =>{
-    if(error){
-      console.log(error);
-    }
-  });
-});
+
 
 // app.post("/insert", (req, res) => {
 //   const { cm_title } = req.body;

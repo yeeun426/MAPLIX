@@ -13,7 +13,7 @@ function Community() {
 
   // 데이터 가져오기
   const loadPost = async () => {
-    const response = await axios.get('http://localhost:3001/api/community');
+    const response = await axios.get('http://localhost:8000/api/community');
     console.log(response.data);
     setPost(response.data.reverse());
     setFiltered(response.data.reverse())
