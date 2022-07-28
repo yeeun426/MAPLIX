@@ -1,5 +1,5 @@
 .main_container{
-  padding: 10px;
+  display: flex;
 }
 
 .card_list  {
@@ -9,39 +9,41 @@
   grid-row-gap: 2rem;
   /* justify-content: center;
   flex-wrap: wrap; */
+  background-color: #E0E3E8;
 }
 
+.filter_container ol{
+  padding: 0px;
+}
 
+.filter_container ul{
+  padding: 0px;
+  border-bottom: 1px solid rgb(185, 183, 183);
+}
 
-h2{
-  font-size: 0.8rem;
+.filter_container img {
+  width: 20px;
+  margin-right: 5px;
 }
 
 .menu {
-  display: flex;
-  float: left;
-  width: 200px;
-  
-  top: 50px;
-  padding: 12px 12px 12px 0;
-  box-sizing: border-box;
+  height: 82vh;
+  background-color: #EFF1F0;
+  padding-top: 30px;
+  padding-left: 50px;
+  color: #293D45;
 }
 
-.filter_container button{
-  
-  margin-right: 2rem;
-  min-width: 5rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: white;
-  color: cadetblue;
-  border-radius: 1rem;
-  border: 2px solid black;
+.filter_container button{ 
+  padding: 10px 40px 10px 0px;
+  color: #293D45;
+  width: 100%;
   font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
-} 
+  text-align: left;
+}
 
 button.active{
-  background: cadetblue;
-  color: white;
+  background: #E0E3E8;
 }

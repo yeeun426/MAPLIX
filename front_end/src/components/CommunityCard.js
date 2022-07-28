@@ -1,4 +1,4 @@
-import { specialChars } from "@testing-library/user-event";
+// import { specialChars } from "@testing-library/user-event";
 import styles from "./CommunityCard.module.css";
 
 export default function CommunityCard({card}) {
