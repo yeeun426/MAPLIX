@@ -1,8 +1,9 @@
 // src/pages/writepost.js
-import Navbar from '../components/Navbar';
-import Layout from '../components/Layout';
-import CommunitySideBar from './CommunitySidebar';
+// import Navbar from '../components/Navbar';
+// import Layout from '../components/Layout';
+// import CommunitySideBar from './CommunitySidebar';
 import styles from '../components/Community.module.css';
+import write from '../img/write.png';
 
 // function WritePost(){
 
@@ -96,73 +97,76 @@ const WritePost = () => {
 
 
   return (
-    <div style={{marginTop: "100px"}}>
-      <form style={{
-        margin: "auto",
-        padding: "15px",
-        maxWidth: "400px",
-        alignContent: "center"
-      }}
-      onSubmit={handleSubmit}
-      >
-        <label htmlFor='cm_title'>Title</label>
-        <input
-        type="text"
-        id="cm_title"
-        name="cm_title"
-        placeholder='제목'
-        vlaue={cm_title}
-        onChange={handleInputChange}
-        />
+    <div style={{padding:"30px", "background-color":"#E0E3E8"}}>
+      <div className={styles.write_container}>
+        <div style={{display:"flex"}}>
+          <img src={write} alt = "write" style={{width:'30px'}}/>
+          <span>글쓰기</span>
+        </div>
+        <form 
+          className={styles.form_container}
+        // style={{
+        //   margin: "auto",
+        //   padding: "15px",
+        //   maxWidth: "400px",
+        //   alignContent: "center"
+        // }}
+          onSubmit={handleSubmit}
+        >
+          <div className={styles.write_item}>
+            <label htmlFor='cm_title'>제목</label>
+            <input
+            type="text"
+            id="cm_title"
+            name="cm_title"
+            placeholder='제목'
+            vlaue={cm_title}
+            onChange={handleInputChange}
+            />
+          </div>
+
+          <div className={styles.write_item}>
+            <label htmlFor='cm_content'>내용</label>
+            <input className={styles.content}
+            type="text"
+            id="cm_content"
+            name="cm_content"
+            placeholder='내용'
+            vlaue={cm_content}
+            onChange={handleInputChange}
+            />
+          </div>
+
+          <div className={styles.write_item}>
+            <label htmlFor='writer'>작성자</label>
+            <input
+            type="text"
+            id="writer"
+            name="writer"
+            placeholder='작성자'
+            vlaue={writer}
+            onChange={handleInputChange}
+            />
+          </div>
+
+          <div className={styles.write_item}>
+            <label htmlFor='cm_type'>유형</label>
+            <select name="cm_type" onChange={handleInputChange} vlaue={cm_type} id="cm_type">
+                <option value="동행">동행</option>
+                <option value="질문">질문</option>
+                <option value="자유">자유</option>
+            </select>
+          </div>
+
+        <div className={styles.write_item}>
+          <label htmlFor='cm_image'>이미지</label>
+          <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} />
+        </div>
         <br></br>
 
-        <label htmlFor='cm_content'>내용</label>
-        <input className={styles.content}
-        type="text"
-        id="cm_content"
-        name="cm_content"
-        placeholder='내용'
-        vlaue={cm_content}
-        onChange={handleInputChange}
-        />
-        <br></br>
-
-        <label htmlFor='writer'>작성자</label>
-        <input
-        type="text"
-        id="writer"
-        name="writer"
-        placeholder='작성자'
-        vlaue={writer}
-        onChange={handleInputChange}
-        />
-        <br></br>
-
-        <label htmlFor='cm_type'>유형</label>
-        <select name="cm_type" onChange={handleInputChange} vlaue={cm_type} id="cm_type">
-             <option value="동행">동행</option>
-             <option value="질문">질문</option>
-             <option value="자유">자유</option>
-         </select>
-        <br></br>
-
-        {/* <input ref={logoImgInput} type='file' className='imgInput' id='logoImg' accept='image/*' name='file' onChange={onImgChange}/> */}
-
-        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} />
-
-        {/* <label htmlFor='cm_image'>이미지</label>
-        <input 
-        type="text"
-        id="cm_image"
-        name="cm_image"
-        placeholder='이미지'
-        vlaue={cm_image}
-        onChange={handleInputChange}
-        /> */}
-        <br></br>
-
-        <input type="submit" value="등록" />        
-      </form>
+          <input className={styles.btn_submit} type="submit" value="등록" />        
+        </form>
+      </div>
     </div>
   );
 };

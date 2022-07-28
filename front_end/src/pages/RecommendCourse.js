@@ -16,6 +16,10 @@ import "swiper/css/pagination";
 SwiperCore.use([Navigation, Pagination]);
 
 function RecommendCourse() {
+  function activatedetails(e) {
+    e.preventDefault();
+    console.log('click');
+  }
   const [content, setContent] = useState();
 
   const buttonValueSetting = e => {
@@ -31,7 +35,7 @@ function RecommendCourse() {
     Busan: <Busan />,
   };
 
-  console.log(content);
+  //console.log(content);
 
   return (
     <div className="RecommendCourse">
@@ -100,7 +104,7 @@ function RecommendCourse() {
           >
             <SwiperSlide>
               <div style={{position: 'relative'}}>
-                <img alt="img_filming" src="https://a.cdn-hotels.com/gdcs/production183/d578/c34b116d-a40f-4d3b-ad93-18bdad947eae.jpg?impolicy=fcrop&w=1600&h=1066&q=medium"/>
+                <button onClick={activatedetails}><img alt="img_filming" src="https://a.cdn-hotels.com/gdcs/production183/d578/c34b116d-a40f-4d3b-ad93-18bdad947eae.jpg?impolicy=fcrop&w=1600&h=1066&q=medium"/></button>
                 <div className={styles.course_name}>메이즈랜드</div>
               </div>
             </SwiperSlide>
