@@ -33,7 +33,6 @@ import styles from '../components/Community.module.css';
 
 
 import { useEffect, useState} from 'react';
-// import { toast } from "react-toastify";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -43,33 +42,43 @@ const initialState = {
   cm_content: "",
   writer: "",
   cm_type: "",
-  cm_image: "",
 };
 
 const WritePost = () => {
   const [state, setState] = useState(initialState);
+  const [img, setImg] = useState({cm_image: ""});
 
-  const {cm_title, cm_content, writer, cm_type, cm_image} = state;
+  const {cm_title, cm_content, writer, cm_type} = state;
+  const {cm_image} = img;
 
   const history = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // const formData = new FormData();
+    const cm_image = img;
+    // formData.append('file', img);
+    console.log(cm_image);
+    // console.log(formData);
+    
     if (!cm_title || !cm_content || !writer || !cm_type || !cm_image) {
       // toast.error("Please provide value into each input field");
     } else {
-      axios
-      .post("http://localhost:8000/community/writepost", {
+      const res = axios.post("http://localhost:8000/community/writepost", {
         cm_title,
         cm_content,
         writer,
         cm_type,
         cm_image
+        // formData
       })
-      .then(() => {
-        setState({cm_title: "", cm_content: "", writer: "", cm_type: "", cm_image: ""});
+      .then((res) => {
+        setState({cm_title: "", cm_content: "", writer: "", cm_type: ""});
+        setImg({cm_image: ""});
+        alert("success!")
       })
+      console.log(res);
       // .catch((err) => toast.error(err.response.data));
     setTimeout(() => history.push("/community"), 500);
     }
@@ -79,6 +88,12 @@ const WritePost = () => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+
+  const handleImgChange = (e) => {
+    console.log(e.target.files[0].name);
+    setImg(e.target.files[0].name);
+  }
+
 
   return (
     <div style={{marginTop: "100px"}}>
@@ -131,9 +146,11 @@ const WritePost = () => {
          </select>
         <br></br>
 
-        {/* <input type="file" id="file" accept='image/*' onChange={handleChangeFile} multiple="multiple" /> */}
+        {/* <input ref={logoImgInput} type='file' className='imgInput' id='logoImg' accept='image/*' name='file' onChange={onImgChange}/> */}
 
-        <label htmlFor='cm_image'>이미지</label>
+        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} />
+
+        {/* <label htmlFor='cm_image'>이미지</label>
         <input 
         type="text"
         id="cm_image"
@@ -141,7 +158,7 @@ const WritePost = () => {
         placeholder='이미지'
         vlaue={cm_image}
         onChange={handleInputChange}
-        />
+        /> */}
         <br></br>
 
         <input type="submit" value="등록" />        
