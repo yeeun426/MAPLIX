@@ -19,35 +19,32 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.get("/api/community", (req, res) => {
   const sqlGet = "SELECT * FROM test.community";
-  // let sqlGet = '';
-  // // 전체
-  // if (req.params.id == '0'){
-  //   sqlGet = "SELECT * FROM test.community";
-  //   console.log(req.params);
-  // // 동행
-  // }else if (req.params.id == '1'){
-  //   sqlGet = "SELECT * FROM test.community WHERE cm_type = '동행'";
-  //   console.log(req.params);
-  // // 질문
-  // }else if (req.params.id == '2'){
-  //   sqlGet = "SELECT * FROM test.community WHERE cm_type = '질문'";
-  //   console.log(req.params);
-  // // 자유
-  // }else if (req.params.id == '3'){
-  //   sqlGet = "SELECT * FROM test.community WHERE cm_type = '자유'";
-  //   console.log(req.params);
-  // }
+  db.query(sqlGet, (error, result) => {
+    res.send(result.reverse());
+  });
+});
+
+
+// 장소명(p_name <- test.place), 주소(address <- test.place) (location과 p_num으로 조인)
+// 드라마명(m_name <- media) (location과 m_num으로 조인)
+app.get("/api/likelist", (req, res) => {
+  // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
+  let sqlGet = " SELECT L.*, m_name, m_type, p_name, address FROM test.location As L ";
+  sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
+  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = 'heesoo') ";
+  // location (미디어num, 장소num)에서 미디어 num
   db.query(sqlGet, (error, result) => {
     console.log(result);
     res.send(result);
   });
 });
-// SELECT * FROM test.community WHERE cm_type = "동행";
-// SELECT * FROM test.community WHERE cm_type = "질문";
-// SELECT * FROM test.community WHERE cm_type = "자유";
 
-
-
+app.get("/api/mycourse", (req, res) => {
+  const sqlGet = "SELECT * FROM test.mycourse WHERE id='heesoo'";
+  db.query(sqlGet, (error, result) => {
+    res.send(result.reverse());
+  });
+});
 // app.post("/insert", (req, res) => {
 //   const { cm_title } = req.body;
 //   const { cm_content } = req.body;

@@ -16,11 +16,13 @@ import Request from './pages/Request';
 import UpdateInfo from './pages/UpdateInfo';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-
+import Modal from "react-modal";
 function App() {
 
   return (
     <div className="App">
+     
+
       <Navbar />
       <Routes>
           <Route exact path='/*' element={<Search/>}></Route>

@@ -7,6 +7,8 @@
     bottom: 0;
     overflow: overlay;
     flex-direction: column;
+    /* //220724 수정 함 해봄 */
+    z-index: 10;
   }
   .layout {
     display: flex;

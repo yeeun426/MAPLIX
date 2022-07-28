@@ -5,16 +5,16 @@ import Modal from "./PostModal";
 
 
 
-export default function CommunityCard({card}) {
+export default function CommunityCard({card, openModal}) {
   
 
   return (
-    <div className={styles.card_container} >    
-        <h2>{card.cm_title}</h2>
+    <div className={styles.card_container} onClick={openModal}>    
+        <h2>{card.mc_title}</h2>
         <div img_box>
             <ol>
-                <ul>내용 : {card.cm_content}</ul>
-                <ul>종류 : {card.cm_type}</ul>
+                <ul>내용 : {card.my_course}</ul>
+                
             </ol>
         </div>
 

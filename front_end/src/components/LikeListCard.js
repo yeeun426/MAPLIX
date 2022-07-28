@@ -10,11 +10,11 @@ export default function CommunityCard({card}) {
 
   return (
     <div className={styles.card_container} >    
-        <h2>{card.cm_title}</h2>
+        <h2>{card.p_name}</h2>
         <div img_box>
             <ol>
-                <ul>내용 : {card.cm_content}</ul>
-                <ul>종류 : {card.cm_type}</ul>
+                <ul>내용 : {card.l_num}</ul>
+                <ul>종류 : {card.address}</ul>
             </ol>
         </div>
 
