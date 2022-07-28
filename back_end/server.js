@@ -77,8 +77,6 @@ app.get("/", (req, res) => {
   });
 });
 
-
-
 app.post("/community/writepost", (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
@@ -89,6 +87,20 @@ app.post("/community/writepost", (req, res) =>{
 
   const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`, `cm_image`) VALUES (?,?,?,?,?);";
   db.query(sqlQuery, [cm_title, cm_content, writer, cm_type, cm_image], (err, result) => {
+      res.send('success!'); 
+  });
+});
+
+app.post("/mypage/request", (req, res) =>{
+  const media_name = req.body.media_name; 
+  const r_content = req.body.r_content;
+  const id = req.body.id; 
+  const m_type = req.body.m_type; 
+  const r_image = req.body.r_image; 
+  
+
+  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`, `r_image`) VALUES (?,?,?,?,?);";
+  db.query(sqlQuery, [media_name, r_content, id, m_type, r_image], (err, result) => {
       res.send('success!'); 
   });
 });

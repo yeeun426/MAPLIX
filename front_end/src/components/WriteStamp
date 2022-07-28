@@ -1,53 +1,10 @@
-// // src/pages/Request.js
-// import Layout from '../components/Layout';
-// import styles from '../components/Community.module.css';
-
-// function Request() {
-//     const SelectBox = () => {
-//         return (
-//             <select>
-//                 <option key="drama" value="drama">드라마</option>
-//                 <option key="movie" value="movie">영화</option>
-//                 <option key="comedy" value="comedy">예능</option>
-//             </select>
-//         );
-//     };
-
-//     return (
-//         <Layout activeMenu="request">
-        
-//         <div className={styles.postbox}>
-//                     컨텐츠유형 
-//                     <SelectBox></SelectBox>
-//                     <br></br>
-
-//                     컨텐츠 제목
-//                     <input ></input>
-//                     <br></br>
-
-//                     요청 내용 : 
-//                     <input className={styles.content}/>
-//                     <input type="file"/>
-//                     <br></br><br></br>
-//                     <button>업로드</button>
-                
-//         </div>
-        
-//         </Layout>
-//     );
-// }
-
-// export default Request;
-
-
-
-// src/pages/writepost.js
+// src/pages/WriteStamp.js
 import Navbar from '../components/Navbar';
 import Layout from '../components/Layout';
 import CommunitySideBar from './CommunitySidebar';
 import styles from '../components/Community.module.css';
 
-// function WritePost(){
+// function WriteStamp(){
 
   
 //     console.log("글쓰기")
@@ -72,7 +29,7 @@ import styles from '../components/Community.module.css';
 //     );
 // }
 
-// export default WritePost;
+// export default WriteStamp;
 
 
 import { useEffect, useState} from 'react';
@@ -81,18 +38,18 @@ import axios from 'axios';
 
 
 const initialState = {
-  media_name: "",
-  r_content: "",
-  id: "",
-  m_type: "",
+  cm_title: "",
+  cm_content: "",
+  writer: "",
+  cm_type: "",
 };
 
-const Request = () => {
+const WriteStamp = () => {
   const [state, setState] = useState(initialState);
-  const [img, setImg] = useState({r_image: ""});
+  const [img, setImg] = useState({cm_image: ""});
 
-  const {media_name, r_content, id, m_type} = state;
-  const {r_image} = img;
+  const {cm_title, cm_content, writer, cm_type} = state;
+  const {cm_image} = img;
 
   const history = useNavigate();
 
@@ -100,30 +57,30 @@ const Request = () => {
     e.preventDefault();
 
     // const formData = new FormData();
-    const r_image = img;
+    const cm_image = img;
     // formData.append('file', img);
-    console.log(r_image);
+    console.log(cm_image);
     // console.log(formData);
     
-    if (!media_name || !r_content || !id || !m_type || !r_image) {
+    if (!cm_title || !cm_content || !writer || !cm_type || !cm_image) {
       // toast.error("Please provide value into each input field");
     } else {
-      const res = axios.post("http://localhost:8000/mypage/request", {
-        media_name,
-        r_content,
-        id,
-        m_type,
-        r_image
+      const res = axios.post("http://localhost:8000/community/WriteStamp", {
+        cm_title,
+        cm_content,
+        writer,
+        cm_type,
+        cm_image
         // formData
       })
       .then((res) => {
-        setState({media_name: "", r_content: "", id: "", m_type: ""});
-        setImg({r_image: ""});
+        setState({cm_title: "", cm_content: "", writer: "", cm_type: ""});
+        setImg({cm_image: ""});
         alert("success!")
       })
       console.log(res);
       // .catch((err) => toast.error(err.response.data));
-    setTimeout(() => history.push("/mypage"), 500);
+    setTimeout(() => history.push("/community"), 500);
     }
   };
 
@@ -148,44 +105,44 @@ const Request = () => {
       }}
       onSubmit={handleSubmit}
       >
-        <label htmlFor='media_name'>Title</label>
+        <label htmlFor='cm_title'>Title</label>
         <input
         type="text"
-        id="media_name"
-        name="media_name"
+        id="cm_title"
+        name="cm_title"
         placeholder='제목'
-        vlaue={media_name}
+        vlaue={cm_title}
         onChange={handleInputChange}
         />
         <br></br>
 
-        <label htmlFor='r_content'>내용</label>
+        <label htmlFor='cm_content'>내용</label>
         <input className={styles.content}
         type="text"
-        id="r_content"
-        name="r_content"
+        id="cm_content"
+        name="cm_content"
         placeholder='내용'
-        vlaue={r_content}
+        vlaue={cm_content}
         onChange={handleInputChange}
         />
         <br></br>
 
-        <label htmlFor='id'>ID</label>
+        <label htmlFor='writer'>작성자</label>
         <input
         type="text"
-        id="id"
-        name="id"
-        placeholder='ID'
-        vlaue={id}
+        id="writer"
+        name="writer"
+        placeholder='작성자'
+        vlaue={writer}
         onChange={handleInputChange}
         />
         <br></br>
 
-        <label htmlFor='m_type'>유형</label>
-        <select name="m_type" onChange={handleInputChange} vlaue={m_type} id="m_type">
-             <option value="드라마">드라마</option>
-             <option value="영화">영화</option>
-             <option value="예능">예능</option>
+        <label htmlFor='cm_type'>유형</label>
+        <select name="cm_type" onChange={handleInputChange} vlaue={cm_type} id="cm_type">
+             <option value="동행">동행</option>
+             <option value="질문">질문</option>
+             <option value="자유">자유</option>
          </select>
         <br></br>
 
@@ -193,13 +150,13 @@ const Request = () => {
 
         <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} />
 
-        {/* <label htmlFor='r_image'>이미지</label>
+        {/* <label htmlFor='cm_image'>이미지</label>
         <input 
         type="text"
-        id="r_image"
-        name="r_image"
+        id="cm_image"
+        name="cm_image"
         placeholder='이미지'
-        vlaue={r_image}
+        vlaue={cm_image}
         onChange={handleInputChange}
         /> */}
         <br></br>
@@ -209,4 +166,4 @@ const Request = () => {
     </div>
   );
 };
-export default Request;
+export default WriteStamp;
