@@ -105,7 +105,96 @@ app.post("/mypage/request", (req, res) =>{
   });
 });
 
+app.post("/checkid", (req, res) => {
+  const id = req.body.id;
+  console.log(req.body.id);
+  
+  const check_id = "SELECT id FROM test.user WHERE id=?"
+
+  db.query(check_id, [id], (error, result) => {
+    console.log(result);
+    let check_id = new Object();
+    check_id.tf = false;
+
+    if (result[0] == undefined) { // 중복 X
+      check_id.tf = true;
+      res.send(check_id)
+      console.log(check_id.id);
+    }
+    else {
+      check_id.tf = false;
+      res.send(check_id);
+      console.log(check_id.id);
+    }
+  });
+});
+
+app.post("/checknickname", (req, res) => {
+  const nick_name = req.body.nick_name;
+  console.log(req.body.nick_name);
+  
+  const check_nick_name = "SELECT nick_name FROM test.user WHERE nick_name=?"
+
+  db.query(check_nick_name, [nick_name], (error, result) => {
+    console.log(result);
+    let check_nick_name= new Object();
+    check_nick_name.tf = false;
+
+    if (result[0] == undefined) { // 중복 X
+      check_nick_name.tf = true;
+      res.send(check_nick_name)
+    }
+    else {
+      check_nick_name.tf = false;
+      res.send(check_nick_name);
+    }
+  });
+});
+
+app.post("/signup", (req, res) => {
+  const email = req.body.email;
+  const id = req.body.id;
+  const pw = req.body.pw;
+  const u_name = req.body.u_name;
+  const birth = req.body.birth;
+  const gender = req.body.gender;
+  const nick_name = req.body.nick_name;
+
+  console.log(email, id, pw, u_name, birth, gender, nick_name);
+
+  const sqlQuery = "INSERT INTO user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
+  db.query(sqlQuery, [id, pw, u_name, birth, gender, nick_name, email], (err, result) => {
+    res.send('success!'); 
+    console.log(result)
+});
+});
+
+app.post("/login", (req, res) => {
+  const id = req.body.id;
+  // const pw = req.body.pw;
+  console.log(id);
+  const sqlQuery = "SELECT id, pw FROM user WHERE id=?;";
+  db.query(sqlQuery, [id], (err, result) => {
+    let user_info = new Object();
+    user_info.tf = true;
+
+    if (result[0] == undefined) { // 아이디 존재 X
+      user_info.tf = false;
+      res.send(user_info);
+    }
+    else {
+      user_info.tf = true;
+      user_info.id = result[0].id;
+      user_info.pw = result[0].pw;
+      res.send(user_info);
+    }
+    console.log(result[0].id, result[0].pw);
+    res.send(user_info);
+    // console.log(user_info);
+    // }
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });
-
