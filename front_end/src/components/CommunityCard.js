@@ -1,6 +1,6 @@
 // import { specialChars } from "@testing-library/user-event";
 import styles from "./CommunityCard.module.css";
-import Modal from "./PostModal";
+// import Modal from "./PostModal";
 
 
 
