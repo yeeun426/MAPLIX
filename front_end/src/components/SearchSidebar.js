@@ -4,8 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import CommunityCard from './CommunityCard';
 import styles from "../components/Community.module.css";
+import SearchResultCard from './SearchResultCard';
 
-function SearchSidebar( props ){
+function SearchSidebar(  ){
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -33,38 +34,6 @@ function SearchSidebar( props ){
     useEffect(()=> {
         getCardListData();
       }, [] );  
-    //useEffect(()=> getCardListData(), [getCardListData]);
-    ///
-
-
-
-    // const media_name = media.state.media;
-    // const navigate = useNavigate(); 
-    // const [cardList, setCardList] = useState([]);
-
-    // 데이터 가져오기
-    // 데이터 가져오기
-    // const loadPlace = async () => {
-    //     const response = await axios.get('http://localhost:8000/api/search');
-    //     console.log(response.data);
-    //     // 전체 데이터가 초기 상태
-    //     setPost(response.data);
-    //     setFiltered(response.data)
-    // };
-
-    // const getCardListData = useCallback(async () => {
-    //     const response = await axios.get('http://localhost:8000/api/search');
-    //     const res = await fetch(
-    //       `${BASE_URL}/main/search`
-    //     );
-    
-    //     const data = await res.json();
-    
-    //     setCardList(data.result);
-    //   }, [search]);
-      
-    //   useEffect(()=> getCardListData(), [getCardListData]);
-    // ///
 
 
     const onChange = (e) => {
@@ -81,14 +50,21 @@ function SearchSidebar( props ){
             <input
             type="text" 
             onChange={onChange}
-            placeholder={media}
+            placeholder="search"
+            defaultValue={media}
+
             />
 
             <div className={styles.card_list}>
                 {filtered.map((card, index) => {
                     return (
                         <div card = {card}>
-                            <CommunityCard key={card.m_num} card={card} />
+                            <SearchResultCard 
+                                key={card.l_num}   
+                                card={card}
+                                // isWishList={wishList.includes(card.lecture_id)}
+                                getCardListData />
+                           
 
                         </div>
                     );
