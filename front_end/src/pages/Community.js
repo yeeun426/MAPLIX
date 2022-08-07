@@ -36,7 +36,7 @@ function Community(props) {
   };
 
   return (
-    <div className={styles.main_container}>
+    <div className={styles.community_container}>
         <div className={styles.menu}>
           
           <CommunitySidebar 

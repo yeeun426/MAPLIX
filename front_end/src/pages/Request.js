@@ -46,7 +46,7 @@ import Navbar from '../components/Navbar';
 import Layout from '../components/Layout';
 import CommunitySideBar from './CommunitySidebar';
 import styles from '../components/Community.module.css';
-
+import styles_two from './MyPage.module.css';
 // function WritePost(){
 
   
@@ -78,7 +78,7 @@ import styles from '../components/Community.module.css';
 import { useEffect, useState} from 'react';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from 'axios';
-
+import {RiQuestionnaireFill} from 'react-icons/ri';
 
 const initialState = {
   media_name: "",
@@ -139,59 +139,71 @@ const Request = () => {
 
 
   return (
-    <div style={{marginTop: "100px"}}>
-      <form style={{
-        margin: "auto",
-        padding: "15px",
-        maxWidth: "400px",
-        alignContent: "center"
-      }}
+    // <div style={{marginTop: "100px"}}>
+  <div style={{padding:"30px", "background-color":"#E0E3E8"}}>
+    <div className={styles.write_container}>
+      <div style={{display:"flex"}}>
+      <RiQuestionnaireFill  className={styles_two.icon}/>
+      <span>요청하기</span>
+    </div>
+      <form 
+        className={styles.form_container}
+      // style={{
+      //   margin: "auto",
+      //   padding: "15px",
+      //   maxWidth: "400px",
+      //   alignContent: "center"
+      // }}
       onSubmit={handleSubmit}
       >
-        <label htmlFor='media_name'>Title</label>
-        <input
-        type="text"
-        id="media_name"
-        name="media_name"
-        placeholder='제목'
-        vlaue={media_name}
-        onChange={handleInputChange}
-        />
-        <br></br>
+        <div className={styles.write_item}>
+          <label htmlFor='media_name'>Title</label>
+          <input
+          type="text"
+          id="media_name"
+          name="media_name"
+          placeholder='제목'
+          vlaue={media_name}
+          onChange={handleInputChange}
+          />
+        </div>
 
-        <label htmlFor='r_content'>내용</label>
-        <input className={styles.content}
-        type="text"
-        id="r_content"
-        name="r_content"
-        placeholder='내용'
-        vlaue={r_content}
-        onChange={handleInputChange}
-        />
-        <br></br>
+        <div className={styles.write_item}>
+          <label htmlFor='r_content'>내용</label>
+          <input className={styles.content}
+          type="text"
+          id="r_content"
+          name="r_content"
+          placeholder='내용'
+          vlaue={r_content}
+          onChange={handleInputChange}
+          />
+        </div>
 
-        <label htmlFor='id'>ID</label>
-        <input
-        type="text"
-        id="id"
-        name="id"
-        placeholder='ID'
-        vlaue={id}
-        onChange={handleInputChange}
-        />
-        <br></br>
+        <div className={styles.write_item}>
+          <label htmlFor='id'>ID</label>
+          <input
+          type="text"
+          id="id"
+          name="id"
+          placeholder='ID'
+          vlaue={id}
+          onChange={handleInputChange}
+          />
+        </div>
 
-        <label htmlFor='m_type'>유형</label>
-        <select name="m_type" onChange={handleInputChange} vlaue={m_type} id="m_type">
-             <option value="드라마">드라마</option>
-             <option value="영화">영화</option>
-             <option value="예능">예능</option>
-         </select>
-        <br></br>
+        <div className={styles.write_item}>
+          <label htmlFor='m_type'>유형</label>
+          <select name="m_type" onChange={handleInputChange} vlaue={m_type} id="m_type">
+              <option value="드라마">드라마</option>
+              <option value="영화">영화</option>
+              <option value="예능">예능</option>
+          </select>
+        </div>
 
         {/* <input ref={logoImgInput} type='file' className='imgInput' id='logoImg' accept='image/*' name='file' onChange={onImgChange}/> */}
 
-        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} />
+        {/* <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} /> */}
 
         {/* <label htmlFor='r_image'>이미지</label>
         <input 
@@ -204,9 +216,10 @@ const Request = () => {
         /> */}
         <br></br>
 
-        <input type="submit" value="등록" />        
+        <input className={styles.btn_submit} type="submit" value="등록" />        
       </form>
     </div>
+  </div>
   );
 };
 export default Request;

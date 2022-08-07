@@ -40,12 +40,7 @@ function MyPage() {
   return (
     <div className={styles.main_container}>
       <Layout activeMenu="mypage">
-        <div>
-          <div>즐겨찾기</div>
-        </div>
-      </Layout>
-              
-        <div className={styles.card_list}>
+      <div className={styles.card_list}>
           {post.map((card, index) => {
             return (
               
@@ -59,6 +54,8 @@ function MyPage() {
           })}
 
         </div>
+      </Layout>
+            
     </div>
   
   );

@@ -92,9 +92,11 @@
 }
 
 .btn_submit{
+  color: black;
   width: 100px;
   height: 34px;
   font-weight: bold;
   border: 1px solid #cacaca;
   box-shadow: 3px 3px 3px 0px #8080803b;
+  cursor: pointer;
 }

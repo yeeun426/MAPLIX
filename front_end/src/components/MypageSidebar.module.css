@@ -1,20 +1,45 @@
 .menu {
-    position: fixed;
-    width: 240px;
-    top: 150px;
-    padding: 12px 12px 12px 0;
+    width: 220px;
     box-sizing: border-box;
+    margin-left: 50px;
+    text-align: -webkit-center;
   }
-  .link {
-    display: flex;
-    height: 40px;
-    padding: 0 24px;
-    background-color: white;
-    color: black;
-    font-size: 14px;
-    text-decoration: none;
-    align-items: center;
-  }
+
+.my_list{
+  background-color: #EFF1F0;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 3px 3px 10px #8080804d;
+}
+
+.user_img{
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.user_nickname {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #293D45;
+}
+
+.link {
+  display: flex;
+  height: 40px;
+  /* padding: 0 24px; */
+  /* background-color: white; */
+  color: #293D45;
+  font-size: 15px;
+  font-weight: bold;
+  /* text-decoration: none; */
+  align-items: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.541);
+}
+
   .link:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
@@ -22,7 +47,7 @@
   .icon {
     width: 24px;
     height: 24px;
-    margin-right: 24px;
+    margin-right: 5px;
   }
 
   .focused {

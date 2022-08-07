@@ -33,8 +33,8 @@ import write from '../img/write.png';
 // export default WritePost;
 
 
-import { useEffect, useState} from 'react';
-import { useNavigate, useParams, Link } from "react-router-dom";
+import {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
@@ -77,7 +77,8 @@ const WritePost = () => {
       .then((res) => {
         setState({cm_title: "", cm_content: "", writer: "", cm_type: ""});
         setImg({cm_image: ""});
-        alert("success!")
+        alert("글이 게시되었습니다.")
+        history('/community');
       })
       console.log(res);
       // .catch((err) => toast.error(err.response.data));

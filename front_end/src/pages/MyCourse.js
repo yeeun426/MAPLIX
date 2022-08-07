@@ -36,11 +36,6 @@ function MyCourse() {
      {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null}
     <div className={styles.main_container}>
       <Layout activeMenu="mypage">
-        <div>
-          <div>내 경로</div>
-        </div>
-      </Layout>
-              
         <div className={styles.card_list}>
           {post.map((card, index) => {
             return (
@@ -57,6 +52,7 @@ function MyCourse() {
           })}
 
         </div>
+      </Layout>
     </div>
     </>
   );

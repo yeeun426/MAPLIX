@@ -167,12 +167,14 @@ const SignUp = () => {
                         <input type='email' placeholder='Email' name='email' value={email} onChange={handleInputChange}></input>
                     </div>
 
-                    <div className="signup_item">
+                    <div className={styles.signup_check}>
                         <div>아이디</div>
-                        <input placeholder='ID' name='id' value={id} onChange={handleInputChange}></input>
+                        <div style={{display: 'flex'}}>
+                            <input placeholder='ID' name='id' value={id} onChange={handleInputChange}></input>
+                            <button onClick={idCheck}>중복 확인</button>
+                        </div>
                     </div>
-                    <button onClick={idCheck}>중복 확인</button>
-
+                    {/* <button onClick={idCheck}>중복 확인</button> */}
 
                     <div className="signup_item">
                         <div>비밀번호</div>
@@ -203,11 +205,14 @@ const SignUp = () => {
                         </select>
                     </div>
 
-                    <div className="signup_item">
+                    <div className={styles.signup_check}>
                         <div>닉네임</div>
-                        <input placeholder='User Nick Name' name='nick_name' value={nick_name} onChange={handleInputChange}></input>
+                        <div style={{display:"flex"}}>
+                            <input placeholder='User Nick Name' name='nick_name' value={nick_name} onChange={handleInputChange}></input>
+                            <button onClick={nicknameCheck}>중복 확인</button>
+                        </div>
                     </div>
-                    <button onClick={nicknameCheck}>중복 확인</button>
+                    {/* <button onClick={nicknameCheck}>중복 확인</button> */}
 
                     <div className={styles.TermsOfService}>
                         <input type="checkbox" name="agree" value="yes" checked={checked} onChange={checkbox}/>
