@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchMain.css';
 import area from "../img/cansearch.png";
 import Jeonju from "../img/Jeonju.png";
@@ -10,13 +10,42 @@ import Daegu from "../img/Daegu.png";
 import Pohang from "../img/Pohang.png";
 import Incheon from "../img/Incheon.png";
 import Map from "../img/Map.png";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function Search() {
-  const onChange = (e) => {
-    console.log(e.target.value);
 
+  const navigate = useNavigate(); // Link 같은 역할
+
+  const [searchKW, setSearchKW ] = useState('');
+  const [activeCate, setActiveCate] = useState('title'); // title이랑 area클릭하는거..?
+
+  // const onChange = (e) => {
+  //   let searchInput = []
+  //   console.log(e.target.value);
+  // }
+  const handleUserInput = (e) => {
+    e.preventDefault();
+    setSearchKW(e.target.value);
+    
+  };
+
+  const onSubmitSearchbar = (e) => {
+    console.log(e);
+    //e.preventDefault();
+    if(e.key === 'Enter') {
+      onClickSearchbar();
+    }
   }
+
+  const onClickSearchbar = () => {
+    navigate(`/search/title/${searchKW}`, {state : {media: searchKW}});
+  }
+
+  // navigate(`/search?media=${searchInput}`);
+  
+  //navigate(`/search/${kw}`, {state : {keyword: kw}});
+  //navigate('/search', {state: { media : `${searchInput}`}});
+
   return(
     <div className='Main_Search'>
       <div className='first_container'>
@@ -27,12 +56,19 @@ function Search() {
           <li><span>title</span></li>
           <li><span>area</span></li>
         </div>
-  
-        <input
-          type="text" 
-          onChange={onChange}
-          placeholder="Search"
-        />
+        {/* <form onSubmit={onSearch}>
+          <input
+            type="text" 
+            onChange={ e => setSearchInput(e.target.value)}
+            placeholder="Search"
+          />
+          <button type="submit">검색</button>
+        </form> */}
+        <form >
+          <input value={searchKW} onChange={handleUserInput} onKeyPress={onSubmitSearchbar} type="text" placeholder="검색어를 입력해주세요." />
+          
+          <button type='submit' onClick={onClickSearchbar}>검색</button>
+        </form>
       </div>    
 
       <div className='second_container'>

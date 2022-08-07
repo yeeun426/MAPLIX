@@ -24,6 +24,50 @@ app.get("/api/community", (req, res) => {
   });
 });
 
+// 미디어 이름 검색시 
+// 미디어 이름을 media에서 m_name, m_name2로 먼저 찾고, m_num을 받아와서
+// location에서 m_num이 위와 같은것의 p_num, description, l_image 받아옴 
+// 그 p_num을 place에서 찾아오기
+
+app.get("/api/search", (req, res) => {
+  const params = "%" + req.query.media + "%";
+  //let sqlGet = "SELECT * FROM `test`.`media` WHERE `m_name2` LIKE ? OR `m_name` LIKE ?";
+  let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
+  sqlGet += "JOIN test.place AS P ON L.p_num = P.p_num JOIN test.media AS M ON L.m_num = M.m_num "; 
+  sqlGet += "WHERE L.m_num = any (SELECT media.m_num FROM test.media WHERE media.m_name LIKE ? OR media.m_name2 LIKE ?) ";
+  
+  console.log('params = '+ params);
+
+  db.query(sqlGet, [params, params], (error, result) => {
+    if (error) {
+      console.log('Error: ' + error);
+    }
+    res.send(result);
+    console.log(result);
+  });
+});
+
+//지역 검색시 
+app.get("/api/search", (req, res) => {
+  const params = "%" + req.query.media + "%";
+  let sqlGet = "SELECT * FROM test.location AS L "; 
+  sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";
+  sqlGet += " WHERE L.p_num = any (SELECT place.p_num FROM test.place WHERE place.address LIKE ? ) " ;
+
+  console.log('params = '+ params);
+
+  db.query(sqlGet, params, (error, result) => {
+    if (error) {
+      console.log('Error: ' + error);
+    }
+    res.send(result);
+    console.log(result);
+  });
+});
+
+
+// 카테고리 선택하면
+
 
 // 장소명(p_name <- test.place), 주소(address <- test.place) (location과 p_num으로 조인)
 // 드라마명(m_name <- media) (location과 m_num으로 조인)

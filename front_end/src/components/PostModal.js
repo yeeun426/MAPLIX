@@ -8,6 +8,7 @@ function PostModal(props) {
     //     props.closeModal();
     //   }
     const {onClose} = props;
+    const {card} = props;
 
       return (
         <Container className="Modal">
@@ -18,6 +19,14 @@ function PostModal(props) {
               ✖
             </button>
             {/* {props.children} */}
+            <ol>
+              <ul>{card.cm_title}</ul>
+              <ul>{card.cm_type}</ul>
+              <ul>{card.cm_content}</ul>
+              <ul>{card.writer}</ul>
+              <ul>{card.wr_date}</ul>
+            </ol>
+
           </div>
         </Container>
       );
@@ -25,10 +34,12 @@ function PostModal(props) {
 
 const Container = styled.div `
   position: fixed;
-  left: 50%;
-  top: 50%;
+  width : 30%;
+  height : 70%;
+  align-items: center;
   z-index: 99;
   box-shadow: rgb(0 0 0 / 5%) 0 0 0 999px;
+  background-color: azure;
 `
 
 export default PostModal;
