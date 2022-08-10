@@ -36,7 +36,7 @@ function Community(props) {
   };
 
   return (
-    <div className={styles.main_container}>
+    <div className={styles.community_container}>
         <div className={styles.menu}>
           
           <CommunitySidebar 
@@ -61,11 +61,8 @@ function Community(props) {
                 activePage="community"
               />
               </div>
-              {/* 모달 이걸로해보기 */}
-              {/* https://github.com/marinakim44/mern-img-modal/blob/master/client/src/App.js */}
-
               {modal ? 
-                <PostModal onClose={setModal}/> : null}
+                <PostModal card={card} onClose={setModal}/> : null}
             </>  
             );
           })}

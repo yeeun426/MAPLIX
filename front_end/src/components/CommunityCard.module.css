@@ -1,22 +1,27 @@
+ol, ul, li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+
 .card_container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-    border: 1px black solid;
-    /* width: 100%; */
-    /* height: 100%; */
-  /*
-    margin: 3% 1%;
-    padding: 1%;
-  
-    box-shadow: -1px 6px 10px 0 rgba(80, 80, 80, 0.473); */
+    border-bottom: 1px black solid;
+    /* border; */
   }
   
-  .card_header {
+.card_header {
     font-size: 2em;
   }
   
-  .image_box {
+  /* .image_box {
     width: 100%;
   }
   
@@ -25,7 +30,7 @@
     height: 100%;
     object-fit: contain;
   }
-  
+   */
   .card_info {
     width: 100%;
     padding-left: 20%;
@@ -51,3 +56,85 @@
     padding: 20px;
     background-color: beige;
   }
+
+.img_item{
+  border: 1px solid black;
+  width: 120px;
+  height: 120px;
+}
+
+.card_details{
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.card_details ol{
+  width: 400px;
+  text-align: left;
+  height: 100px;
+}
+
+.card_title{
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.like_name{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.likeList_container {
+  background-color: #EFF1F0;
+  display: flex;
+  width: 500px;
+  height: 142px;
+  box-shadow: 4px 4px 6px #0000002b;
+  border-bottom-right-radius: 30px;
+}
+
+.likeList_container img_box{
+  display: flex; 
+}
+
+.like_img{
+  border: 1px solid black;
+  width: 140px;
+  height: 140px;
+}
+
+.like_txt{
+  padding: 30px 15px;
+  text-align: left;
+}
+
+.mycourse_modal{
+  background-color: #e0edf1;
+  width: 400px;
+  height: 470px;
+  box-shadow: 5px 3px 5px #0000003d;
+  border-radius: 30px;
+  border-top-left-radius: 0px;
+  margin-left: 3px;
+  position: absolute;
+  left: 93%;
+  z-index: 1;
+}
+
+.MyCourseCard {
+  display: flex;
+  position: relative;
+}
+
+@media only screen and (min-width: 1550px) {
+  .mycourse_modal{
+    box-shadow: -7px 7px 5px #0000003d;
+    border-radius: 30px;
+    border-top-right-radius: 0px;
+    left: -408px;
+  }
+
+}

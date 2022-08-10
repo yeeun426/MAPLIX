@@ -36,27 +36,27 @@ function MyCourse() {
      {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null}
     <div className={styles.main_container}>
       <Layout activeMenu="mypage">
-        <div>
-          <div>내 경로</div>
-        </div>
-      </Layout>
-              
-        <div className={styles.card_list}>
-          {post.map((card, index) => {
-            return (
-              
-              <div>
-              {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
-              <MyCourseCard key={card.mc_num} card={card} 
-                            openModal={ () => setModal(true)} />
-             
-              {/* 모달 이걸로해보기 */}
-              {/* https://github.com/marinakim44/mern-img-modal/blob/master/client/src/App.js */}
-              </div>
-            );
-          })}
+      <div className={styles.title_like}>
+        내 경로
+      </div>
 
-        </div>
+      <div className={styles.like_list}>
+        {post.map((card, index) => {
+          return (
+            
+            <div>
+            {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
+            <MyCourseCard key={card.mc_num} card={card} 
+                          openModal={ () => setModal(true)} />
+            
+            {/* 모달 이걸로해보기 */}
+            {/* https://github.com/marinakim44/mern-img-modal/blob/master/client/src/App.js */}
+            </div>
+          );
+        })}
+      </div>
+      
+      </Layout>
     </div>
     </>
   );

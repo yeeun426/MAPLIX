@@ -17,6 +17,7 @@ function Search() {
   const navigate = useNavigate(); // Link 같은 역할
 
   const [searchKW, setSearchKW ] = useState('');
+  const [activeCate, setActiveCate] = useState('title'); // title이랑 area클릭하는거..?
 
   // const onChange = (e) => {
   //   let searchInput = []
@@ -37,7 +38,7 @@ function Search() {
   }
 
   const onClickSearchbar = () => {
-    navigate(`/search/${searchKW}`, {state : {media: searchKW}});
+    navigate(`/search/title/${searchKW}`, {state : {media: searchKW}});
   }
 
   // navigate(`/search?media=${searchInput}`);
