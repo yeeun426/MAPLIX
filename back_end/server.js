@@ -75,7 +75,7 @@ app.get("/api/likelist", (req, res) => {
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
   let sqlGet = " SELECT L.*, m_name, m_type, p_name, address FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
-  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = 'heesoo') ";
+  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = '예은') ";
   // location (미디어num, 장소num)에서 미디어 num
   db.query(sqlGet, (error, result) => {
     console.log(result);
@@ -84,7 +84,7 @@ app.get("/api/likelist", (req, res) => {
 });
 
 app.get("/api/mycourse", (req, res) => {
-  const sqlGet = "SELECT * FROM test.mycourse WHERE id='heesoo'";
+  const sqlGet = "SELECT * FROM test.mycourse WHERE id='예은'";
   db.query(sqlGet, (error, result) => {
     res.send(result.reverse());
   });
@@ -215,29 +215,68 @@ app.post("/signup", (req, res) => {
 
 app.post("/login", (req, res) => {
   const id = req.body.id;
-  // const pw = req.body.pw;
-  console.log(id);
-  const sqlQuery = "SELECT id, pw FROM user WHERE id=?;";
-  db.query(sqlQuery, [id], (err, result) => {
-    let user_info = new Object();
-    user_info.tf = true;
+  const pw = req.body.pw;
 
+  let user_info = new Object();
+  user_info.tf = true;
+
+  console.log(id);
+
+  const sqlQueryId = "SELECT id FROM user WHERE id=?;";
+
+  // const sqlQuery = "SELECT COUNT(id) as result FROM user WHERE id=?;";
+  db.query(sqlQueryId, [id], (err, result) => {
     if (result[0] == undefined) { // 아이디 존재 X
       user_info.tf = false;
       res.send(user_info);
     }
     else {
-      user_info.tf = true;
-      user_info.id = result[0].id;
-      user_info.pw = result[0].pw;
-      res.send(user_info);
+      const sqlQueryPw = "SELECT pw, nick_name FROM user WHERE id=?;";
+      db.query(sqlQueryPw, [id], (err, resultPw) => {
+          user_info.tf = true;
+          user_info.id = result[0].id;
+          user_info.pw = resultPw[0].pw;
+          user_info.nick_name = resultPw[0].nick_name;
+          res.send(user_info);
+      })
     }
-    console.log(result[0].id, result[0].pw);
-    res.send(user_info);
+    // console.log(result[0].id, result[0].pw);
+    // res.send(user_info);
     // console.log(user_info);
+  //   if (!err) {
+  //     if (result[0] == undefined) {
+  //       // 동일한 id가 없으면
+  //       console.log(id)
+  //       res.send({ 'msg': '입력하신 id가 일치하지 않습니다.'})
+  //     } else { // 동일한 id가 있으면 비밀번호 일치 확인
+  //       const sqlQuery2 = `SELECT 
+  //                           CASE (SELECT id FROM user WHERE id = ? AND pw = ?)
+  //                               WHEN '0' THEN NULL
+  //                               ELSE (SELECT id FROM user WHERE id = ? AND pw = ?)
+  //                           END AS id
+  //                           , CASE (SELECT id FROM user WHERE id = ? AND pw = ?)
+  //                               WHEN '0' THEN NULL
+  //                               ELSE (SELECT pw FROM user WHERE id = ? AND pw = ?)
+  //                           END AS pw`;
+  //       const params = [id, pw, id, pw, id, pw, id, pw]
+  //       db.query(sqlQuery2, params, (err, result) => {
+  //         if(!err) {
+  //           res.send(result[0])
+  //           console.log(result[0])
+
+  //         } else {
+  //           res.send(err)
+  //           console.log(result[0])
+  //         }
+  //       })
+  //     }
+  //   } else {
+  //     res.send(err)
+  //   }
+  // })
     // }
   })
-})
+});
 
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);

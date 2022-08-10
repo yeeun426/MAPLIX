@@ -10,6 +10,9 @@ import acitivity from "../img/activity.png";
 import tour from "../img/tour.png";
 import like from "../img/like.png";
 import MapContainer from '../components/MapContainer';
+import CourseAdd from '../components/CourseAdd'
+
+import styled from 'styled-components';
 
 function Course(){
   const [inputText, setInputText] = useState("");
@@ -89,11 +92,7 @@ function Course(){
 
           <div className="course-sidebar">
             <div id="course-line"></div>
-            <div className="course-make">
-              <button className="one-course">
-                +
-              </button>
-            </div>
+            <CourseAdd/>
           </div>
           <MapContainer searchPlace={place}/>      
 
@@ -102,4 +101,6 @@ function Course(){
     )
   }
 
-export default Course;
+  // styled. 
+  
+  export default Course;

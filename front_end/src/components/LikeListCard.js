@@ -9,15 +9,19 @@ export default function CommunityCard({card}) {
   
 
   return (
-    <div className={styles.card_container} >    
-        <h2>{card.p_name}</h2>
-        <div img_box>
-            <ol>
-                <ul>내용 : {card.l_num}</ul>
-                <ul>종류 : {card.address}</ul>
-            </ol>
+    <div className={styles.likeList_container} >  
+        <div className={styles.like_img}>
+          이미지 넣을 공간
+        </div>  
+        <div className={styles.like_txt}>
+          <div className={styles.like_name}>{card.p_name}</div>
+          <div img_box>
+              <ol>
+                  <ul>내용 : {card.l_num}</ul>
+                  <ul>종류 : {card.address}</ul>
+              </ol>
+          </div>
         </div>
-
     </div>
 
   );
