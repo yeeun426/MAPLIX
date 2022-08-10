@@ -1,0 +1,7 @@
+.course_make img {
+    width: 45px;
+    top: 6%;
+    position: absolute;
+    z-index: 1;
+    left: 16%;
+}

@@ -40,11 +40,16 @@ function MyPage() {
   return (
     <div className={styles.main_container}>
       <Layout activeMenu="mypage">
-      <div className={styles.card_list}>
+      <div className={styles.title_like}>
+        즐겨찾기
+      </div>
+
+      <div className={styles.like_list}>
           {post.map((card, index) => {
             return (
               
               <div>
+
               {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
               <LikeListCard key={card.l_num} card={card} onClick={openModal}/>
               {/* 모달 이걸로해보기 */}

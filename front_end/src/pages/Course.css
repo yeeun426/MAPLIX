@@ -28,13 +28,25 @@ button{
 
 .course-make button {
     background-color: #79bc82;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     position: absolute;
     color: black;
     font-size: 40px;
 
     top: 6%;
-    left: 5%;
+    left: 6%;
+}
+
+.modal_course {
+    background-color: #e0edf1;
+    width: 280px;
+    height: 430px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 3px #80808075;
+    
+    position: absolute;
+    top: 5%;
+    left: 100%;
 }
