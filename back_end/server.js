@@ -29,7 +29,7 @@ app.get("/api/community", (req, res) => {
 // location에서 m_num이 위와 같은것의 p_num, description, l_image 받아옴 
 // 그 p_num을 place에서 찾아오기
 
-app.get("/api/search", (req, res) => {
+app.get("/api/search/title", (req, res) => {
   const params = "%" + req.query.media + "%";
   //let sqlGet = "SELECT * FROM `test`.`media` WHERE `m_name2` LIKE ? OR `m_name` LIKE ?";
   let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
@@ -48,7 +48,7 @@ app.get("/api/search", (req, res) => {
 });
 
 //지역 검색시 
-app.get("/api/search", (req, res) => {
+app.get("/api/search/area", (req, res) => {
   const params = "%" + req.query.media + "%";
   let sqlGet = "SELECT * FROM test.location AS L "; 
   sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";

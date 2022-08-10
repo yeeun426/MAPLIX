@@ -33,6 +33,7 @@ function Community(props) {
 
   const openModal = (e) => {
     setModal(true);
+    debugger
   };
 
   return (
@@ -62,7 +63,7 @@ function Community(props) {
               />
               </div>
               {modal ? 
-                <PostModal card={card} onClose={setModal}/> : null}
+                <PostModal key={card.like_num} card={card} onClose={setModal}/> : null}
             </>  
             );
           })}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './SearchPage.css';
 import mountain from "../img/mountain.png";
 import forest from "../img/forest.png";
@@ -11,176 +11,236 @@ import tour from "../img/tour.png";
 import etc from "../img/etc.png";
 import MapContainer from '../components/MapContainer';
 import SearchSidebar from '../components/SearchSidebar';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import styles from "../components/Community.module.css";
+import SearchResultCard from '../components/SearchResultCard';
 
-function SearchPage(){
-
-  // 데이터 받아오기
+const SearchPage = ( props ) => {
+  
   const location = useLocation();
   const navigate = useNavigate();
-  const media = location.state.media; // 메인에서 검색한 미디어명
+  // 메인에서 검색한 키워드 받아오기
+  const useparams = useParams();
 
-  const getCardListData = async () => {
-    const response = await axios.get('http://localhost:8000/api/search', {
+  // 메인에서 선택한 카테고리 (title / area)
+  let searchCate = useparams.cate;
+
+  // const { searchCate, SetSearchCate} = useState(useparams.cate);
+  // const { cate, setCate } = useState(searchCate);
+
+  // 메인에서 검색한 키워드
+  const [searchWord, setSearchWord] = useState( useparams.word );
+  // SearchPage내에서 검색한 키워드로 넣어주기?
+  const [search, setSearch] = useState(searchWord);
+
+  // 데이터 받아오기
+  const loadData = async () => {
+    let response;
+    if ( searchCate === "title"){
+      response = await axios.get('http://localhost:8000/api/search/title', {
         params: {
-            'media': media
+            'media': search
         }
-    });
-    console.log(response.data);
+      });
+    } else if ( searchCate === "area"){
+      response = await axios.get('http://localhost:8000/api/search/area', {
+        params: {
+            'media': search
+        }
+      });
+    }
+
     setCardList(response.data);
-    //setFiltered(response.data)
+    setFiltered(response.date);
+    console.log("로드데이터");
 };
 
 // 변수들
-const [cardList, setCardList] = useState([]);
+const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
+const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
+//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
+const [filtered, setFiltered] = useState([]); 
 
-const [isClicked, setIsClicked] = useState(false);
-
-const [clickedList, setClickedList] = useState([
-    // mountain : false,
-    // forest : false,
-    // sea : false,
-    // river : false,
-    // restaurant : false,
-    // cafe : false,
-    // activity : false,
-    // tour : false,
-    // etc : false
-  { category : "mountain" , flag : false},
-  { category : "forest" , flag : false},
-  { category : "sea" , flag : false},
-  { category : "river" , flag : false},
-  { category : "restaurant" , flag : false},
-  { category : "cafe" , flag : false},
-  { category : "activity" , flag : false},
-  { category : "tour" , flag : false},
-  { category : "etc" , flag : false}
-  // { "mountain" : false},
-  // { "forest" : false},
-  // { "sea" : false},
-  // { "river" : false},
-  // { "restaurant" : false},
-  // { "cafe" : false},
-  // { "activity" : false},
-  // { "tour" : false},
-  // { "etc" : false}
+let cnt = 0;
+//const [cnt, setCnt] = useState(0);
+const [activeCate, setActiveCate] = useState([ // 필터 어떤거 클릭됐는지, true : 클릭된상태
+  { category : "mountain" , flag : false, realCate: "산"},
+  { category : "forest" , flag : false, realCate: "숲"},
+  { category : "sea" , flag : false, realCate: "바다"},
+  { category : "river" , flag : false, realCate: "강"},
+  { category : "restaurant" , flag : false, realCate: "음식점"},
+  { category : "cafe" , flag : false, realCate: "카페"},
+  { category : "activity" , flag : false, realCate: "액티비티"},
+  { category : "tour" , flag : false, realCate: "관광지"},
+  { category : "etc" , flag : false, realCate: "기타"}
 ]);
 
-const [isLiked, setIsLiked] = useState();
+useEffect(()=> { 
+  loadData();
+  // console.log(useparams.cate); // 왜 얘는 되고
+  // console.log(cate); // 얘는 안되는지;
+  // console.log(searchWord);
+}, [search, searchCate] ); //search, searchCate
 
-useEffect(()=> { getCardListData();}, [] );  
+useEffect(() => {
 
-// const updateState = (e) => {
-//   const clickedBtn = e.target.id;
-//   const idx = e.target.getAttribute('idx');
-
-//   const newState = clickedList.map(obj => {
-//     // 👇️ if id equals 2, update country property
-//     if (obj.category === clickedBtn){
-//       return {...obj, [obj.category] : !obj.flag};
-//     }
-//   });
-
-//   setClickedList(newState);
-// };
-
-//필터기능
-//누를때마다 걔의 flag를 true로 만든다음에 
-//그때마다 새롭게 filter적용해서 post.flag = True 이런식으로 배열만들어주기
-const onClickFilterBtn = (e) => {
-  const clickedBtn = e.target.id;
-  const idx = e.target.getAttribute('idx');
-  // if Object.keys
-  // console.log(Object.keys());
-
-  // setClickedList((prev) => {
-  //   let next = {...prev};
-  //   console.log(Object.keys(clickedList));
   
-  // });
+  // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
+  // 그 temp
+  var arr = [];
+  const temp = activeCate.map((obj) => {
+    if (obj.flag === true) 
+      arr.push(obj.realCate);
+  } );
+  console.log(arr);
+
+
+ 
+  let filtered = cardList.filter((card)=> {
+    if (arr.includes(card.category)){
+      return true;
+    }
+   });
+  setFiltered(filtered);
+ 
+
+}, [activeCate])
+
+
+const filterOn = (e) => {
+  console.log("필터 버튼 눌림" + e.target.id);
+  var count = 0;
+  const newKeywords = activeCate.map(k => {
+    if (k.category === e.target.id) {
+      return { ...k, flag : !k.flag,};
+    } else {
+      return k;
+    }
+  });
+  newKeywords.map(item => {
+    if (item.flag === true) count++;
+  });
+  setActiveCate(newKeywords);
+  console.log(count);
+  //console.log(Object.values(activeCate));
+  // 버튼 눌릴때마다 true인 것들의 이름만 찾아서 cardlist filter해줘야함 
 };
 
-  
-  
-  // setClickedList((prev) => {...clickedList, O : Object.values(clickedList[idx])});
-//setClickedList(prev => ({...prev, category:{...prev.category, mountain : true} }));
-  // console.log(e.target.id, idx);
-  // console.log('clickedlist' + Object.values(clickedList[0]));
-  // console.log(clickedList[0].mountain);
 
+const handleUserInput = (e) => {
+  e.preventDefault();
+  setSearch(e.target.value);
+};
 
-  //const temp = Object.values(clickedList);
-  //console.log('temp' + temp);
+const onSubmitSearchbar = (e) => {
+  console.log(e);
+  //e.preventDefault();
+  if(e.key === 'Enter') {
+  onClickSearchbar(e);
+  }
+}
 
-  // const filtered = cardList.filter(card => card.category.includes(clickedBtn));
-  // console.log('필터된거' + filtered);
+const onClickSearchbar = (e) => {
+  setSearch(e.target.value);
+  navigate(`/search/${searchCate}/${search}`);
+  console.log('파라미터'+ search);
+}
 
-
-//console.log('clickedlist' + clickedList.values());
-
-
-// 그 값 card로 넘겨주기
-
-// 좋아요 기능
-  
-
+const ClickedSearchCate = (e) => {
+  e.preventDefault();
+  searchCate = e.target.id;
+  navigate(`/search/${searchCate}/${search}`);
+}
 
     return(
       <div className='Search'>
         <div className='Upper'>
           <h1>Maplix</h1>
           <div className='Filter'>
-            <button className='FilterIcons'  onClick={onClickFilterBtn}>
-              <img src={mountain} alt = "mountain" id="mountain" idx="0"/>
+            <button className='FilterIcons'  onClick={filterOn}>
+              <img src={mountain} alt = "mountain" id="mountain" idx="0" />
               <li>#산</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={forest} alt = "forest" id="forest" idx="1"/>
               <li>#숲</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={sea} alt = "sea" id="sea" idx="2"/>
               <li>#바다</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={river} alt = "river" id="river" idx="3"/>
               <li>#강</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={restaurant} alt = "restaurant" id="restaurant" idx="4"/>
               <li>#음식점</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={cafe} alt = "cafe" id="cafe" idx="5"/>
               <li>#카페</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={acitivity} alt = "activity" id="activity" idx="6"/>
               <li>#액티비티</li>
             </button>
 
-            <button className='FilterIcons'>
+            <button className='FilterIcons' onClick={filterOn}>
               <img src={tour} alt = "tour" id="tour" idx="7"/>
               <li>#관광지</li>
             </button>
 
-            <button className='FilterIcons'>
-              <img src={etc} alt = "etc" idx="8" />
+            <button className='FilterIcons' onClick={filterOn}>
+              <img src={etc} alt = "etc" id="etc" idx="8" />
               <li>#기타</li>            
             </button>
-
           </div>
         </div>
 
         <div className='Lower'>
-        <SearchSidebar />
+        <div className="search-sidebar">
+            <div className='sidebar_category'>
+              {/* 현재 활성화된 카테고리(title, area)는 cate로 확인하면 됩니다~ */}
+              <li><button onClick={ClickedSearchCate} id="title">title</button></li>
+              <li><button onClick={ClickedSearchCate} id="area">area</button></li>
+            </div>
+            
+            <input
+                type="text" 
+                onChange={handleUserInput}
+                onKeyPress={onSubmitSearchbar}
+                placeholder="search"
+                defaultValue={searchWord}
+                value={search}
+                />
+            
+            <button type='submit' onClick={onClickSearchbar}>검색</button>
+
+            <div className={styles.card_list}>
+                { filtered && filtered.map((card, index) => {
+                    return (
+                        <div card = {card}>
+                            <SearchResultCard 
+                                key={card.l_num}   
+                                card={card}
+                                // isWishList={wishList.includes(card.lecture_id)}
+                                 />
+                           
+
+                        </div>
+                    );
+                })}
+
+            </div>
+        </div>
         <MapContainer />
 
         </div>

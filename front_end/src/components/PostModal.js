@@ -3,12 +3,12 @@ import React from "react";
 // import { createPortal } from "react-dom";
 import styled from 'styled-components';
 
-function PostModal(props) {
+function PostModal({card, onClose}) {
     // function closeModal() {
     //     props.closeModal();
     //   }
-    const {onClose} = props;
-    const {card} = props;
+    console.log("현재 카드", card.like_num);
+    
 
       return (
         <Container className="Modal">

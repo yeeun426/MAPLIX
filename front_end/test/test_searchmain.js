@@ -17,7 +17,7 @@ function Search() {
   const navigate = useNavigate(); // Link 같은 역할
 
   const [searchKW, setSearchKW ] = useState('');
-  const [activeSearchCate, setActiveSearchCate] = useState('title'); // title이랑 area클릭하는거..?
+  const [activeCate, setActiveCate] = useState('title'); // title이랑 area클릭하는거..?
 
   // const onChange = (e) => {
   //   let searchInput = []
@@ -38,20 +38,8 @@ function Search() {
   }
 
   const onClickSearchbar = () => {
-    // if (activeSearchCate === 'title'){
-      navigate(`/search/${activeSearchCate}/${searchKW}`);
-    //   navigate(`/search/title/${searchKW}`);
-    
-    // } else{
-    //   navigate(`/search/area/${searchKW}`);
-    // }
+    navigate(`/search/title/${searchKW}`);
     setSearchKW("");
-  }
-
-  const ClickedSearchCate = (e) => {
-    e.preventDefault();
-    setActiveSearchCate(e.target.id);
-    console.log(activeSearchCate);
   }
 
   // navigate(`/search?media=${searchInput}`);
@@ -66,8 +54,8 @@ function Search() {
         <li>영화, 드라마, 예능을 보면서 가고 싶은 곳을 지금 바로 찾아보세요!</li>
 
         <div className='Search_Category'>
-          <li><button onClick={ClickedSearchCate} id="title">title</button></li>
-          <li><button onClick={ClickedSearchCate} id="area">area</button></li>
+          <li><span>title</span></li>
+          <li><span>area</span></li>
         </div>
         {/* <form onSubmit={onSearch}>
           <input
