@@ -5,11 +5,15 @@ import LikeListCard from "..//components/LikeListCard";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 function MyPage() {
-
+  // const id = window.localStorage.getItem("id");
+  // const [state, setState] = useState(window.localStorage.getItem("id"));
+  
 
   // 데이터 가져오기
   const loadPost = async () => {
-    const response = await axios.get('http://localhost:8000/api/likelist');
+    const response = await axios.get('http://localhost:8000/api/likelist'
+    // , {body: JSON.stringify({id: window.localStorage.getItem("id")})}
+    );
     console.log(response.data);
     // 전체 데이터가 초기 상태
     setPost(response.data);
