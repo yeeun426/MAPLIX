@@ -3,59 +3,8 @@ import styles from './SignUp.module.css';
 // import { Link } from 'react-router-dom';
 
 import { useEffect, useState} from 'react';
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-
-// function Login() {
-//     const [id, setInputId] = useState('')
-//     const [pw, setInputPw] = useState('')
- 
-//     const handleInputId = (e) => {
-//         setInputId(e.target.value)
-//     }
- 
-//     const handleInputPw = (e) => {
-//         setInputPw(e.target.value)
-//     }
- 
-//     const onClickLogin = () => {
-//         console.log('click login')
-//         console.log('ID : ', id)
-//         console.log('PW : ', pw)
-//         axios.post('/login', null, {
-//             params: {
-//             'id': id,
-//             'pw': pw
-//             }
-//         })
-//         .then(res => {
-//             console.log(res)
-//             console.log('res.result.id :: ', res.result.id)
-//             console.log('res.result.msg :: ', res.result.msg)
-//             if(res.result.id === undefined){
-//                 // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-//                 console.log('======================',res.result.msg)
-//                 alert('입력하신 id 가 일치하지 않습니다.')
-//             } else if(res.result.id === null){
-//                 // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
-//                 console.log('======================','입력하신 비밀번호 가 일치하지 않습니다.')
-//                 alert('입력하신 비밀번호 가 일치하지 않습니다.')
-//             } else if(res.result.id === id) {
-//                 // id, pw 모두 일치 userId = userId1, msg = undefined
-//                 console.log('======================','로그인 성공')
-//                 sessionStorage.setItem('id', id)
-//             }
-//             // 작업 완료 되면 페이지 이동(새로고침)
-//             document.location.href = '/'
-//         })
-//         .catch()
-//     }
- 
-//      useEffect(() => {
-//          axios.get('/login')
-//          .then(res => console.log(res))
-//          .catch()
-//      },[])
  
 const initialState = {
   id: "",
@@ -67,7 +16,6 @@ const Login = () =>  {
     const {id, pw} = state;
     
     const history = useNavigate();
-
 
     const onClickLogin = (e) => {
         console.log('click login')
@@ -104,9 +52,9 @@ const Login = () =>  {
                     // const res = axios.post("http://localhost:8000/", {id,pw})
                     // .then((res) => {
                         alert("로그인 성공")
-                        // sessionStorage.setItem('id', id)
                         const nick_name = json.nick_name
                         window.localStorage.setItem('nick_name', nick_name);
+                        window.localStorage.setItem('id', id);
                         document.location.href = '/'
                 }            
             })

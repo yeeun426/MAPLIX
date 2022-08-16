@@ -54,17 +54,33 @@ const SignUp = () => {
         .then(json => {
             // console.log(json);
             if(json.tf === true){		// json을 받아왔는데 .tf 값이 true면 사용가능
+                console.log(email, id)
+
                 alert("사용 가능한 ID입니다");  //알람!
                 setState({
                     check_id: true,
-                    id: state.id
+                    email: state.email,
+                    id: state.id,
+                    pw: state.pw,
+                    confirm_pw: state.confirm_pw,  
+                    u_name: state.u_name,
+                    birth: state.birth,
+                    gender: state.gender,
+                    nick_name: state.nick_name,
                 })
                 console.log(check_id, id, checked);
             }
             else {
                 alert("이미 사용 중인 ID입니다.")
                 setState({
-                    check_id: false
+                    check_id: false,
+                    email: state.email,
+                    pw: state.pw,
+                    confirm_pw: state.confirm_pw,  
+                    u_name: state.u_name,
+                    birth: state.birth,
+                    gender: state.gender,
+                    nick_name: state.nick_name,
                 })
           
             }
@@ -90,35 +106,112 @@ const SignUp = () => {
                 alert("사용 가능한 닉네임입니다");  //알람!
                 setState({
                     check_nick_name: true,
+                    check_id: true,
+                    email: state.email,
+                    id: state.id,
+                    pw: state.pw,
+                    confirm_pw: state.confirm_pw,  
+                    u_name: state.u_name,
+                    birth: state.birth,
+                    gender: state.gender,
                     nick_name: state.nick_name
                 })
             }
             else {
                 alert("이미 사용 중인 닉네임입니다.")
                 setState({
-                    check_nick_name: false
+                    check_nick_name: false,
+                    check_id: true,
+                    email: state.email,
+                    id: state.id,
+                    pw: state.pw,
+                    confirm_pw: state.confirm_pw,  
+                    u_name: state.u_name,
+                    birth: state.birth,
+                    gender: state.gender,
+                    nick_name : ""
                 })
             
             }
         })
     };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const gCheck = (e) => {
+        e.preventDefault();
+        console.log(gender);
+    }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setState({ ...state, [name]: value });
+      };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
     if (check_id == false){
+        setState({
+            email: state.email,
+            id: state.id,
+            pw: state.pw,
+            confirm_pw: state.confirm_pw,  
+            u_name: state.u_name,
+            birth: state.birth,
+            gender: state.gender,
+            nick_name: state.nick_name,
+        });
         return alert('ID 중복 확인을 해주세요.')
     }
     if (pw !== confirm_pw){
+        setState({
+            email: state.email,
+            id: state.id,
+            pw: state.pw,
+            confirm_pw: "",  
+            u_name: state.u_name,
+            birth: state.birth,
+            gender: state.gender,
+            nick_name: state.nick_name,
+        });
         return alert('비밀번호를 다시 확인해주세요.')
     }
-    if (gender == undefined){
+    if (gender == ''){
+        setState({
+            email: state.email,
+            id: state.id,
+            pw: state.pw,
+            confirm_pw: state.confirm_pw,  
+            u_name: state.u_name,
+            birth: state.birth,
+            gender: "",
+            nick_name: state.nick_name,
+        });
         return alert('성별을 선택해주세요')
     }
     if (check_nick_name == false){
+        setState({
+            email: state.email,
+            id: state.id,
+            pw: state.pw,
+            confirm_pw: state.confirm_pw,  
+            u_name: state.u_name,
+            birth: state.birth,
+            gender: state.gender,
+            nick_name: state.nick_name,
+        });
         return alert('닉네임 중복 확인을 해주세요.')
     }
     if (checked == false){
+        setState({
+            email: state.email,
+            id: state.id,
+            pw: state.pw,
+            confirm_pw: state.confirm_pw,  
+            u_name: state.u_name,
+            birth: state.birth,
+            gender: state.gender,
+            nick_name: state.nick_name,
+        });
         return alert('약관에 동의해주세요')
     }
     
@@ -142,16 +235,12 @@ const SignUp = () => {
       .then((res) => {
         setState({email:"", id: "", pw: "", confirm_pw:"", u_name: "", birth: "", gender: "", nick_name: "", check_id:false});
         alert("success!")
+        document.location.href = '/login'
       })
       console.log(res);
       // .catch((err) => toast.error(err.response.data));
     setTimeout(() => history.push("/signup"), 500);
     }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setState({ ...state, [name]: value });
   };
 
   return (
@@ -174,7 +263,6 @@ const SignUp = () => {
                             <button onClick={idCheck}>중복 확인</button>
                         </div>
                     </div>
-                    {/* <button onClick={idCheck}>중복 확인</button> */}
 
                     <div className="signup_item">
                         <div>비밀번호</div>
@@ -203,6 +291,7 @@ const SignUp = () => {
                             <option value="woman">여</option>
                             <option value="man">남</option>
                         </select>
+                        <button onClick={gCheck}>성별 확인</button>
                     </div>
 
                     <div className={styles.signup_check}>

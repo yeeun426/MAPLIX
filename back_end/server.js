@@ -71,13 +71,14 @@ app.get("/api/search/area", (req, res) => {
 
 // 장소명(p_name <- test.place), 주소(address <- test.place) (location과 p_num으로 조인)
 // 드라마명(m_name <- media) (location과 m_num으로 조인)
-app.get("/api/likelist", (req, res) => {
+app.post("/api/likelist", (req, res) => {
+  const id = req.body.id;
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
   let sqlGet = " SELECT L.*, m_name, m_type, p_name, address FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
-  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = '예은') ";
+  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
   // location (미디어num, 장소num)에서 미디어 num
-  db.query(sqlGet, (error, result) => {
+  db.query(sqlGet, [id], (error, result) => {
     console.log(result);
     res.send(result);
   });
@@ -240,42 +241,24 @@ app.post("/login", (req, res) => {
           res.send(user_info);
       })
     }
-    // console.log(result[0].id, result[0].pw);
-    // res.send(user_info);
-    // console.log(user_info);
-  //   if (!err) {
-  //     if (result[0] == undefined) {
-  //       // 동일한 id가 없으면
-  //       console.log(id)
-  //       res.send({ 'msg': '입력하신 id가 일치하지 않습니다.'})
-  //     } else { // 동일한 id가 있으면 비밀번호 일치 확인
-  //       const sqlQuery2 = `SELECT 
-  //                           CASE (SELECT id FROM user WHERE id = ? AND pw = ?)
-  //                               WHEN '0' THEN NULL
-  //                               ELSE (SELECT id FROM user WHERE id = ? AND pw = ?)
-  //                           END AS id
-  //                           , CASE (SELECT id FROM user WHERE id = ? AND pw = ?)
-  //                               WHEN '0' THEN NULL
-  //                               ELSE (SELECT pw FROM user WHERE id = ? AND pw = ?)
-  //                           END AS pw`;
-  //       const params = [id, pw, id, pw, id, pw, id, pw]
-  //       db.query(sqlQuery2, params, (err, result) => {
-  //         if(!err) {
-  //           res.send(result[0])
-  //           console.log(result[0])
-
-  //         } else {
-  //           res.send(err)
-  //           console.log(result[0])
-  //         }
-  //       })
-  //     }
-  //   } else {
-  //     res.send(err)
-  //   }
-  // })
-    // }
   })
+});
+
+app.post("/api/stamp", (req, res) => {
+  const id = req.body.id;
+  const m_type = req.body.m_type;
+  const media_name = "%"  + req.body.media_name + "%";
+
+  console.log(id, m_type, media_name)
+  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
+  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
+  // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
+  
+  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
+    console.log(result);
+    res.send(result);
+  });
 });
 
 app.listen(PORT, () => {

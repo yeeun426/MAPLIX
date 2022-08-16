@@ -5,17 +5,21 @@ import LikeListCard from "..//components/LikeListCard";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 function MyPage() {
-
+  const id = window.localStorage.getItem("id");
 
   // 데이터 가져오기
   const loadPost = async () => {
-    const response = await axios.get('http://localhost:8000/api/likelist');
+    const response = await axios.post('http://localhost:8000/api/likelist'
+    // , {body: JSON.stringify({id: id})}
+    , {id}
+    );
     console.log(response.data);
     // 전체 데이터가 초기 상태
     setPost(response.data);
     //setFiltered(response.data)
   };
-  
+
+
   // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
   const [post, setPost] = useState([]);
   //const [filtered, setFiltered] = useState([]);

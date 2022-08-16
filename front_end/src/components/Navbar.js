@@ -5,10 +5,16 @@ import logo from '../img/logo.JPG';
 
 function Navbar() {
   const onLogout = () => {
-    // sessionStorage 에 user_id 로 저장되어있는 아이템을 삭제한다.
-      sessionStorage.removeItem('nick_names')
+    // sessionStorage 에 id 로 저장되어있는 아이템을 삭제한다.
+      localStorage.removeItem('nick_name')
+      localStorage.removeItem('id')
       // App 으로 이동(새로고침)
       document.location.href = '/'
+  }
+  const goMypage = () => {
+    const id = window.localStorage.getItem("id")
+    if (id== undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
+    else  return document.location.href = '/mypage';
   }
   return (
     <nav className="navbar">
@@ -22,14 +28,19 @@ function Navbar() {
         </div>
 
         <div className="navbar_my">
-          
-          <button type='button' onClick={onLogout}>Logout</button>
-          <li>{window.localStorage.getItem("nick_name")} 님</li>
-
+          {
+            (function() {
+              if (window.localStorage.getItem("nick_name") != undefined) return (<li>{window.localStorage.getItem("nick_name")}님</li>);
+            })()
+          }
           <li><Link to ='/Request'>CONSULTATION</Link></li>
           <li id="cart"><Link to='/mypage'>CART</Link></li>
-          <li><Link to='/login'>LOGIN</Link></li>
-          
+          {
+            (function() {
+              if (window.localStorage.getItem("nick_name") == undefined) return (<li><Link to='/login'>LOGIN</Link></li>);
+              else  return (<button type='button' onClick={onLogout}>Logout</button>);
+            })()
+          }
         </div>
       </div>
           
@@ -38,7 +49,8 @@ function Navbar() {
         <li><Link to ="/course">Course</Link></li>
         <li><Link to ="/recommend">Recommend</Link></li>
         <li><Link to ="/community">Community</Link></li>
-        <li><Link to="/mypage">Mypage</Link></li>
+        <li><button type='button' onClick={goMypage}>Mypage</button></li>
+        {/* <li><Link to="/mypage">Mypage</Link></li> */}
       </div>
     </nav>
     );
