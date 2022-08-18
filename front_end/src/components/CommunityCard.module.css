@@ -129,6 +129,58 @@ ol, ul {
   position: relative;
 }
 
+.search_title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.search_container {
+  padding: 20px;
+}
+
+.search_address{
+  color: black !important;
+}
+
+.search_container ul {
+  font-size: 14px;
+  text-align: left;
+  color: gray;
+}
+
+.search_detail{
+  background-color: #E0E3E8;
+  right: -330px;
+  top: -112px;
+  position: relative;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: -webkit-center;
+  width: 290px;
+}
+
+.search_detail ul {
+  font-size: 14px;
+}
+
+.SearchResultCard{
+  height: 135px;
+}
+
+.sm_img{
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin: 15px 0;
+}
+
+.sm_title {
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 @media only screen and (min-width: 1550px) {
   .mycourse_modal{
     box-shadow: -7px 7px 5px #0000003d;
