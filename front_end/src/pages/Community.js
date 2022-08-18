@@ -26,14 +26,21 @@ function Community(props) {
 
   const [modal, setModal] = useState(false);
 
+  const [clickId, setClickId] = useState()
   // 컴포넌트가 렌더링 될때마다 특정 작업 실행되도록
   useEffect(()=> {
       loadPost();
     }, [] );  
 
   const openModal = (e) => {
+    e.preventDefault();
+    setClickId(Number(e.currentTarget.children[0].id));
     setModal(true);
   };
+
+  useEffect(() => {
+    console.log(clickId);
+  }, [clickId]);
 
   return (
     <div className={styles.community_container}>
@@ -51,7 +58,7 @@ function Community(props) {
           {filtered.map((card, index) => {
             return (
             <>
-              <div onClick={openModal} card={card}>
+              <div onClick={openModal}>
               {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
 
               <CommunityCard 
@@ -62,7 +69,7 @@ function Community(props) {
               />
               </div>
               {modal ? 
-                <PostModal card={card} onClose={setModal}/> : null}
+                <PostModal card={card} onClose={setModal} clickId={clickId}/> : null}
             </>  
             );
           })}

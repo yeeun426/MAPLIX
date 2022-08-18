@@ -1,18 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 // import styles from "./PostModal.module.css";
 // import { createPortal } from "react-dom";
 import styled from 'styled-components';
 
 function PostModal(props) {
-    // function closeModal() {
-    //     props.closeModal();
-    //   }
-    const {onClose} = props;
-    const {card} = props;
+
+  const [modal, setModal] = useState([]);
+
+  const {clickId} = props;
+  const {onClose} = props;
+  const {card} = props;
+  // console.log(card)
+  // debugger
+    useEffect(() => {
+      if(card.cm_num === clickId) {
+        console.log(card.cm_num)
+        console.log(clickId)
+        setModal(card)
+      }else {
+        console.log("음"+ card.cm_num)
+      }
+
+      console.log(modal)
+    }, [modal])
+
 
       return (
+        <>
+        {Object.keys(modal).length !== 0 &&
         <Container className="Modal">
-          {/* <div className="modalBody" onClick={(e) => e.stopPropagation()}> */}
+          
           <div className="modalBody">  
             모달창
             <button id="modalCloseBtn" onClick={()=> {onClose(false);}}>
@@ -20,15 +37,16 @@ function PostModal(props) {
             </button>
             {/* {props.children} */}
             <ol>
-              <ul>{card.cm_title}</ul>
-              <ul>{card.cm_type}</ul>
-              <ul>{card.cm_content}</ul>
-              <ul>{card.writer}</ul>
-              <ul>{card.wr_date}</ul>
+              <ul>{modal.cm_title}</ul>
+              <ul>{modal.cm_type}</ul>
+              <ul>{modal.cm_content}</ul>
+              <ul>{modal.writer}</ul>
+              <ul>{modal.wr_date}</ul>
             </ol>
-
           </div>
         </Container>
+      }
+    </>
       );
 };
 
