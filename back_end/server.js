@@ -29,7 +29,7 @@ app.get("/api/community", (req, res) => {
 // location에서 m_num이 위와 같은것의 p_num, description, l_image 받아옴 
 // 그 p_num을 place에서 찾아오기
 
-app.get("/api/search", (req, res) => {
+app.get("/api/search/title", (req, res) => {
   const params = "%" + req.query.media + "%";
   //let sqlGet = "SELECT * FROM `test`.`media` WHERE `m_name2` LIKE ? OR `m_name` LIKE ?";
   let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
@@ -48,7 +48,7 @@ app.get("/api/search", (req, res) => {
 });
 
 //지역 검색시 
-app.get("/api/search", (req, res) => {
+app.get("/api/search/area", (req, res) => {
   const params = "%" + req.query.media + "%";
   let sqlGet = "SELECT * FROM test.location AS L "; 
   sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";
@@ -71,13 +71,14 @@ app.get("/api/search", (req, res) => {
 
 // 장소명(p_name <- test.place), 주소(address <- test.place) (location과 p_num으로 조인)
 // 드라마명(m_name <- media) (location과 m_num으로 조인)
-app.get("/api/likelist", (req, res) => {
+app.post("/api/likelist", (req, res) => {
+  const id = req.body.id;
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
   let sqlGet = " SELECT L.*, m_name, m_type, p_name, address FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
-  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = '예은') ";
+  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
   // location (미디어num, 장소num)에서 미디어 num
-  db.query(sqlGet, (error, result) => {
+  db.query(sqlGet, [id], (error, result) => {
     console.log(result);
     res.send(result);
   });
@@ -215,29 +216,50 @@ app.post("/signup", (req, res) => {
 
 app.post("/login", (req, res) => {
   const id = req.body.id;
-  // const pw = req.body.pw;
-  console.log(id);
-  const sqlQuery = "SELECT id, pw FROM user WHERE id=?;";
-  db.query(sqlQuery, [id], (err, result) => {
-    let user_info = new Object();
-    user_info.tf = true;
+  const pw = req.body.pw;
 
+  let user_info = new Object();
+  user_info.tf = true;
+
+  console.log(id);
+
+  const sqlQueryId = "SELECT id FROM user WHERE id=?;";
+
+  // const sqlQuery = "SELECT COUNT(id) as result FROM user WHERE id=?;";
+  db.query(sqlQueryId, [id], (err, result) => {
     if (result[0] == undefined) { // 아이디 존재 X
       user_info.tf = false;
       res.send(user_info);
     }
     else {
-      user_info.tf = true;
-      user_info.id = result[0].id;
-      user_info.pw = result[0].pw;
-      res.send(user_info);
+      const sqlQueryPw = "SELECT pw, nick_name FROM user WHERE id=?;";
+      db.query(sqlQueryPw, [id], (err, resultPw) => {
+          user_info.tf = true;
+          user_info.id = result[0].id;
+          user_info.pw = resultPw[0].pw;
+          user_info.nick_name = resultPw[0].nick_name;
+          res.send(user_info);
+      })
     }
-    console.log(result[0].id, result[0].pw);
-    res.send(user_info);
-    // console.log(user_info);
-    // }
   })
-})
+});
+
+app.post("/api/stamp", (req, res) => {
+  const id = req.body.id;
+  const m_type = req.body.m_type;
+  const media_name = "%"  + req.body.media_name + "%";
+
+  console.log(id, m_type, media_name)
+  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
+  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
+  // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
+  
+  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);

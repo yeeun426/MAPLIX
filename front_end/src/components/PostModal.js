@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-// import styles from "./PostModal.module.css";
-// import { createPortal } from "react-dom";
 import styled from 'styled-components';
 
 function PostModal(props) {
@@ -11,8 +9,8 @@ function PostModal(props) {
   const {onClose} = props;
   const {card} = props;
   // console.log(card)
-  // debugger
-    useEffect(() => {
+
+  useEffect(() => {
       if(card.cm_num === clickId) {
         console.log(card.cm_num)
         console.log(clickId)
@@ -35,7 +33,7 @@ function PostModal(props) {
             <button id="modalCloseBtn" onClick={()=> {onClose(false);}}>
               ✖
             </button>
-            {/* {props.children} */}
+
             <ol>
               <ul>{modal.cm_title}</ul>
               <ul>{modal.cm_type}</ul>

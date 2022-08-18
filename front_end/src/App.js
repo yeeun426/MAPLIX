@@ -16,6 +16,7 @@ import Request from './pages/Request';
 import UpdateInfo from './pages/UpdateInfo';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import SearchSidebar from './components/SearchSidebar';
 // import Modal from "react-modal";
 function App() {
 
@@ -42,8 +43,11 @@ function App() {
           <Route path='/signup' element={<SignUp/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
 
-          <Route path='/search' element={<SearchPage/>}></Route>
-          <Route path="/search/title/:media" element={<SearchPage />}></Route>
+          {/* <Route path='/search' element={<SearchPage/>}></Route> */}
+          <Route path="/search/:cate/:word" element={<SearchPage />}></Route>
+          {/* <Route path="/search/area/:word" element={<SearchPage />}></Route> */}
+        
+          {/* <Route path="/search/title/inpage/:media" element={<SearchPage />}></Route> */}
       </Routes>
     
     </div>

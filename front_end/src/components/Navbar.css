@@ -6,7 +6,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-a, span {
+a, span , button{
     text-decoration: none;
     color: #293D45;
 }
