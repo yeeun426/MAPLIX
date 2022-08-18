@@ -261,6 +261,20 @@ app.post("/api/stamp", (req, res) => {
   });
 });
 
+app.post("/community/writestamp", (req, res) =>{
+  const cm_title = req.body.cm_title; 
+  const cm_content = req.body.cm_content;
+  const writer = req.body.writer; 
+  const cm_type = req.body.cm_type; 
+  const cm_image = req.body.cm_image; 
+  
+
+  const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`, `cm_image`) VALUES (?,?,?,?,?);";
+  db.query(sqlQuery, [cm_title, cm_content, writer, cm_type, cm_image], (err, result) => {
+      res.send('success!'); 
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });
