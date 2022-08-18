@@ -36,7 +36,6 @@ function Community(props) {
     e.preventDefault();
     setClickId(Number(e.currentTarget.children[0].id));
     setModal(true);
-    debugger
   };
 
   useEffect(() => {
