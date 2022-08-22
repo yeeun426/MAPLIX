@@ -58,13 +58,17 @@ const loadData = () => {
         .then(function (response) {
             setCardList(response.data);
         });
+    } else {
+      console.log(cardList)
     }
+    
 };
 
 useEffect(()=> {
     if (activeCate){
         loadData();
     }
+    console.log(activeCate)
     // console.log("courseadd 필터" + Object.values(activeCate));
 },[activeCate]);      
 
@@ -186,7 +190,7 @@ useEffect(()=> {
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList}/>
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} searchPlace={place}/>      
+          <MapContainer activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place}/>      
 
           </div>      
         </div>

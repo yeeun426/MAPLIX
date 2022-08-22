@@ -215,6 +215,18 @@ app.post("/checknickname", (req, res) => {
   });
 });
 
+app.post("/api/post/likelist", (req, res) => {
+  const id = req.body.id;
+  const l_num = req.body.l_num;
+
+  console.log(id, l_num)
+  const sqlQuery = "INSERT INTO test.likelist (id, l_num) VALUES (?, ?)";
+  db.query(sqlQuery, [id, l_num], (err, result) => {
+    res.send('즐겨찾기에 추가되었습니다'); 
+    console.log(result)
+});
+})
+
 app.post("/signup", (req, res) => {
   const email = req.body.email;
   const id = req.body.id;
