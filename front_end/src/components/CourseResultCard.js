@@ -4,12 +4,16 @@ import styles from "./CommunityCard.module.css";
 import React, { useState }from "react";
 
 
-export default function SearchResultCard({card}) {
-  const [detail, setDetail] = useState(false); 
+export default function SearchResultCard({card, setResult}) {
+
   
   const onClickPlace =()=> {
-      setDetail(true);
+    if (window.confirm('경로에 추가하시겟습니까?')){
+        setResult(card);
+        alert("추가되었습니다")
+    }
   }
+  
   return (
     <div className={styles.SearchResultCard}>
       <div className={styles.search_container} onClick={onClickPlace}>    
@@ -19,23 +23,12 @@ export default function SearchResultCard({card}) {
                 <ul className={styles.search_address}>{card.address}</ul>
                 <ul>#{card.m_name}</ul>
                 <ul>#{card.category}</ul>
+                {/* <button onClick={onClickPlace}>추가하기</button> */}
             
             </ol>
             {/* <button type='submit' onClick={onClickLikeBtn}>즐겨찾기</button> */}
         </div>
       </div>
-
-      {detail ?
-      <div className={styles.search_detail} onClick={()=>{setDetail(false)}}>
-          <div className={styles.sm_img}>
-            임시 사진
-          </div>
-          <div className={styles.sm_title}>{card.p_name}</div>
-          <ul>{card.address}</ul>
-          <ul>#{card.m_name}</ul>
-          <ul>#{card.category}</ul>
-      </div>
-      : null}
     </div>
   );
 }

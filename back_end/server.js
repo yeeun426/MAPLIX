@@ -65,6 +65,13 @@ app.get("/api/search/area", (req, res) => {
   });
 });
 
+app.get("/api/search", (req, res) => {
+  const sqlGet = "SELECT * FROM test.place";
+  db.query(sqlGet, (error, result) => {
+    res.send(result);
+  });
+});
+
 
 // 카테고리 선택하면
 
@@ -74,7 +81,7 @@ app.get("/api/search/area", (req, res) => {
 app.post("/api/likelist", (req, res) => {
   const id = req.body.id;
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
-  let sqlGet = " SELECT L.*, m_name, m_type, p_name, address FROM test.location As L ";
+  let sqlGet = " SELECT L.*, m_name, m_type, p_name, address, category FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
   sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
   // location (미디어num, 장소num)에서 미디어 num
@@ -83,6 +90,18 @@ app.post("/api/likelist", (req, res) => {
     res.send(result);
   });
 });
+
+app.get('/api/course', (req, res) => {
+  const id = req.body.id;
+  // 즐겨찾기 값
+  let sqlGet = " SELECT * FROM test.location As L ";
+  sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
+  sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
+  sqlGet += "UNION";
+  sqlGet = "SELECT * FROM test.location AS L "; 
+  sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";
+  sqlGet += " WHERE L.p_num = any (SELECT place.p_num FROM test.place WHERE place.category = '관광지' ) " ;
+})
 
 app.get("/api/mycourse", (req, res) => {
   const sqlGet = "SELECT * FROM test.mycourse WHERE id='예은'";
@@ -207,7 +226,7 @@ app.post("/signup", (req, res) => {
 
   console.log(email, id, pw, u_name, birth, gender, nick_name);
 
-  const sqlQuery = "INSERT INTO user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
+  const sqlQuery = "INSERT INTO test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
   db.query(sqlQuery, [id, pw, u_name, birth, gender, nick_name, email], (err, result) => {
     res.send('success!'); 
     console.log(result)

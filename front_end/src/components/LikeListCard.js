@@ -17,8 +17,9 @@ export default function CommunityCard({card}) {
           <div className={styles.like_name}>{card.p_name}</div>
           <div img_box>
               <ol>
-                  <ul>내용 : {card.l_num}</ul>
-                  <ul>종류 : {card.address}</ul>
+                  <ul>{card.l_num}</ul>
+                  <ul>주소 : {card.address}</ul>
+                  <ul>#{card.m_name} #{card.m_type} #{card.category}</ul>
               </ol>
           </div>
         </div>
