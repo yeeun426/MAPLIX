@@ -1,3 +1,5 @@
+//**** courseAdd에서 api호출한거
+
 import React, { useEffect, useState } from "react";
 import './Course.css';
 import mountain from "../img/mountain.png";
@@ -16,15 +18,6 @@ import styled from 'styled-components';
 import axios from "axios";
 
 function Course(){
-
-  //const [cnt, setCnt] = useState(0);
-  const [result, setResult] = useState([]);
-  const [activeCate, setActiveCate] = useState(null);
-  
-  const [inputText, setInputText] = useState("");
-  const [place, setPlace] = useState("");
-
-
   const id = window.localStorage.getItem("id");
 
   const initialCate = [ // 필터 어떤거 클릭됐는지, true : 클릭된상태
@@ -41,44 +34,18 @@ function Course(){
   { category : "etc" , flag : false, realCate: "기타"}
 ];
 
-const [cardList, setCardList] = useState([])
-
-const loadData = () => {
-
-    if (Object.values(activeCate)[0].flag === true){ // likelist
-        axios.post('http://localhost:8000/api/likelist',{id})
-        .then(function (response) {
-        console.log(response.data);
-        setCardList(response.data);
-        //console.log(Object.values(activeCate));
-        // console.log(Object.values(activeCate)[0].flag);
-        });
-    } else if (Object.values(activeCate)[1].flag === true){
-        axios.get('http://localhost:8000/api/search')
-        .then(function (response) {
-            setCardList(response.data);
-        });
-    } else {
-      console.log(cardList)
-    }
-    
-};
-
-useEffect(()=> {
-    if (activeCate){
-        loadData();
-    }
-    console.log(activeCate)
-    // console.log("courseadd 필터" + Object.values(activeCate));
-},[activeCate]);      
-
-useEffect(()=> {
-  setActiveCate(initialCate);
-  console.log('result = ', result);
-}, []);
+  useEffect(()=> {
+    setActiveCate(initialCate);
+    console.log('result = ', result);
+  }, []);
 
   
-   
+   //const [cnt, setCnt] = useState(0);
+  const [result, setResult] = useState([]);
+  const [activeCate, setActiveCate] = useState(null);
+  
+  const [inputText, setInputText] = useState("");
+  const [place, setPlace] = useState("");
 
   // 중복필터
   const filterOn2 = (e) => {
@@ -188,9 +155,9 @@ useEffect(()=> {
 
           <div className="course-sidebar">
             <div id="course-line"></div>
-            <CourseAdd activeCate={activeCate} cardList={cardList}/>
+            <CourseAdd activeCate={activeCate} />
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place}/>      
+          <MapContainer activeCate={activeCate} searchPlace={place}/>      
 
           </div>      
         </div>
