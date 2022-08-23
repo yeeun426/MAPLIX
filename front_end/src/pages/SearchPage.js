@@ -15,6 +15,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from "../components/Community.module.css";
 import SearchResultCard from '../components/SearchResultCard';
+import Pagination from '../components/Pagination';
 
 function SearchPage ( ) {
   
@@ -33,6 +34,14 @@ function SearchPage ( ) {
   const [searchWord, setSearchWord] = useState( useparams.word );
   // SearchPage내에서 검색한 키워드로 넣어주기?
   const [search, setSearch] = useState(searchWord);
+
+
+  // 변수들
+const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
+const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
+//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
+const [filtered, setFiltered] = useState([]); 
+
 
   // 데이터 받아오기
   const loadData = async () => {
@@ -59,13 +68,10 @@ function SearchPage ( ) {
     }
 
     console.log("로드데이터", response.data.length);
+    console.log(response.data);
 };
 
-// 변수들
-const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
-const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
-//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
-const [filtered, setFiltered] = useState([]); 
+
 
 let cnt = 0;
 //const [cnt, setCnt] = useState(0);
@@ -156,6 +162,19 @@ const clickall = () => {
   }));
 }
 
+const [currentPage, setCurrentPage] = useState(1);
+const [postsPerPage, setPostsPerPage] = useState(6);
+
+const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
+const indexOfFirst = indexOfLast - postsPerPage;
+const currentPosts = (posts) => {
+  let currentPosts = 0;
+  currentPosts = cardList.slice(indexOfFirst, indexOfLast);
+  return currentPosts;
+};
+
+
+
     return(
       <div className='Search'>
         <div className='Upper'>
@@ -232,7 +251,7 @@ const clickall = () => {
             </button>
 
             <div className={styles.card_list}>
-                { filtered && filtered.map((card, index) => {
+                { filtered && currentPosts(filtered).map((card, index) => {
                     return (
                         <div card = {card}>
                             <SearchResultCard 
@@ -245,6 +264,12 @@ const clickall = () => {
                         </div>
                     );
                 })}
+
+              <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={cardList.length}
+                paginate={setCurrentPage}
+              />
 
             </div>
         </div>

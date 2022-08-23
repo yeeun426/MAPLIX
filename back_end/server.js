@@ -207,7 +207,7 @@ app.post("/signup", (req, res) => {
 
   console.log(email, id, pw, u_name, birth, gender, nick_name);
 
-  const sqlQuery = "INSERT INTO user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
+  const sqlQuery = "INSERT INTO test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
   db.query(sqlQuery, [id, pw, u_name, birth, gender, nick_name, email], (err, result) => {
     res.send('success!'); 
     console.log(result)

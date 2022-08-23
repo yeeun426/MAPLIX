@@ -34,9 +34,9 @@ function CommunitySidebar({setActiveCate, activeCate, setFiltered, post}){
           <img src={free} alt = "free"/>
           자유
         </button></ul>
-        <ul><button><Link to="/community/writepost">
+        <ul><button className={activeCate === "글쓰기" ? styles.active : ""} onClick={() => setActiveCate("글쓰기")}>
           <img src={write} alt = "free"/>
-          글쓰기</Link>
+          글쓰기
         </button></ul>
       </ol>
     </div>
@@ -44,13 +44,3 @@ function CommunitySidebar({setActiveCate, activeCate, setFiltered, post}){
 }
 
 export default CommunitySidebar;
-// export default function Catbtn({ name, catActive, handleSetCat }) {
-//   return (
-//     <button
-//       className={`cat_btn hover ${catActive ? "active_btn" : null}`}
-//       onClick={() => handleSetCat(name)}
-//     >
-//       {name}
-//     </button>
-//   );
-// }
