@@ -73,9 +73,9 @@ const Container = styled.div `
 
   .modalBody button{
     float: right;
-    font-size: 23px;
+    font-size: 16px;
     color: white;
-    padding: 3px 12px;
+    padding: 8px 12px;
   }
 
   .modalBody ul{

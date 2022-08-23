@@ -163,7 +163,7 @@ const clickall = () => {
 }
 
 const [currentPage, setCurrentPage] = useState(1);
-const [postsPerPage, setPostsPerPage] = useState(6);
+const [postsPerPage, setPostsPerPage] = useState(5);
 
 const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
 const indexOfFirst = indexOfLast - postsPerPage;
@@ -264,14 +264,13 @@ const currentPosts = (posts) => {
                         </div>
                     );
                 })}
-
-              <Pagination
+            </div>
+            
+            <Pagination
                 postsPerPage={postsPerPage}
                 totalPosts={cardList.length}
                 paginate={setCurrentPage}
               />
-
-            </div>
         </div>
         <MapContainer />
 

@@ -5,7 +5,7 @@ import MypageSidebar from './MypageSidebar';
 
 function Layout({ children, activeMenu }) {
   return (
-    <div>
+    <div style={{width:"100%"}}>
   
       <div className={styles.layout}>
         <MypageSidebar activeMenu={activeMenu}/>

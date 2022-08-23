@@ -13,9 +13,8 @@
   .layout {
     display: flex;
     /* margin-top: 56px; */
-    flex: 1;
+    /* flex: 1; */
   }
   .contents {
-    /* margin-left: 240px; */
-    flex: 1;
+    width: 80%;
   }
