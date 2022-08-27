@@ -53,6 +53,14 @@ const [cardList, setCardList] = useState([])
 
 const loadData = () => {
 
+  let nowcate = "";
+
+        for (var k=0; k < activeCate.length; k++){
+          if (Object.values(activeCate)[k].flag === true){
+            nowcate = Object.values(activeCate)[k].realCate
+          }
+        }
+
     if (Object.values(activeCate)[0].flag === true){ // likelist
         axios.post('http://localhost:8000/api/likelist',{id})
         .then(function (response) {
@@ -66,8 +74,28 @@ const loadData = () => {
         .then(function (response) {
             setCardList(response.data);
         });
+    } else{
+      var ps = new kakao.maps.services.Places(); 
+
+      ps.keywordSearch(nowcate , placesSearchCB, {page: 1 , size : 15}); 
+      ps.keywordSearch(nowcate , placesSearchCB, {page: 2 , size : 15}); 
+      ps.keywordSearch(nowcate , placesSearchCB, {page: 3 , size : 15}); 
+      
+      const newnew = []
+
+      function placesSearchCB (data, status, pagination) {
+        if (status === kakao.maps.services.Status.OK) {
+          console.log(data)
+          for (var a=0; a < data.length; a++){
+            newnew.push({address : data[a].address_name, category : nowcate, p_name : data[a].place_name, p_num : a})
+          }
+
+          
+        }
+      }
+      setCardList(newnew);
     }
-    console.log(cardList)
+    console.log(cardList.length)
     
 };
 
@@ -75,7 +103,7 @@ const loadData = () => {
 
 useEffect(()=> {
     if (activeCate){
-        loadData();
+      loadData();
     }
     console.log(activeCate)
     // console.log("courseadd 필터" + Object.values(activeCate));
