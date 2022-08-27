@@ -14,10 +14,10 @@ import CourseAdd from '../components/CourseAdd'
 
 import styled from 'styled-components';
 import axios from "axios";
-
+const { kakao } = window;
 function Course(){
 
-  //const [cnt, setCnt] = useState(0);
+  
   const [result, setResult] = useState([]);
   const [activeCate, setActiveCate] = useState(null);
   
@@ -36,12 +36,20 @@ function Course(){
   { category : "river" , flag : false, realCate: "강"},
   { category : "restaurant" , flag : false, realCate: "음식점"},
   { category : "cafe" , flag : false, realCate: "카페"},
-  { category : "activity" , flag : false, realCate: "액티비티"},
+  { category : "activity" , flag : false, realCate: "체험"},
   { category : "tour" , flag : false, realCate: "관광지"},
   { category : "etc" , flag : false, realCate: "기타"}
 ];
 
+// let nowkakaocate = activeCate.filter(k => {
+//   if (k.flag !== "likelist" || k.flag !== 'mediaplace'){
+//     if (k.flag )
+//   }
+//       return k.flag === true ? true : false })
+const [dddd, setdddd] = useState("")
+
 const [cardList, setCardList] = useState([])
+
 
 const loadData = () => {
 
@@ -58,11 +66,12 @@ const loadData = () => {
         .then(function (response) {
             setCardList(response.data);
         });
-    } else {
-      console.log(cardList)
     }
+    console.log(cardList)
     
 };
+
+
 
 useEffect(()=> {
     if (activeCate){
@@ -78,8 +87,6 @@ useEffect(()=> {
 }, []);
 
   
-   
-
   // 중복필터
   const filterOn2 = (e) => {
     console.log("필터 버튼 눌림" + e.target.id);
@@ -97,14 +104,24 @@ useEffect(()=> {
 
   // 단일필터
   const filterOn = (e) => {
+  
     const newKeywords = activeCate.map(k => {
       if (k.category === e.target.id) {
+
         return {...k, flag : true};
       }else {
         return {...k, flag : false};
       }
+  
     });
-    setActiveCate(newKeywords);
+   // console.log("필터 클릭 : ", nowclickcate)
+   setActiveCate((prev) => {return newKeywords});
+    // setActiveCate(() => {
+    //   activeCate.map(k => {
+    //     if (k.category === e.target.id){ return {...k, flag : true};}
+    //     else{ return {...k, flag : false}}
+    //   })
+    // });
   };
 
 
@@ -190,8 +207,12 @@ useEffect(()=> {
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList}/>
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place}/>      
-
+          <MapContainer dddd={dddd} activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place} />      
+          {/* <div
+          id="kakaoMap"
+          style={{
+            height: '1000px',
+          }}></div> */}
           </div>      
         </div>
     )
