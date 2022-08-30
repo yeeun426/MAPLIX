@@ -5,7 +5,9 @@ import axios from "axios";
 import '../pages/Course.css'
 
 import click from '../img/click.png';
-import CourseResultCard from './CourseResultCard';
+import CourseResultCard from './CourseResultCard'
+import MapContainer from '../components/MapContainer';
+
 
 // ㅈㄴ 노답버전
 
@@ -169,10 +171,11 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     
                     <div className="modal_course_list">
+                        
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult1}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult1}/>
                                 </div>
                             );
                         })}      
@@ -201,7 +204,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult2}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
                                 </div>
                             );
                         })}      
@@ -232,7 +235,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult3}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3}/>
                                 </div>
                             );
                         })}      
@@ -264,7 +267,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult4}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult4}/>
                                 </div>
                             );
                         })}      
@@ -296,7 +299,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult5}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult5}/>
                                 </div>
                             );
                         })}      
@@ -328,7 +331,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult6}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult6}/>
                                 </div>
                             );
                         })}      
@@ -360,7 +363,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult7}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult7}/>
                                 </div>
                             );
                         })}      
@@ -393,7 +396,7 @@ const CourseAdd = (props) => {
                         {cardList.map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult8}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult8}/>
                                 </div>
                             );
                         })}      
@@ -424,8 +427,8 @@ const CourseAdd = (props) => {
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div className="modal_course_items" card = {card}>
-                                    <CourseResultCard key={card.like_num} card={card} setResult={setResult9}/>
+                                <div card = {card}>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult9}/>
                                 </div>
                             );
                         })}      
