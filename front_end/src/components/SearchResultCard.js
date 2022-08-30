@@ -40,7 +40,7 @@ export default function SearchResultCard({card}) {
       {detail ?
       <div className={styles.search_detail} onClick={()=>{setDetail(false)}}>
           <div className={styles.sm_img}>
-            임시 사진
+            <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'}></img>
           </div>
           <div className={styles.sm_title}>{card.p_name}</div>
           <ul>{card.address}</ul>

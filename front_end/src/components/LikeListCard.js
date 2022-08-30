@@ -11,7 +11,7 @@ export default function CommunityCard({card}) {
   return (
     <div className={styles.likeList_container} >  
         <div className={styles.like_img}>
-          이미지 넣을 공간
+          <img className={styles.like_img} src={'/location/location_' + card.l_image + '.png'}></img>
         </div>  
         <div className={styles.like_txt}>
           <div className={styles.like_name}>{card.p_name}</div>
