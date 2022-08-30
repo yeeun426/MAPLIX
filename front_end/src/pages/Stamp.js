@@ -283,8 +283,8 @@ const Stamp = () => {
           if (m_num == undefined) return 0;
           else  
             return (
-              <div className={styles.form_container}>
-                {poster}<br></br>
+              <div className={styles.stamp_form_container}>
+                {/* <div>{poster}</div> */}
                 <img src={'/poster/poster_' + m_num + '_1.jpg'} className={styles.img_item} onClick={clickPoster1}></img>
                 <img src={'/poster/poster_' + m_num + '_2.jpg'} className={styles.img_item} onClick={clickPoster2}></img>
                 <img src={'/poster/poster_' + m_num + '_3.jpg'} className={styles.img_item} onClick={clickPoster3}></img>
