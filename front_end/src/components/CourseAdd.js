@@ -5,8 +5,7 @@ import axios from "axios";
 import '../pages/Course.css'
 
 import click from '../img/click.png';
-import CourseResultCard from './CourseResultCard'
-
+import CourseResultCard from './CourseResultCard';
 
 // ㅈㄴ 노답버전
 
@@ -129,7 +128,7 @@ const CourseAdd = (props) => {
 
     // const ResultCard = (e) => {
     //     return(
-    //         <div className={styles.card_list}>
+    //         <div className="modal_course_list">
     //             {cardList.map((card, index) => {
     //                 return (
     //                     <div card = {card}>
@@ -156,8 +155,8 @@ const CourseAdd = (props) => {
                 <CourseList listTop="2%">
                     {result1 &&
                     <div>
-                        <p>{result1.p_name}</p>
-                        <p>▶{result1.category}</p>
+                        <div className="course-add-title">{result1.p_name}</div>
+                        <div className="course-add-cate">▶{result1.category}</div>
                     </div>
                     }
                 </CourseList>
@@ -169,10 +168,10 @@ const CourseAdd = (props) => {
                     
                     <ClickedCate/>
                     
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult1}/>
                                 </div>
                             );
@@ -190,18 +189,18 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="13%">
-                    <p>{result2.p_name}</p>
-                    <p>{result2.category}</p>
+                    <div className="course-add-title">{result2.p_name}</div>
+                    <div className="course-add-cate">▶{result2.category}</div>
                 </CourseList>
 
                 { modal2 ? 
                 <ModalCourse ModalTop = "14%">
                     {/* <span onClick={()=>{setModal2(false); setChangeNum2(true)}}>모달</span>  */}
                     <ClickedCate/>
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult2}/>
                                 </div>
                             );
@@ -220,8 +219,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="24%">
-                    <p>{result3.p_name}</p>
-                    <p>{result3.category}</p>
+                    <div className="course-add-title">{result3.p_name}</div>
+                    <div className="course-add-cate">▶{result3.category}</div>
                 </CourseList>
 
                 { modal3 ? 
@@ -229,10 +228,10 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal3(false); setChangeNum3(true)}}>모달</span>  */}
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult3}/>
                                 </div>
                             );
@@ -252,8 +251,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="35%">
-                    <p>{result4.p_name}</p>
-                    <p>{result4.category}</p>
+                    <div className="course-add-title">{result4.p_name}</div>
+                    <div className="course-add-cate">▶{result4.category}</div>
                 </CourseList>
 
                 { modal4 ? 
@@ -261,10 +260,10 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal4(false); setChangeNum4(true)}}>모달</span>  */}
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult4}/>
                                 </div>
                             );
@@ -284,8 +283,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="46%">
-                    <p>{result5.p_name}</p>
-                    <p>{result5.category}</p>
+                    <div className="course-add-title">{result5.p_name}</div>
+                    <div className="course-add-cate">▶{result5.category}</div>
                 </CourseList>
 
                 { modal5 ? 
@@ -293,10 +292,10 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal5(false); setChangeNum5(true)}}>모달</span>  */}
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult5}/>
                                 </div>
                             );
@@ -316,8 +315,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="57%">
-                    <p>{result6.p_name}</p>
-                    <p>{result6.category}</p>
+                    <div className="course-add-title">{result6.p_name}</div>
+                    <div className="course-add-cate">▶{result6.category}</div>
                 </CourseList>
 
                 { modal6 ? 
@@ -325,10 +324,10 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal6(false); setChangeNum6(true)}}>모달</span>  */}
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult6}/>
                                 </div>
                             );
@@ -348,8 +347,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="68%">
-                    <p>{result7.p_name}</p>
-                    <p>{result7.category}</p>
+                    <div className="course-add-title">{result7.p_name}</div>
+                    <div className="course-add-cate">▶{result7.category}</div>
                 </CourseList>
 
                 { modal7 ? 
@@ -357,10 +356,10 @@ const CourseAdd = (props) => {
                     <span onClick={()=>{setModal7(false); setChangeNum7(true)}}>모달</span> 
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult7}/>
                                 </div>
                             );
@@ -381,8 +380,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="79%">
-                    <p>{result8.p_name}</p>
-                    <p>{result8.category}</p>
+                    <div className="course-add-title">{result8.p_name}</div>
+                    <div className="course-add-cate">▶{result8.category}</div>
                 </CourseList>
 
                 { modal8 ? 
@@ -390,10 +389,10 @@ const CourseAdd = (props) => {
                     <span onClick={()=>{setModal8(false); setChangeNum8(true)}}>모달</span> 
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult8}/>
                                 </div>
                             );
@@ -413,8 +412,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <CourseList listTop="90%">
-                    <p>{result9.p_name}</p>
-                    <p>{result9.category}</p>
+                    <div className="course-add-title">{result9.p_name}</div>
+                    <div className="course-add-cate">▶{result9.category}</div>
                 </CourseList>
 
                 { modal9 ? 
@@ -422,10 +421,10 @@ const CourseAdd = (props) => {
                     <span onClick={()=>{setModal9(false); setChangeNum9(true)}}>모달</span> 
                     <ClickedCate/>
                     {/* <ResultCard /> */}
-                    <div className={styles.card_list}>
+                    <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_items" card = {card}>
                                     <CourseResultCard key={card.like_num} card={card} setResult={setResult9}/>
                                 </div>
                             );
@@ -461,6 +460,18 @@ const CourseAdd = (props) => {
         position: absolute;
         top: ${(props)=>props.ModalTop};
         left: 100%;
+
+        .modal_course_container{
+            box-sizing: border-box;
+            padding: 10px 20px;
+            text-align: left;
+        }
+
+        .modal_course_container:hover{
+            background-color: #bccbc494;
+            cursor: pointer;
+        }
+
     `
     const CourseList = styled.div`
         background-color: white;
@@ -472,5 +483,14 @@ const CourseAdd = (props) => {
         position: absolute;
         top: ${(props)=>props.listTop};
         left: 25%;
+
+        .course-add-title{
+            padding-top: 15px;
+            font-family: 'yg-jalnan';
+        }  
+        
+        .course-add-cate{
+            font-size: 15px;
+        }
     `
 export default CourseAdd;

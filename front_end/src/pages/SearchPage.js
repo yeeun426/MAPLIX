@@ -95,8 +95,6 @@ useEffect(()=> {
 }, [search, searchCate] ); //search, searchCate
 
 useEffect(() => {
-
-  
   // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
   // 그 temp
   var arr = [];
@@ -110,7 +108,6 @@ useEffect(() => {
   setFiltered(filtered);
  
 }, [ activeCate])
-
 
 const filterOn = (e) => {
   console.log("필터 버튼 눌림" + e.target.id);
@@ -232,8 +229,8 @@ const currentPosts = (posts) => {
         <div className="search-sidebar">
             <div className='sidebar_category'>
               {/* 현재 활성화된 카테고리(title, area)는 cate로 확인하면 됩니다~ */}
-              <li><button onClick={ClickedSearchCate} id="title">title</button></li>
-              <li><button onClick={ClickedSearchCate} id="area">area</button></li>
+              <li><button className={searchCate === 'title' && "btn_active"} onClick={ClickedSearchCate} id="title">title</button></li>
+              <li><button className={searchCate === 'area' && "btn_active"} onClick={ClickedSearchCate} id="area">area</button></li>
             </div>
             
             <input
@@ -246,7 +243,7 @@ const currentPosts = (posts) => {
                 />
             
             <button type='submit' onClick={onClickSearchbar}>검색</button>
-            <button className='FilterIcons'  onClick={clickall}>
+            <button  onClick={clickall}>
               <li>#전체 결과 조회하기</li>
             </button>
 

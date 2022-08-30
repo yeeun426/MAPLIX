@@ -1,5 +1,5 @@
 // import { specialChars } from "@testing-library/user-event";
-import styles from "./CommunityCard.module.css";
+import {CourseResultCardStyle} from "./styled";
 // import Modal from "./PostModal";
 import React, { useState }from "react";
 
@@ -15,12 +15,12 @@ export default function SearchResultCard({card, setResult}) {
   }
   
   return (
-    <div className={styles.SearchResultCard}>
-      <div className={styles.search_container} onClick={onClickPlace}>    
-        <div className={styles.search_title}>{card.p_name}</div>
+    <CourseResultCardStyle>
+      <div className="modal-course-items" onClick={onClickPlace}>    
+        <div className="mci-title">{card.p_name}</div>
         <div img_box>
             <ol>
-                <ul className={styles.search_address}>{card.address}</ul>
+                <ul className="mci-address">{card.address}</ul>
                 <ul>#{card.m_name}</ul>
                 <ul>#{card.category}</ul>
                 {/* <button onClick={onClickPlace}>추가하기</button> */}
@@ -29,6 +29,6 @@ export default function SearchResultCard({card, setResult}) {
             {/* <button type='submit' onClick={onClickLikeBtn}>즐겨찾기</button> */}
         </div>
       </div>
-    </div>
+    </CourseResultCardStyle>
   );
 }

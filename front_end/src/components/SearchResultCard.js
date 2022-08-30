@@ -3,7 +3,8 @@ import styles from "./CommunityCard.module.css";
 // import Modal from "./PostModal";
 import React, { useState }from "react";
 import axios from "axios";
-
+import { MdBookmarkBorder } from "react-icons/md";
+import { MdBookmark } from "react-icons/md";
 
 export default function SearchResultCard({card}) {
 
@@ -32,7 +33,7 @@ export default function SearchResultCard({card}) {
                 <ul className={styles.search_address}>{card.address}</ul>
                 <ul>#{card.m_name}</ul>
                 <ul>#{card.category}</ul>
-                <button onClick={addLikelist}>즐겨찾기</button>
+                <button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>
             
             </ol>
             {/* <button type='submit' onClick={onClickLikeBtn}>즐겨찾기</button> */}

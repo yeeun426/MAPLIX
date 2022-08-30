@@ -1,6 +1,7 @@
 // import Navbar from "../components/Navbar";
 import CommunitySidebar from './CommunitySidebar';
 import CommunityCard from "../components/CommunityCard";
+import Footer from "../components/Footer";
 import styles from "./Community.module.css";
 
 import React, { useState, useEffect } from "react";
@@ -44,6 +45,7 @@ function Community(props) {
   }, [clickId]);
 
   return (
+    <>
     <div className={styles.community_container}>
         <div className={styles.menu}>
           
@@ -77,6 +79,8 @@ function Community(props) {
         </div>
         }
     </div>
+    <Footer />
+    </>
   );
 }
 

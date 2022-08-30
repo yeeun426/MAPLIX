@@ -4,6 +4,7 @@ import styles from "./Community.module.css";
 import LikeListCard from "..//components/LikeListCard";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+
 function MyPage() {
   const id = window.localStorage.getItem("id");
 
