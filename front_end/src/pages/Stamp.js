@@ -285,7 +285,10 @@ const Stamp = () => {
             return (
               <div className={styles.form_container}>
                 {poster}<br></br>
-                <img src={'/poster/poster_' + m_num + '.jpg'} width='300px' height='400px'></img>
+                <img src={'/poster/poster_' + m_num + '_1.jpg'} className={styles.img_item} onClick={clickPoster1}></img>
+                <img src={'/poster/poster_' + m_num + '_2.jpg'} className={styles.img_item} onClick={clickPoster2}></img>
+                <img src={'/poster/poster_' + m_num + '_3.jpg'} className={styles.img_item} onClick={clickPoster3}></img>
+                <img src={'/poster/poster_' + m_num + '_4.jpg'} className={styles.img_item} onClick={clickPoster4}></img>
               </div>
             );
           })()
