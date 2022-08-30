@@ -15,6 +15,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from "../components/Community.module.css";
 import SearchResultCard from '../components/SearchResultCard';
+import Pagination from '../components/Pagination';
 
 function SearchPage ( ) {
   
@@ -33,6 +34,14 @@ function SearchPage ( ) {
   const [searchWord, setSearchWord] = useState( useparams.word );
   // SearchPage내에서 검색한 키워드로 넣어주기?
   const [search, setSearch] = useState(searchWord);
+
+
+  // 변수들
+const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
+const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
+//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
+const [filtered, setFiltered] = useState([]); 
+
 
   // 데이터 받아오기
   const loadData = async () => {
@@ -59,13 +68,10 @@ function SearchPage ( ) {
     }
 
     console.log("로드데이터", response.data.length);
+    console.log(response.data);
 };
 
-// 변수들
-const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
-const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
-//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
-const [filtered, setFiltered] = useState([]); 
+
 
 let cnt = 0;
 //const [cnt, setCnt] = useState(0);
@@ -89,8 +95,6 @@ useEffect(()=> {
 }, [search, searchCate] ); //search, searchCate
 
 useEffect(() => {
-
-  
   // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
   // 그 temp
   var arr = [];
@@ -104,7 +108,6 @@ useEffect(() => {
   setFiltered(filtered);
  
 }, [ activeCate])
-
 
 const filterOn = (e) => {
   console.log("필터 버튼 눌림" + e.target.id);
@@ -155,6 +158,19 @@ const clickall = () => {
       return { ...k, flag : !k.flag,};
   }));
 }
+
+const [currentPage, setCurrentPage] = useState(1);
+const [postsPerPage, setPostsPerPage] = useState(5);
+
+const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
+const indexOfFirst = indexOfLast - postsPerPage;
+const currentPosts = (posts) => {
+  let currentPosts = 0;
+  currentPosts = cardList.slice(indexOfFirst, indexOfLast);
+  return currentPosts;
+};
+
+
 
     return(
       <div className='Search'>
@@ -213,8 +229,8 @@ const clickall = () => {
         <div className="search-sidebar">
             <div className='sidebar_category'>
               {/* 현재 활성화된 카테고리(title, area)는 cate로 확인하면 됩니다~ */}
-              <li><button onClick={ClickedSearchCate} id="title">title</button></li>
-              <li><button onClick={ClickedSearchCate} id="area">area</button></li>
+              <li><button className={searchCate === 'title' && "btn_active"} onClick={ClickedSearchCate} id="title">title</button></li>
+              <li><button className={searchCate === 'area' && "btn_active"} onClick={ClickedSearchCate} id="area">area</button></li>
             </div>
             
             <input
@@ -227,12 +243,12 @@ const clickall = () => {
                 />
             
             <button type='submit' onClick={onClickSearchbar}>검색</button>
-            <button className='FilterIcons'  onClick={clickall}>
+            <button  onClick={clickall}>
               <li>#전체 결과 조회하기</li>
             </button>
 
             <div className={styles.card_list}>
-                { filtered && filtered.map((card, index) => {
+                { filtered && currentPosts(filtered).map((card, index) => {
                     return (
                         <div card = {card}>
                             <SearchResultCard 
@@ -245,8 +261,13 @@ const clickall = () => {
                         </div>
                     );
                 })}
-
             </div>
+            
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={cardList.length}
+                paginate={setCurrentPage}
+              />
         </div>
         <MapContainer />
 

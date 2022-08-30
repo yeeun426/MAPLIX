@@ -74,7 +74,7 @@ const Login = () =>  {
         
     return(
         <div className="SignUp">
-            <div id="title">LOGIN</div>
+            <div id="titleMain">LOGIN</div>
             
             <div className="signup_container">
                 <div className="signup_item">

@@ -28,18 +28,22 @@ function PostModal(props) {
         {Object.keys(modal).length !== 0 &&
         <Container className="Modal">
           
-          <div className="modalBody">  
-            모달창
-            <button id="modalCloseBtn" onClick={()=> {onClose(false);}}>
-              ✖
-            </button>
+          <div className="modalBody"> 
+            <div id="closeContainer">
+              <button id="modalCloseBtn" onClick={()=> {onClose(false);}}>
+                ✖
+              </button>
+            </div>
 
             <ol>
-              <ul>{modal.cm_title}</ul>
-              <ul>{modal.cm_type}</ul>
-              <ul>{modal.cm_content}</ul>
-              <ul>{modal.writer}</ul>
-              <ul>{modal.wr_date}</ul>
+              <ul className="modal-title">{modal.cm_title}</ul>
+              <ul className="modal-type">{modal.cm_type}</ul>
+              <ul className="modal-writer">{modal.writer}</ul>
+              <ul className="modal-date">{modal.wr_date}</ul>
+              <div style={{display:"flex", justifyContent: "space-between"}}>
+                <div className="modal-img"></div>
+                <div className="modal-body">{modal.cm_content}</div>
+              </div>
             </ol>
           </div>
         </Container>
@@ -50,12 +54,62 @@ function PostModal(props) {
 
 const Container = styled.div `
   position: fixed;
-  width : 30%;
-  height : 70%;
-  align-items: center;
+  width: 500px;
+  height: 470px;
   z-index: 99;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 0 999px;
-  background-color: azure;
+  box-shadow: rgb(0 0 0 / 20%) 0 0 0 999px;
+  background-color: white;
+  left: 40%;
+  top: 22%;
+  border-radius: 10px;
+
+  #closeContainer{
+    width: 100%;
+    height: 40px;
+    background-color: #395C3C;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .modalBody button{
+    float: right;
+    font-size: 16px;
+    color: white;
+    padding: 8px 12px;
+  }
+
+  .modalBody ul{
+    font-size: 14px;
+  }
+
+  .modalBody ol {
+    padding: 25px 20px;
+    text-align: left;
+  }
+
+  .modal-title{
+    font-size: 20px !important;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+
+  .modal-date{
+    margin-bottom:20px;
+  }
+
+  .modal-type{
+    color: gray;
+  }
+
+  .modal-img{
+    border: 1px solid black;
+    height: 190px;
+    width: 190px;
+  }
+  
+  .modal-body{
+    width: 250px;
+  }
 `
 
 export default PostModal;

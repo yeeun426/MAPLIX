@@ -1,12 +1,14 @@
 // import Navbar from "../components/Navbar";
 import CommunitySidebar from './CommunitySidebar';
 import CommunityCard from "../components/CommunityCard";
+import Footer from "../components/Footer";
 import styles from "./Community.module.css";
 
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import PostModal from "../components/PostModal";
+import WritePost from './WritePost';
 
 function Community(props) {
 
@@ -43,6 +45,7 @@ function Community(props) {
   }, [clickId]);
 
   return (
+    <>
     <div className={styles.community_container}>
         <div className={styles.menu}>
           
@@ -54,19 +57,19 @@ function Community(props) {
           />
         </div>
         
-        <div className={styles.card_list}>
+        {activeCate ==="글쓰기"
+        ? <WritePost/>
+        :<div className={styles.card_list}>
           {filtered.map((card, index) => {
             return (
             <>
               <div onClick={openModal}>
-              {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
-
-              <CommunityCard 
+                <CommunityCard 
                 key={card.like_num} 
                 card={card} 
                 // onClick={openModal} 
                 activePage="community"
-              />
+                />
               </div>
               {modal ? 
                 <PostModal card={card} onClose={setModal} clickId={clickId}/> : null}
@@ -74,7 +77,10 @@ function Community(props) {
             );
           })}
         </div>
+        }
     </div>
+    <Footer />
+    </>
   );
 }
 

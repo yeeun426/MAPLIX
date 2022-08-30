@@ -1,6 +1,7 @@
 // src/pages/Stamp.js
 import Layout from '../components/Layout';
 import styles from '../components/Community.module.css';
+import styles2 from "./Community.module.css";
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -257,11 +258,12 @@ const Stamp = () => {
       // }
     }
   return (
+    <div className={styles2.main_container}>
     <Layout activeMenu="stamp">
-      <div className={styles.title_like}>도장깨기</div>
+      <div className={styles2.title_like}>도장깨기</div>
 
-      <div className={styles.write_item}>
-          <label htmlFor='m_type'>유형</label>
+      <div className={styles.stamp_item}>
+          <label htmlFor='m_type'>컨텐츠 분류</label>
           <select name="m_type" id="m_type" onChange={handleInputChange} vlaue={m_type}>
               <option value="none">기록할 컨텐츠 분류를 선택해주세요.</option>
               <option value="드라마">드라마</option>
@@ -269,7 +271,8 @@ const Stamp = () => {
               <option value="예능">예능</option>
           </select>
       </div>
-      <div className={styles.write_item}>
+      <div className={styles.stamp_item}>
+        <div>컨텐츠 검색</div>
         <form onSubmit={handleSubmit}>
           <input  name="media_name" vlaue={media_name} onChange={handleInputChange}type="text" placeholder="기록할 컨텐츠 제목을 검색하세요." />
           <button type='submit'>검색</button>
@@ -281,17 +284,14 @@ const Stamp = () => {
           else  
             return (
               <div className={styles.form_container}>
-                {poster}
-                <br></br>
-                <img src={'/poster/poster_' + m_num + '_1.jpg'} className={styles.img_item} onClick={clickPoster1}></img>
-                <img src={'/poster/poster_' + m_num + '_2.jpg'} className={styles.img_item} onClick={clickPoster2}></img>
-                <img src={'/poster/poster_' + m_num + '_3.jpg'} className={styles.img_item} onClick={clickPoster3}></img>
-                <img src={'/poster/poster_' + m_num + '_4.jpg'} className={styles.img_item} onClick={clickPoster4}></img>
+                {poster}<br></br>
+                <img src={'/poster/poster_' + m_num + '.jpg'} width='300px' height='400px'></img>
               </div>
             );
           })()
       }
     </Layout>
+    </div>
   );
 }
 

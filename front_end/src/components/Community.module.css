@@ -47,6 +47,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
+  margin-left: 75px;
 }
 
 .write_item label {
@@ -64,6 +65,10 @@
 .write_container{
   width: 700px;
   margin: auto;
+}
+
+.write_container span{
+  font-family: 'yg-jalnan'
 }
 
 :global #cm_title {
@@ -99,4 +104,31 @@
   border: 1px solid #cacaca;
   box-shadow: 3px 3px 3px 0px #8080803b;
   cursor: pointer;
+}
+
+.stamp_item{
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 75px;
+  text-align: left;
+}
+
+.stamp_item select, input{
+  height: 40px;
+  width: 350px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.stamp_container {
+  padding: 40px;
+  border-radius: 14px;
+  box-sizing: border-box;
+  background: #EFF1F0;
+  width: 650px;
+  margin-top: 20px;
+  margin-left: 75px;
+  box-shadow: 5px 5px 7px #00000030;
 }

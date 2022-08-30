@@ -1,37 +1,5 @@
-// src/pages/writepost.js
-// import Navbar from '../components/Navbar';
-// import Layout from '../components/Layout';
-// import CommunitySideBar from './CommunitySidebar';
 import styles from '../components/Community.module.css';
 import write from '../img/write.png';
-
-// function WritePost(){
-
-  
-//     console.log("글쓰기")
-//     return(
-//         <div>
-//             {/* <Navbar/> */}
-//             <div className={styles.sidebar}>
-//                 <CommunitySideBar/>
-//             </div>
-//             <div className={styles.postbox}>
-//                 제목 : 
-//                 <input />
-//                 <br></br><br></br>
-
-//                 내용 : 
-//                 <input className={styles.content}/>
-//                 <input type="file"/>
-//                 <br></br><br></br>
-//                 <button>업로드</button>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default WritePost;
-
 
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
@@ -57,11 +25,8 @@ const WritePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const formData = new FormData();
     const cm_image = img;
-    // formData.append('file', img);
     console.log(cm_image);
-    // console.log(formData);
     
     if (!cm_title || !cm_content || !writer || !cm_type || !cm_image) {
       // toast.error("Please provide value into each input field");
@@ -98,7 +63,7 @@ const WritePost = () => {
 
 
   return (
-    <div style={{padding:"30px", "background-color":"#E0E3E8"}}>
+    <div style={{padding:"30px", "background-color":"#E0E3E8", "flex":"auto"}}>
       <div className={styles.write_container}>
         <div style={{display:"flex"}}>
           <img src={write} alt = "write" style={{width:'30px'}}/>
