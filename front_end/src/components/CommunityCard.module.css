@@ -137,6 +137,7 @@ ol, ul {
 
 .search_container {
   padding: 20px;
+  position: relative;
 }
 
 .search_address{
@@ -168,6 +169,15 @@ ol, ul {
   height: 135px;
 }
 
+.SearchResultCard button{
+  position: absolute;
+  top: 16px;
+  right: 6px;
+}
+.SearchResultCard:hover{
+  background-color: #eff1f08f;
+  cursor: pointer;
+}
 .sm_img{
   width: 200px;
   height: 200px;

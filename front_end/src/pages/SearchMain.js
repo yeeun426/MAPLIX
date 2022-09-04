@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchMain.css';
 import area from "../img/cansearch.png";
 import Jeonju from "../img/Jeonju.png";
@@ -11,6 +11,8 @@ import Pohang from "../img/Pohang.png";
 import Incheon from "../img/Incheon.png";
 import Map from "../img/Map.png";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { GoSearch } from "react-icons/go";
+import Footer from '../components/Footer'
 
 function Search() {
 
@@ -19,10 +21,6 @@ function Search() {
   const [searchKW, setSearchKW ] = useState('');
   const [activeSearchCate, setActiveSearchCate] = useState('title'); // title이랑 area클릭하는거..?
 
-  // const onChange = (e) => {
-  //   let searchInput = []
-  //   console.log(e.target.value);
-  // }
   const handleUserInput = (e) => {
     e.preventDefault();
     setSearchKW(e.target.value);
@@ -54,20 +52,17 @@ function Search() {
     console.log(activeSearchCate);
   }
 
-  // navigate(`/search?media=${searchInput}`);
-  
-  //navigate(`/search/${kw}`, {state : {keyword: kw}});
-  //navigate('/search', {state: { media : `${searchInput}`}});
-
   return(
     <div className='Main_Search'>
       <div className='first_container'>
-        <li id="title">Maplix</li>  
+        <li id="titleMain">Maplix</li>  
         <li>영화, 드라마, 예능을 보면서 가고 싶은 곳을 지금 바로 찾아보세요!</li>
 
         <div className='Search_Category'>
-          <li><button onClick={ClickedSearchCate} id="title">title</button></li>
-          <li><button onClick={ClickedSearchCate} id="area">area</button></li>
+          <li>
+            <button onClick={ClickedSearchCate} id="title" className={activeSearchCate === 'title' && "btn_active"}>title</button>
+          </li>
+          <li><button onClick={ClickedSearchCate} id="area" className={activeSearchCate === 'area' && "btn_active"}>area</button></li>
         </div>
         {/* <form onSubmit={onSearch}>
           <input
@@ -80,7 +75,7 @@ function Search() {
         <form >
           <input value={searchKW} onChange={handleUserInput} onKeyPress={onSubmitSearchbar} type="text" placeholder="검색어를 입력해주세요." />
           
-          <button type='submit' onClick={onClickSearchbar}>검색</button>
+          <button type='submit' onClick={onClickSearchbar}><GoSearch/></button>
         </form>
       </div>    
 
@@ -143,6 +138,7 @@ function Search() {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
     );
   };

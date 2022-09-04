@@ -15,11 +15,14 @@ function SearchSidebar( {search, searchWord, setSearch, setSearchWord} ){
 
     console.log('searchpage'+word);
 
+    const ClickedSearchCate = (e) => {
+        e.preventDefault();
+        debugger
+    }
+
     // const media = location.state.media;
     // console.log(media);
-
     
-
 //     // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
 //   const [cardList, setCardList] = useState([]);
 //   const [filtered, setFiltered] = useState([]);
@@ -62,12 +65,12 @@ function SearchSidebar( {search, searchWord, setSearch, setSearchWord} ){
         setSearchWord(e.target.value)
         navigate(`/search/title/${word}`);
       }
-    
+
     return (
         <div className="search-sidebar">
             <div className='sidebar_category'>
-                <li><span>title</span></li>
-                <li><span>area</span></li>
+                <li><button id="title">title</button></li>
+                <li><button id="area">area</button></li>
             </div>
             <form>
                 

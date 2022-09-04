@@ -16,21 +16,44 @@ body {
   font-size: 13px;
 }
 
-#title {
+#titleMain {
   font-size: 40px;
+  font-weight: bold;
 }
 
 .first_container input{
   width: 600px;
-  height: 30px;
+  height: 40px;
   border-style: none;
   border-radius: 5px;
 }
 
+.first_container input:focus{
+  outline: 2px solid #395C3C;
+}
+
+.first_container form {
+  position: relative;
+}
+
+.first_container form button{
+  position: absolute;
+  top: 40%;
+  right: 28.5%;
+}
+
 .Search_Category {
   display: flex;
-  margin-left: 390px;
+  margin-left: 28%;
   margin-top: 20px;
+}
+
+.Search_Category li button{
+  font-size: 14px;
+}
+
+.Search_Category li .btn_active{
+  border-bottom: 2px solid gray;
 }
 
 .Search_Category li{

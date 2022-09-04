@@ -11,6 +11,7 @@ import tour from "../img/tour.png";
 import like from "../img/like.png";
 import MapContainer from '../components/MapContainer';
 import CourseAdd from '../components/CourseAdd'
+import Footer from '../components/Footer';
 
 import styled from 'styled-components';
 import axios from "axios";

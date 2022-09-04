@@ -3,7 +3,12 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const PORT = process.env.port || 8000;
+
+const PORT = 8000;
+
+// const corsOptions = {
+//   origin: 'http://localhost:8000'
+// }
 
 const db = mysql.createPool({
     host: "localhost",
@@ -15,7 +20,6 @@ const db = mysql.createPool({
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({extended : true}));
-
 
 app.get("/api/community", (req, res) => {
   const sqlGet = "SELECT * FROM test.community";
@@ -109,39 +113,21 @@ app.get("/api/mycourse", (req, res) => {
     res.send(result.reverse());
   });
 });
-// app.post("/insert", (req, res) => {
-//   const { cm_title } = req.body;
-//   const { cm_content } = req.body;
-  
-//   let sqlInsert = "INSERT INTO test.community (cm_title, cm_name) VALUES (?, ?)";
-//   db.query(sqlInsert, [cm_title, cm_content], (err, result) => {
-//     res.send(result);
-//   });
-// });
 
 
-// app.get("/", (req, res) => {
-//   // 데이터베이스에 제대로 들어오는거 확인하면 쿼리문 삭제하세유
-//   const sqlQuery = "INSERT INTO test.media (m_name, m_name2, m_type) VALUES ('가', '나', '드라마')";
-//   // ---------------------------------------------------------------------
-//   db.query(sqlQuery, (err, result) => {
-//     console.log(err);
-//     res.send("success!");
-//   });
-// });
-
-
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   // 데이터베이스에 제대로 들어오는거 확인하면 쿼리문 삭제하세유
   // const sqlQuery = "INSERT INTO test.media (m_name, m_name2, m_type) VALUES ('가', '나', '드라마')";
   // ---------------------------------------------------------------------
+  // res.setHeader('Access-Control-Allow-origin', 'https://localhost');
+
   db.query(sqlQuery, (err, result) => {
     console.log(err);
     res.send("success!");
   });
 });
 
-app.post("/community/writepost", (req, res) =>{
+app.post("/api/community/writepost", (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
   const writer = req.body.writer; 
@@ -155,21 +141,21 @@ app.post("/community/writepost", (req, res) =>{
   });
 });
 
-app.post("/mypage/request", (req, res) =>{
-  const media_name = req.body.media_name; 
-  const r_content = req.body.r_content;
-  const id = req.body.id; 
-  const m_type = req.body.m_type; 
-  const r_image = req.body.r_image; 
+// app.post("/mypage/request", (req, res) =>{
+//   const media_name = req.body.media_name; 
+//   const r_content = req.body.r_content;
+//   const id = req.body.id; 
+//   const m_type = req.body.m_type; 
+//   const r_image = req.body.r_image; 
   
 
-  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`, `r_image`) VALUES (?,?,?,?,?);";
-  db.query(sqlQuery, [media_name, r_content, id, m_type, r_image], (err, result) => {
-      res.send('success!'); 
-  });
-});
+//   const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`, `r_image`) VALUES (?,?,?,?,?);";
+//   db.query(sqlQuery, [media_name, r_content, id, m_type, r_image], (err, result) => {
+//       res.send('success!'); 
+//   });
+// });
 
-app.post("/checkid", (req, res) => {
+app.post("/api/checkid", (req, res) => {
   const id = req.body.id;
   console.log(req.body.id);
   
@@ -193,7 +179,7 @@ app.post("/checkid", (req, res) => {
   });
 });
 
-app.post("/checknickname", (req, res) => {
+app.post("/api/checknickname", (req, res) => {
   const nick_name = req.body.nick_name;
   console.log(req.body.nick_name);
   
@@ -238,14 +224,14 @@ app.post("/signup", (req, res) => {
 
   console.log(email, id, pw, u_name, birth, gender, nick_name);
 
-  const sqlQuery = "INSERT INTO test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
+  const sqlQuery = "INSERT INTO test.test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
   db.query(sqlQuery, [id, pw, u_name, birth, gender, nick_name, email], (err, result) => {
     res.send('success!'); 
     console.log(result)
 });
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const id = req.body.id;
   const pw = req.body.pw;
 
@@ -254,7 +240,7 @@ app.post("/login", (req, res) => {
 
   console.log(id);
 
-  const sqlQueryId = "SELECT id FROM user WHERE id=?;";
+  const sqlQueryId = "SELECT id FROM test.user WHERE id=?;";
 
   // const sqlQuery = "SELECT COUNT(id) as result FROM user WHERE id=?;";
   db.query(sqlQueryId, [id], (err, result) => {
@@ -263,7 +249,7 @@ app.post("/login", (req, res) => {
       res.send(user_info);
     }
     else {
-      const sqlQueryPw = "SELECT pw, nick_name FROM user WHERE id=?;";
+      const sqlQueryPw = "SELECT pw, nick_name FROM test.user WHERE id=?;";
       db.query(sqlQueryPw, [id], (err, resultPw) => {
           user_info.tf = true;
           user_info.id = result[0].id;
@@ -292,7 +278,117 @@ app.post("/api/stamp", (req, res) => {
   });
 });
 
-app.post("/community/writestamp", (req, res) =>{
+app.post("/api/poster", (req, res) => {
+  const id = req.body.id;
+  const m_type = req.body.m_type;
+  const media_name = "%"  + req.body.media_name + "%";
+
+  console.log(id, m_type, media_name)
+  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
+  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
+  // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
+  
+  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
+// 도장깨기 글쓰기
+app.post("/api/writestamp", (req, res) => {
+  const id = req.body.id;
+  const m_num = req.body.m_num;
+  const poster = req.body.poster;
+  // const record_title_var = "record_title" + req.body.part;
+  // const record_content_var = "record_content" + req.body.part;
+  const record_title = req.body.record_title;
+  const record_content = req.body.record_content;
+  const part = req.body.part;
+  
+  console.log(id, m_num, poster, record_content, record_title);
+
+  if (part == 1) {
+    const sqlQuery =  "UPDATE test.stamp SET record_title1 = ?, record_content1 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (part == 2) {
+    const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (part == 3) {
+    const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (part == 4) {
+    const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }  
+})
+
+app.post("/api/stampcheck", (req, res) => {
+  const id = req.body.id;
+  const m_num = req.body.m_num;
+  const poster = req.body.poster;
+  const part = req.body.num;
+
+  const sqlQuery =  "SELECT * FROM test.stamp WHERE id = ? AND m_num = ? AND poster = ?;"
+  db.query(sqlQuery, [id, m_num, poster], (err, result) => {
+    console.log(result);
+    res.send(result);
+  })
+
+  // if (part == 1) {
+  //   const sqlQuery =  "SELECT * FROM test.stamp WHERE id = ? AND m_num = ? AND poster = ?;"
+  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+  //     console.log(result);
+  //     res.send(result);
+  //   })
+  // }
+  // else if (part == 2) {
+  //   const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+  //     console.log(result);
+  //     res.send(result);
+  //   })
+  // }
+  // else if (part == 3) {
+  //   const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+  //     console.log(result);
+  //     res.send(result);
+  //   })
+  // }
+  // else if (part == 4) {
+  //   const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+  //     console.log(result);
+  //     res.send(result);
+  //   })
+  // }   
+})
+
+app.post("/api/community/writepost", (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
   const writer = req.body.writer; 
@@ -305,6 +401,7 @@ app.post("/community/writestamp", (req, res) =>{
       res.send('success!'); 
   });
 });
+
 
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
