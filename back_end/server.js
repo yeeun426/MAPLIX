@@ -50,7 +50,7 @@ app.get("/api/search/title", (req, res) => {
 //지역 검색시 
 app.get("/api/search/area", (req, res) => {
   const params = "%" + req.query.media + "%";
-  let sqlGet = "SELECT * FROM test.location AS L "; 
+  let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
   sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";
   sqlGet += " WHERE L.p_num = any (SELECT place.p_num FROM test.place WHERE place.address LIKE ? ) " ;
 

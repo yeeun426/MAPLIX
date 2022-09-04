@@ -66,13 +66,13 @@ const MapContainer = ({activeCate, cardList, setCardList}) => {
 
                 infowindow.open(map, marker);
                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-              
+                map.setCenter(coords); 
               }
-              final_coords.maps.LatLng(result[0].y, result[0].x);
+              //final_coords.maps.LatLng(result[0].y, result[0].x);
             });
               
           }
-          map.setCenter(final_coords); 
+          
         }
           
       }
