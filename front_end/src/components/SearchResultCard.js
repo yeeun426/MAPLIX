@@ -13,7 +13,7 @@ export default function SearchResultCard({card}) {
   const [detail, setDetail] = useState(false); 
   
   const onClickPlace =()=> {
-      setDetail(true);
+      setDetail(!detail);
   }
 
   const addLikelist = () => {
