@@ -47,54 +47,70 @@ const [filtered, setFiltered] = useState([]);
   const loadData = async () => {
     let response;
     if ( searchCate === "title"){
-      response = await axios.get('http://localhost:8000/api/search/title', {
+      // response = await axios.get('http://localhost:8000/api/search/title', {
+      //   params: {
+      //       'media': search
+      //   }
+      // });
+      axios.get('http://localhost:8000/api/search/title', {
         params: {
             'media': search
         }
+      }).then(function (response) {
+        setCardList(response.data)
       });
-    } else if ( searchCate === "area"){
-      response = await axios.get('http://localhost:8000/api/search/area', {
-        params: {
-            'media': search
-        }
-      });
-    }
 
-    if (response.data.length > 0){
-    setCardList(response.data);
-    setFiltered(response.date);
-    }else{
-      console.log("결과가 없습니다 어쩌구 생성")
+    } else if ( searchCate === "area"){
+      // response = await axios.get('http://localhost:8000/api/search/area', {
+      //   params: {
+      //       'media': search
+      //   }
+      // });
+      axios.get('http://localhost:8000/api/search/area', {
+        params: {
+            'media': search
+        }
+      }).then(function (response) {
+        setCardList(response.data)
+      });
     }
 
     console.log("로드데이터", response.data.length);
     console.log(response.data);
 };
 
+const initialCate = [
+  { category : "mountain" , flag : true, realCate: "산"},
+  { category : "forest" , flag : true, realCate: "숲"},
+  { category : "sea" , flag : true, realCate: "바다"},
+  { category : "river" , flag : true, realCate: "강"},
+  { category : "restaurant" , flag : true, realCate: "음식점"},
+  { category : "cafe" , flag : true, realCate: "카페"},
+  { category : "activity" , flag : true, realCate: "액티비티"},
+  { category : "tour" , flag : true, realCate: "관광지"},
+  { category : "etc" , flag : true, realCate: "기타"}
+]
 
-
-let cnt = 0;
 //const [cnt, setCnt] = useState(0);
-const [activeCate, setActiveCate] = useState([ // 필터 어떤거 클릭됐는지, true : 클릭된상태
-  { category : "mountain" , flag : false, realCate: "산"},
-  { category : "forest" , flag : false, realCate: "숲"},
-  { category : "sea" , flag : false, realCate: "바다"},
-  { category : "river" , flag : false, realCate: "강"},
-  { category : "restaurant" , flag : false, realCate: "음식점"},
-  { category : "cafe" , flag : false, realCate: "카페"},
-  { category : "activity" , flag : false, realCate: "액티비티"},
-  { category : "tour" , flag : false, realCate: "관광지"},
-  { category : "etc" , flag : false, realCate: "기타"}
-]);
+const [activeCate, setActiveCate] = useState(null); // 필터 어떤거 클릭됐는지, true : 클릭된상태
+  
+useEffect(() =>{
+  setActiveCate(initialCate);
+},[])
 
 useEffect(()=> { 
-  loadData();
+  if(activeCate){
+    loadData();  
+  }
+  
   // console.log(useparams.cate); // 왜 얘는 되고
   // console.log(cate); // 얘는 안되는지;
   // console.log(searchWord);
 }, [search, searchCate] ); //search, searchCate
 
 useEffect(() => {
+
+  
   // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
   // 그 temp
   var arr = [];
@@ -111,19 +127,15 @@ useEffect(() => {
 
 const filterOn = (e) => {
   console.log("필터 버튼 눌림" + e.target.id);
-  var count = 0;
   const newKeywords = activeCate.map(k => {
     if (k.category === e.target.id) {
-      return { ...k, flag : !k.flag,};
-    } else {
-      return k;
+      return {...k, flag : true};
+    }else {
+      return {...k, flag : false};
     }
   });
-  newKeywords.map(item => {
-    if (item.flag === true) count++;
-  });
-  setActiveCate(newKeywords);
-  console.log(count);
+  
+  setActiveCate((prev) => {return newKeywords});
   //console.log(Object.values(activeCate));
   // 버튼 눌릴때마다 true인 것들의 이름만 찾아서 cardlist filter해줘야함 
 };
@@ -243,12 +255,12 @@ const currentPosts = (posts) => {
                 />
             
             <button type='submit' onClick={onClickSearchbar}>검색</button>
-            <button  onClick={clickall}>
+            {/* <button className='FilterIcons'  onClick={clickall}>
               <li>#전체 결과 조회하기</li>
-            </button>
+            </button> */}
 
             <div className={styles.card_list}>
-                { filtered && currentPosts(filtered).map((card, index) => {
+                { cardList && currentPosts(cardList).map((card, index) => {
                     return (
                         <div card = {card}>
                             <SearchResultCard 

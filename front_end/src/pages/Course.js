@@ -47,7 +47,6 @@ function Course(){
 //     if (k.flag )
 //   }
 //       return k.flag === true ? true : false })
-const [dddd, setdddd] = useState("")
 
 const [cardList, setCardList] = useState([])
 
@@ -78,23 +77,23 @@ const loadData = () => {
     } else{
       var ps = new kakao.maps.services.Places(); 
 
-      ps.keywordSearch(nowcate , placesSearchCB, {page: 1 , size : 15}); 
-      ps.keywordSearch(nowcate , placesSearchCB, {page: 2 , size : 15}); 
-      ps.keywordSearch(nowcate , placesSearchCB, {page: 3 , size : 15}); 
+      ps.keywordSearch(nowcate , placesSearchCB); 
+      // ps.keywordSearch(nowcate , placesSearchCB, {page: 2 , size : 15}); 
+      // sps.keywordSearch(nowcate , placesSearchCB, {page: 3 , size : 15}); 
       
-      const newnew = []
+      
 
       function placesSearchCB (data, status, pagination) {
         if (status === kakao.maps.services.Status.OK) {
           console.log(data)
+          const newnew = []
           for (var a=0; a < data.length; a++){
             newnew.push({address : data[a].address_name, category : nowcate, p_name : data[a].place_name, p_num : a})
           }
-
+          setCardList(newnew);
           
         }
       }
-      setCardList(newnew);
     }
     console.log(cardList.length)
     
@@ -236,7 +235,7 @@ useEffect(()=> {
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList}/>
           </div>
-          <MapContainer dddd={dddd} activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place} />      
+          <MapContainer activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place} />      
           {/* <div
           id="kakaoMap"
           style={{
