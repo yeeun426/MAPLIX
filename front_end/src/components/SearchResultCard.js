@@ -18,11 +18,20 @@ export default function SearchResultCard({card}) {
 
   const addLikelist = () => {
     console.log(id, l_num);
-    axios.post('http://localhost:8000/api/post/likelist',{id, l_num})
+    if (id == undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
+    else return (
+      axios.post('http://localhost:8000/api/post/likelistcheck',{id, l_num})
         .then(function (response) {
-          alert("즐겨찾기에 추가되었습니다")    
-        
-        });
+          console.log(response)
+          if (response.data[0] == undefined) return (
+            axios.post('http://localhost:8000/api/post/likelistcheck',{id, l_num})
+            .then(function (response) {
+              alert("즐겨찾기에 추가되었습니다")
+            })
+          )
+          else return alert("이미 추가된 항목입니다.")
+        })
+    )
   }
   return (
     <div className={styles.SearchResultCard}>

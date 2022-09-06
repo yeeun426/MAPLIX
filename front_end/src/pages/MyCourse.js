@@ -9,9 +9,11 @@ import Navbar from "../components/Navbar";
 
 function MyCourse() {
 
+  const id = window.localStorage.getItem("id");
+
   // 데이터 가져오기
   const loadPost = async () => {
-    const response = await axios.get('http://localhost:8000/api/mycourse');
+    const response = await axios.post('http://localhost:8000/api/mycourse', {id});
     console.log(response.data);
     // 전체 데이터가 초기 상태
     setPost(response.data);
