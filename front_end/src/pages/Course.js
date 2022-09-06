@@ -222,14 +222,14 @@ useEffect(()=> {
         </div>
 
         <div className='Lower'>
-          <form className="inputForm" onSubmit={handleSubmit}>
+          {/* <form className="inputForm" onSubmit={handleSubmit}>
             <input
               placeholder="Search Place..."
               onChange={onChange}
               value={inputText}
             />
             <button type="submit">검색</button>
-          </form>
+          </form> */}
 
           <div className="course-sidebar">
             <div id="course-line"></div>

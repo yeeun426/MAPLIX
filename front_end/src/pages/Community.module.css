@@ -71,8 +71,7 @@ button.active{
 .like_list  {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 100%;
-  grid-gap: 10px;
+  grid-gap: 35px;
   margin-left: 75px;
 }
 

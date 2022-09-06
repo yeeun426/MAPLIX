@@ -43,7 +43,7 @@ const SignUp = () => {
 
     console.log(state.id);
 
-    fetch("http://localhost:8000/checkid", {
+    fetch("http://localhost:8000/api/checkid", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"
@@ -92,7 +92,7 @@ const SignUp = () => {
 
     console.log(state.id);
 
-    fetch("http://localhost:8000/checknickname", {
+    fetch("http://localhost:8000/api/checknickname", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json"

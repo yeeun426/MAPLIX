@@ -121,9 +121,9 @@ app.post("/api/mycourse", (req, res) => {
 
 app.get("/api", (req, res) => {
   // 데이터베이스에 제대로 들어오는거 확인하면 쿼리문 삭제하세유
-  // const sqlQuery = "INSERT INTO test.media (m_name, m_name2, m_type) VALUES ('가', '나', '드라마')";
+  const sqlQuery = "INSERT INTO test.media (m_name, m_name2, m_type) VALUES ('다', '라', '드라마')";
   // ---------------------------------------------------------------------
-  // res.setHeader('Access-Control-Allow-origin', 'https://localhost');
+  res.setHeader('Access-Control-Allow-origin', 'https://localhost');
 
   db.query(sqlQuery, (err, result) => {
     console.log(err);
@@ -256,7 +256,7 @@ app.post("/api/login", (req, res) => {
 
   console.log(id);
 
-  const sqlQueryId = "SELECT id FROM test.user WHERE id=?;";
+  let sqlQueryId = "SELECT id FROM test.user WHERE id= ?;";
 
   // const sqlQuery = "SELECT COUNT(id) as result FROM user WHERE id=?;";
   db.query(sqlQueryId, [id], (err, result) => {
