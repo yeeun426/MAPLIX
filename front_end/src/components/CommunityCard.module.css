@@ -141,6 +141,8 @@ ol, ul {
 }
 
 .search_address{
+  font-size: 14px;
+  text-align: left;
   color: black !important;
 }
 
@@ -150,19 +152,10 @@ ol, ul {
   color: gray;
 }
 
-.search_detail{
-  background-color: #E0E3E8;
-  right: -330px;
-  top: -112px;
-  position: relative;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: -webkit-center;
-  width: 290px;
-}
-
-.search_detail ul {
+.search_detail_tag{
   font-size: 14px;
+  text-align: left;
+  color: gray;
 }
 
 .SearchResultCard{
@@ -181,7 +174,7 @@ ol, ul {
 .sm_img{
   width: 200px;
   height: 200px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 15px 0;
 }
 
@@ -199,4 +192,28 @@ ol, ul {
     left: -408px;
   }
 
+}
+
+:global .search_detail {
+  display: none;
+}
+
+:global .search_detail.modalOn {
+  display: block;
+  background-color: #E0E3E8;
+  right: -330px;
+  top: -112px;
+  position: relative;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: -webkit-center;
+  width: 290px;
+}
+
+:global .search_detail ul {
+  font-size: 14px;
+}
+
+:global .search_detail button {
+  font-size: 16px;
 }

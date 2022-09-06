@@ -31,6 +31,13 @@
     height: 72px;
 }
 
+.FilterIcons.filterOn{
+    background: rgb(0 0 0 / 10%);
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+}
+
 .test{
     border: 1px solid black;
     width: 30px;

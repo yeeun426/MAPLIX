@@ -5,7 +5,7 @@ import styles from "./CommunityCard.module.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MdBookmarkBorder } from "react-icons/md";
-import { MdBookmark } from "react-icons/md";
+// import { MdBookmark } from "react-icons/md"; 
 
 export default function SearchResultCard({card}) {
 
@@ -32,8 +32,17 @@ export default function SearchResultCard({card}) {
       loadPost();
     }, [] );
 
-  const onClickPlace =()=> {
-      setDetail(true);
+  const onClickPlace =(e)=> {
+      // setDetail(!detail);
+      if(document.getElementsByClassName('modalOn').length !== 0) {
+        document.getElementsByClassName('modalOn')[0].classList.remove('modalOn') 
+        }
+      //   debugger
+        e.target.parentElement.parentElement.children[1].classList.add('modalOn');
+  }
+
+  const test = (e) => {
+    debugger
   }
 
   const addLikelist = () => {
@@ -59,36 +68,27 @@ export default function SearchResultCard({card}) {
           )
         })
     )}
+
   return (
     <div className={styles.SearchResultCard}>
       <div className={styles.search_container} onClick={onClickPlace}>    
         <div className={styles.search_title}>{card.p_name}</div>
-        <div img_box>
-            <ol>
-                <ul className={styles.search_address}>{card.address}</ul>
-                <ul>#{card.m_name}</ul>
-                <ul>#{card.category}</ul>
-                {
-                (function() {
-                  if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
-                  else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
-                })()
-                }
-            </ol>
-        </div>
+        <div className={styles.search_address}>{card.address}</div>
+        <div className={styles.search_detail_tag}>#{card.m_name}</div>
+        <div className={styles.search_detail_tag}>#{card.category}</div>
+        <button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>
       </div>
 
-      {detail ?
-      <div className={styles.search_detail} onClick={()=>{setDetail(false)}}>
-          <div className={styles.sm_img}>
+      <div className="search_detail">
+          <div>
             <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'}></img>
           </div>
           <div className={styles.sm_title}>{card.p_name}</div>
           <ul>{card.address}</ul>
           <ul>#{card.m_name}</ul>
           <ul>#{card.category}</ul>
-      </div>
-      : null}
+          <button className="modal_close_btn" onClick={(e)=>{e.target.parentElement.classList.remove('modalOn')}}>X</button>
+      </div> 
     </div>
   );
 }

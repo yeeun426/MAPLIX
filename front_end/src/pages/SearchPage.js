@@ -121,7 +121,13 @@ useEffect(()=> {
 // }, [ activeCate])
 
 const filterOn = (e) => {
+  if(document.getElementsByClassName('filterOn').length !== 0) {
+  document.getElementsByClassName('filterOn')[0].classList.remove('filterOn') 
+  }
+
   console.log("필터 버튼 눌림" + e.target.id);
+  e.target.parentElement.classList.add('filterOn');
+  // debugger
   const newKeywords = activeCate.map(k => {
     if (k.category === e.target.id) {
       return {...k, flag : true};
@@ -129,7 +135,6 @@ const filterOn = (e) => {
       return {...k, flag : false};
     }
   });
-  
   setActiveCate((prev) => {return newKeywords});
   //console.log(Object.values(activeCate));
   // 버튼 눌릴때마다 true인 것들의 이름만 찾아서 cardlist filter해줘야함 
