@@ -41,13 +41,13 @@ function Menu({ activeMenu }) {
           <BiCaretRight className={styles.icon} />
           요청하기
         </Link>
-        <Link
+        {/* <Link
           to="/mypage/updateinfo"
           className={activeMenu === 'updateinfo' ? styles.focused : styles.link}
         >
           <BiCaretRight className={styles.icon} />
           회원정보 수정
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
