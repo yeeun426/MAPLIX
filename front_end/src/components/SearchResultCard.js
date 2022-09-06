@@ -1,7 +1,8 @@
 // import { specialChars } from "@testing-library/user-event";
 import styles from "./CommunityCard.module.css";
 // import Modal from "./PostModal";
-import React, { useState }from "react";
+// import React, { useState }from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MdBookmarkBorder } from "react-icons/md";
 import { MdBookmark } from "react-icons/md";
@@ -11,7 +12,28 @@ export default function SearchResultCard({card}) {
   const id = window.localStorage.getItem("id");
   const l_num = card.l_num;
   const [detail, setDetail] = useState(false); 
-  
+
+  // let check_like = false;
+
+  // 데이터 가져오기
+  const loadPost = async () => {
+    const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
+    , {id, l_num}
+    );
+    console.log(response.data[0].l_num);
+    if (response.data[0].l_num == l_num) 
+      return setLike(true);
+  };
+
+
+  // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
+  const [check_like, setLike] = useState();
+
+  // 컴포넌트가 렌더링 될때마다 특정 작업 실행되도록
+  useEffect(()=> {
+      loadPost();
+    }, [] );
+
   const onClickPlace =()=> {
       setDetail(true);
   }
@@ -24,15 +46,21 @@ export default function SearchResultCard({card}) {
         .then(function (response) {
           console.log(response)
           if (response.data[0] == undefined) return (
-            axios.post('http://localhost:8000/api/post/likelistcheck',{id, l_num})
+            axios.post('http://localhost:8000/api/post/likelist',{id, l_num})
             .then(function (response) {
               alert("즐겨찾기에 추가되었습니다")
-            })
+              setLike(true);
+              })
           )
-          else return alert("이미 추가된 항목입니다.")
+          else return (
+            axios.post('http://localhost:8000/api/post/deletelikelist',{id, l_num})
+            .then(function (response) {
+              alert("즐겨찾기에서 삭제되었습니다.")
+              setLike(false);
+              })
+          )
         })
-    )
-  }
+    )}
   return (
     <div className={styles.SearchResultCard}>
       <div className={styles.search_container} onClick={onClickPlace}>    
@@ -42,10 +70,13 @@ export default function SearchResultCard({card}) {
                 <ul className={styles.search_address}>{card.address}</ul>
                 <ul>#{card.m_name}</ul>
                 <ul>#{card.category}</ul>
-                <button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>
-            
+                {
+                (function() {
+                  if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
+                  else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
+                })()
+                }
             </ol>
-            {/* <button type='submit' onClick={onClickLikeBtn}>즐겨찾기</button> */}
         </div>
       </div>
 
