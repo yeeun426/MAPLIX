@@ -64,52 +64,6 @@ const Stamp = () => {
 
     const [post, setPost] = useState([]);
 
-    const clickPoster1 = (e) => {
-      e.preventDefault();
-      console.log("poster1 click!")
-      const stamp = window.localStorage.getItem("stamp1");
-      const num = 1;
-      const res = axios.post("http://localhost:8000/api/stampcheck", {
-        id,
-        m_num,
-        poster,
-        num
-      })
-      .then((res) => {
-        // alert("success!")
-        console.log(res.data[0])
-        // if (res.data[0].record_title1 == undefined) {
-          window.localStorage.setItem('poster', poster);
-          window.localStorage.setItem('part', 1);
-          window.localStorage.setItem('m_num', m_num);  
-          // document.location.href = '/mypage/writestamp';
-        // }
-        // else {
-          // const record_title1 = res.data[0].record_title1;
-          // const record_content1 = res.data[0].record_content1;
-
-          window.localStorage.setItem('record_title', res.data[0].record_title1);
-          window.localStorage.setItem('record_content', res.data[0].record_content1);
-          document.location.href = '/mypage/writestamp';
-          // alert(record_title1 + record_content1);
-        // }
-        // setPoster({poster: res.data[0].poster})
-        // setMNum({m_num: res.data[0].m_num})
-        // console.log(poster, m_num);
-      })
-      
-      // if (stamp == true) {
-       
-      // }
-      // else {
-      //   window.localStorage.setItem('poster', poster);
-      //   window.localStorage.setItem('part', 1);
-      //   window.localStorage.setItem('m_num', m_num);  
-      //   document.location.href = '/mypage/writestamp';
-      // }
-
-    }
-    
   return (
     <>
      {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null}

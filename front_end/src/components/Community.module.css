@@ -141,11 +141,20 @@
   box-shadow: 5px 5px 7px #00000030;
   display: flex;
   flex-wrap: wrap;
-  width: 900px;
+  width: 500px;
   gap: 17px;
+}
+
+/* .stamp_form_container img{
+  width: 200px;
+  opacity: 0.5;
+} */
+
+:global #before_img {
+  width: 200px;
   opacity: 0.5;
 }
 
-.stamp_form_container img{
-  width: 400px;
+:global #after_img {
+  width: 200px;
 }

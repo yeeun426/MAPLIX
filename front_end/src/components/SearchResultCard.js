@@ -13,8 +13,6 @@ export default function SearchResultCard({card}) {
   const l_num = card.l_num;
   const [detail, setDetail] = useState(false); 
 
-  // let check_like = false;
-
   // 데이터 가져오기
   const loadPost = async () => {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
