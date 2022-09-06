@@ -17,9 +17,12 @@ import styles from "../components/Community.module.css";
 import SearchResultCard from '../components/SearchResultCard';
 import Pagination from '../components/Pagination';
 
-function SearchPage ( ) {
+const { kakao } = window;
+
+function SearchPage () {
+
+  const id = window.localStorage.getItem("id");
   
-  const location = useLocation();
   const navigate = useNavigate();
   // 메인에서 검색한 키워드 받아오기
   const useparams = useParams();
@@ -37,93 +40,85 @@ function SearchPage ( ) {
 
 
   // 변수들
-const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
-const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
-//const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
-const [filtered, setFiltered] = useState([]); 
+  const [cardList, setCardList] = useState([]); // 키워드 검색시 반환된 데이터
+  const [isLiked, setIsLiked] = useState(); // 즐겨찾기 추가하기 위한 변수
+  //const [filtered, setFiltered] = useState(() => get비ㅏㅆㄴ초기계산값()); // 필터링된 결과
+  const [filtered, setFiltered] = useState([]); 
+
+  const initialCate = [
+    { category : "mountain" , flag : true, realCate: "산"},
+    { category : "forest" , flag : true, realCate: "숲"},
+    { category : "sea" , flag : true, realCate: "바다"},
+    { category : "river" , flag : true, realCate: "강"},
+    { category : "restaurant" , flag : true, realCate: "음식점"},
+    { category : "cafe" , flag : true, realCate: "카페"},
+    { category : "activity" , flag : true, realCate: "액티비티"},
+    { category : "tour" , flag : true, realCate: "관광지"},
+    { category : "etc" , flag : true, realCate: "기타"}
+  ];
 
 
   // 데이터 받아오기
-  const loadData = async () => {
-    let response;
+  const loadData = () => {
     if ( searchCate === "title"){
-      // response = await axios.get('http://localhost:8000/api/search/title', {
-      //   params: {
-      //       'media': search
-      //   }
-      // });
       axios.get('http://localhost:8000/api/search/title', {
         params: {
             'media': search
         }
       }).then(function (response) {
+        console.log(response.data);
         setCardList(response.data)
       });
 
     } else if ( searchCate === "area"){
-      // response = await axios.get('http://localhost:8000/api/search/area', {
-      //   params: {
-      //       'media': search
-      //   }
-      // });
       axios.get('http://localhost:8000/api/search/area', {
         params: {
             'media': search
         }
       }).then(function (response) {
+        console.log(response.data);
         setCardList(response.data)
       });
     }
 
-    console.log("로드데이터", response.data.length);
-    console.log(response.data);
 };
 
-const initialCate = [
-  { category : "mountain" , flag : true, realCate: "산"},
-  { category : "forest" , flag : true, realCate: "숲"},
-  { category : "sea" , flag : true, realCate: "바다"},
-  { category : "river" , flag : true, realCate: "강"},
-  { category : "restaurant" , flag : true, realCate: "음식점"},
-  { category : "cafe" , flag : true, realCate: "카페"},
-  { category : "activity" , flag : true, realCate: "액티비티"},
-  { category : "tour" , flag : true, realCate: "관광지"},
-  { category : "etc" , flag : true, realCate: "기타"}
-]
 
 //const [cnt, setCnt] = useState(0);
 const [activeCate, setActiveCate] = useState(null); // 필터 어떤거 클릭됐는지, true : 클릭된상태
   
-useEffect(() =>{
-  setActiveCate(initialCate);
-},[])
-
-useEffect(()=> { 
-  if(activeCate){
-    loadData();  
-  }
-  
-  // console.log(useparams.cate); // 왜 얘는 되고
-  // console.log(cate); // 얘는 안되는지;
-  // console.log(searchWord);
-}, [search, searchCate] ); //search, searchCate
 
 useEffect(() => {
+  if (activeCate){
+    loadData();
+  }
+},[activeCate, search, searchCate]);
+
+useEffect(()=> {
+  setActiveCate(initialCate);
+  // console.log('result = ', result);
+}, []);
+
+
+
+// useEffect(() => {
 
   
-  // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
-  // 그 temp
-  var arr = [];
-  const temp = activeCate.map((obj) => {
-    if (obj.flag === true) 
-      arr.push(obj.realCate);
-  } );
-  console.log(arr);
+//   // activeCate안에 값 바뀔때마다 filter로 flag값이 true인 값들의 category만 뽑아서 temp에 저장
+//   // 그 temp
+//   if (activeCate){
+//     const temp = activeCate.map((obj) => {
+//       if (obj.flag === true) 
+//         arr.push(obj.realCate);
+//     } );
+//     console.log(arr);
+   
+//     let filtered = cardList.filter((card) => arr.includes(card.category) );
+//     setFiltered(filtered);
+//   }
+  
  
-  let filtered = cardList.filter((card) => arr.includes(card.category) );
-  setFiltered(filtered);
- 
-}, [ activeCate])
+// }, [ activeCate])
 
 const filterOn = (e) => {
   console.log("필터 버튼 눌림" + e.target.id);
@@ -262,7 +257,7 @@ const currentPosts = (posts) => {
             <div className={styles.card_list}>
                 { cardList && currentPosts(cardList).map((card, index) => {
                     return (
-                        <div card = {card}>
+                        <div card =  {card}>
                             <SearchResultCard 
                                 key={card.l_num}   
                                 card={card}
@@ -281,7 +276,8 @@ const currentPosts = (posts) => {
                 paginate={setCurrentPage}
               />
         </div>
-        <MapContainer />
+        <MapContainer activeCate={activeCate} cardList={cardList}/>
+
 
         </div>
       </div>

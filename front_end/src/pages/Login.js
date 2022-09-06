@@ -24,7 +24,7 @@ const Login = () =>  {
     
         console.log(state.id);
     
-        fetch("http://localhost:8000/login", {
+        fetch("http://localhost:8000/api/login", {
             method: "POST",
             headers: {
             "Content-Type" : "application/json"
@@ -34,7 +34,7 @@ const Login = () =>  {
         .then(res => res.json())
             .then(json => {
                 console.log(json);
-                if(json.tf === false){		// json을 받아왔는데 .tf 값이 true면 사용가능
+                if(json.tf === false){      // json을 받아왔는데 .tf 값이 true면 사용가능
                     alert("ID를 다시 확인해주세요.");  //알람!
                     setState({
                         id: "",

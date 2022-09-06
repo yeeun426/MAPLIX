@@ -24,7 +24,6 @@ function Search() {
   const handleUserInput = (e) => {
     e.preventDefault();
     setSearchKW(e.target.value);
-    
   };
 
   const onSubmitSearchbar = (e) => {
@@ -36,14 +35,7 @@ function Search() {
   }
 
   const onClickSearchbar = () => {
-    // if (activeSearchCate === 'title'){
-      navigate(`/search/${activeSearchCate}/${searchKW}`);
-    //   navigate(`/search/title/${searchKW}`);
-    
-    // } else{
-    //   navigate(`/search/area/${searchKW}`);
-    // }
-    setSearchKW("");
+    navigate(`/search/${activeSearchCate}/${searchKW}`);
   }
 
   const ClickedSearchCate = (e) => {
