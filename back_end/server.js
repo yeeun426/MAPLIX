@@ -107,10 +107,14 @@ app.get('/api/course', (req, res) => {
   sqlGet += " WHERE L.p_num = any (SELECT place.p_num FROM test.place WHERE place.category = '관광지' ) " ;
 })
 
-app.get("/api/mycourse", (req, res) => {
-  const sqlGet = "SELECT * FROM test.mycourse WHERE id='예은'";
-  db.query(sqlGet, (error, result) => {
-    res.send(result.reverse());
+app.post("/api/mycourse", (req, res) => {
+  const id = req.body.id;
+
+  const sqlGet = "SELECT * FROM test.mycourse WHERE id = ?";
+  
+  db.query(sqlGet, [id], (error, result) => {
+    // res.send(result.reverse());
+    res.send(result);
   });
 });
 
@@ -209,6 +213,30 @@ app.post("/api/post/likelist", (req, res) => {
   const sqlQuery = "INSERT INTO test.likelist (id, l_num) VALUES (?, ?)";
   db.query(sqlQuery, [id, l_num], (err, result) => {
     res.send('즐겨찾기에 추가되었습니다'); 
+    console.log(result)
+});
+})
+
+app.post("/api/post/likelistcheck", (req, res) => {
+  const id = req.body.id;
+  const l_num = req.body.l_num;
+
+  console.log(id, l_num)
+  const sqlQuery = "SELECT * FROM test.likelist WHERE id = ? AND l_num = ?";
+  db.query(sqlQuery, [id, l_num], (err, result) => {
+    res.send(result); 
+    console.log(result)
+});
+})
+
+app.post("/api/post/deletelikelist", (req, res) => {
+  const id = req.body.id;
+  const l_num = req.body.l_num;
+
+  console.log(id, l_num)
+  const sqlQuery = "DELETE FROM test.likelist WHERE id = ? AND l_num = ?";
+  db.query(sqlQuery, [id, l_num], (err, result) => {
+    res.send('즐겨찾기에서 삭제되었습니다.'); 
     console.log(result)
 });
 })
