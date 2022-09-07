@@ -24,7 +24,7 @@ const Login = () =>  {
     
         console.log(state.id);
     
-        fetch("http://43.200.154.14:8000/api/login", {
+        fetch("http://localhost:8000/api/login", {
             method: "POST",
             headers: {
             "Content-Type" : "application/json"
