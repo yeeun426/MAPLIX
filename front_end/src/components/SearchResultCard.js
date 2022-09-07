@@ -18,8 +18,8 @@ export default function SearchResultCard({card}) {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
     , {id, l_num}
     );
-    console.log(response.data[0].l_num);
-    if (response.data[0].l_num == l_num) 
+    // console.log(response.data[0].l_num);
+    if (response.data[0].l_num === l_num) 
       return setLike(true);
   };
 
@@ -39,10 +39,6 @@ export default function SearchResultCard({card}) {
         }
       //   debugger
         e.target.parentElement.parentElement.children[1].classList.add('modalOn');
-  }
-
-  const test = (e) => {
-    debugger
   }
 
   const addLikelist = () => {

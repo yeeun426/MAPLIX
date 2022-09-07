@@ -32,7 +32,6 @@ const CourseAdd = (props) => {
     const [modal1, setModal1] = useState(false);
     const [changeNum1, setChangeNum1] = useState(false);
     const [result1, setResult1] = useState([]);
-    const [clickedPlace, setClickedPlace] = useState(1);
 
     const [modal2, setModal2] = useState(false);
     const [changeNum2, setChangeNum2] = useState(false);
@@ -75,6 +74,7 @@ const CourseAdd = (props) => {
             setCourselist(courselist => [...courselist, {1: result1}]);
             setCount(1);
         }
+        
     }, [result1])
 
     useEffect(() => {

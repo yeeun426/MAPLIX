@@ -71,10 +71,14 @@ const loadData = () => {
         // console.log(Object.values(activeCate)[0].flag);
         });
     } else if (Object.values(activeCate)[1].flag === true){
-        axios.get('http://localhost:8000/api/search')
+        // axios.get('http://localhost:8000/api/search')
+        axios.get('http://localhost:8000/api/search/title', {params: {
+          'media': ''
+      }})
         .then(function (response) {
             setCardList(response.data);
         });
+        
     } else{
       var ps = new kakao.maps.services.Places(); 
 
@@ -236,7 +240,7 @@ useEffect(()=> {
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist}/>
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist}/>      
+          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist}  />      
           {/* <div
           id="kakaoMap"
           style={{
