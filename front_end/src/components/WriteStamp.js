@@ -7,9 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function WriteStamp({card, openModal}) {
-// const WriteStamp = () => {
     const id = window.localStorage.getItem("id");
-
     const poster = card.poster;
     const m_num = card.m_num;
 
@@ -24,6 +22,59 @@ export default function WriteStamp({card, openModal}) {
 
     const [record, setRecord] = useState(initialRecord);
     const {record_title, record_content} = record;
+
+
+    // 데이터 가져오기
+  const loadPost = async () => {
+    const response = await axios.post('http://localhost:8000/api/stampcheck'
+    , {id, m_num, poster}
+    );
+    console.log(response.data[0]);
+    if (response.data[0].record_title1 != undefined) 
+      return setRecord1(true);    
+  };
+
+  const loadPost2 = async () => {
+    const response = await axios.post('http://localhost:8000/api/stampcheck'
+    , {id, m_num, poster}
+    );
+    console.log(response.data[0]);
+    if (response.data[0].record_title2 != undefined) 
+      return setRecord2(true);
+  };
+
+  const loadPost3 = async () => {
+    const response = await axios.post('http://localhost:8000/api/stampcheck'
+    , {id, m_num, poster}
+    );
+    console.log(response.data[0]);
+    if (response.data[0].record_title3 != undefined) 
+      return setRecord3(true);
+  };
+
+  const loadPost4 = async () => {
+    const response = await axios.post('http://localhost:8000/api/stampcheck'
+    , {id, m_num, poster}
+    );
+    console.log(response.data[0]);
+    if (response.data[0].record_title4 != undefined) 
+      return setRecord4(true);
+  };
+
+  // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
+  const [record1, setRecord1] = useState();
+  const [record2, setRecord2] = useState();
+  const [record3, setRecord3] = useState();
+  const [record4, setRecord4] = useState();
+
+  // 컴포넌트가 렌더링 될때마다 특정 작업 실행되도록
+  useEffect(()=> {
+      loadPost();
+      loadPost2();
+      loadPost3();
+      loadPost4();
+    }, [] );
+
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -45,6 +96,7 @@ export default function WriteStamp({card, openModal}) {
       })
       .then((res) => {
         alert("success!")
+        document.location.href = '/mypage/stamp'
         console.log(res.data[0])
       })
     }
@@ -62,13 +114,13 @@ export default function WriteStamp({card, openModal}) {
         part
       })
       .then((res) => {
-        // console.log(res.data[0].record_title1);
-        if (res.data[0].record_title1 != 'null') {
-          // const record_title = res.data[0].record_title1;
-          // const record_content = res.data[0].record_content1;
-          // console.log(record_title, record_content);
-
+        if (res.data[0].record_title1 != undefined) {
+          console.log(res.data[0].record_title1, res.data[0].record_content1);
           setRecord({record_title: res.data[0].record_title1, record_content: res.data[0].record_content1});
+          console.log(record)
+        }
+        else {
+          setRecord({record_title: "", record_content: ""});
         }
       })
       setStampModal(!stampModal);
@@ -87,13 +139,11 @@ export default function WriteStamp({card, openModal}) {
         part
       })
       .then((res) => {
-        // console.log(res.data[0].record_title1);
-        if (res.data[0].record_title2 != 'null') {
-          // const record_title = res.data[0].record_title1;
-          // const record_content = res.data[0].record_content1;
-          // console.log(record_title, record_content);
-
+        if (res.data[0].record_title2 != undefined) {
           setRecord({record_title: res.data[0].record_title2, record_content: res.data[0].record_content2});
+        }
+        else {
+          setRecord({record_title: "", record_content: ""});
         }
       })
       setStampModal(!stampModal);
@@ -101,7 +151,7 @@ export default function WriteStamp({card, openModal}) {
 
     const clickPoster3 = (e) => {
       e.preventDefault();
-      console.log("poster1 click!");
+      console.log("poster3 click!");
       const part = 3;
       window.localStorage.setItem('part', 3);
 
@@ -112,13 +162,11 @@ export default function WriteStamp({card, openModal}) {
         part
       })
       .then((res) => {
-        // console.log(res.data[0].record_title1);
-        if (res.data[0].record_title3 != 'null') {
-          // const record_title = res.data[0].record_title1;
-          // const record_content = res.data[0].record_content1;
-          // console.log(record_title, record_content);
-
+        if (res.data[0].record_title3 != undefined) {
           setRecord({record_title: res.data[0].record_title3, record_content: res.data[0].record_content3});
+        }
+        else {
+          setRecord({record_title: "", record_content: ""});
         }
       })
       setStampModal(!stampModal);
@@ -126,7 +174,7 @@ export default function WriteStamp({card, openModal}) {
 
     const clickPoster4 = (e) => {
       e.preventDefault();
-      console.log("poster3 click!");
+      console.log("poster4 click!");
       const part = 4;
       window.localStorage.setItem('part', 4);
 
@@ -137,31 +185,46 @@ export default function WriteStamp({card, openModal}) {
         part
       })
       .then((res) => {
-        // console.log(res.data[0].record_title1);
-        if (res.data[0].record_title4 != 'null') {
-          // const record_title = res.data[0].record_title1;
-          // const record_content = res.data[0].record_content1;
-          // console.log(record_title, record_content);
-
+        if (res.data[0].record_title4 != undefined) {
           setRecord({record_title: res.data[0].record_title4, record_content: res.data[0].record_content4});
+        }
+        else {
+          setRecord({record_title: "", record_content: ""});
         }
       })
       setStampModal(!stampModal);
     }
 
-    
-
 
   return (
-    <Layout activeMenu="stamp">
+    <div>
       <div className={styles.stamp_form_container}>
-                {/* <div>{poster}</div> */}
-                <img src={'/poster/poster_' + m_num + '_1.jpg'} className={styles.img_item} onClick={clickPoster1}></img>
-                <img src={'/poster/poster_' + m_num + '_2.jpg'} className={styles.img_item} onClick={clickPoster2}></img>
-                <img src={'/poster/poster_' + m_num + '_3.jpg'} className={styles.img_item} onClick={clickPoster3}></img>
-                <img src={'/poster/poster_' + m_num + '_4.jpg'} className={styles.img_item} onClick={clickPoster4}></img>
-              </div>
-      <div className={styles.title_like}>도장깨기</div>
+      {
+        (function() {
+          if (record1 == true) return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "after_img" onClick={clickPoster1}></img>);
+          else return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "before_img" onClick={clickPoster1}></img>);
+        })()
+      }
+      {
+        (function() {
+          console.log(record2)
+          if (record2 == true) return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "after_img" onClick={clickPoster2}></img>);
+          else return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "before_img" onClick={clickPoster2}></img>);
+        })()
+      }
+      {
+        (function() {
+          if (record3 == true) return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "after_img" onClick={clickPoster3}></img>);
+          else return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "before_img" onClick={clickPoster3}></img>);
+        })()
+      }
+      {
+        (function() {
+          if (record4 == true) return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "after_img" onClick={clickPoster4}></img>);
+          else return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "before_img" onClick={clickPoster4}></img>);
+        })()
+      }
+      </div>
       {stampModal ?
       <div className={styles2.mycourse_modal}>
         글쓰기
@@ -176,7 +239,7 @@ export default function WriteStamp({card, openModal}) {
             id="record_title"
             name="record_title"
             placeholder='제목'
-            vlaue={record.record_title}
+            value={record.record_title}
             onChange={handleInputChange}
             />
           </div>
@@ -188,7 +251,7 @@ export default function WriteStamp({card, openModal}) {
             id="record_content"
             name="record_content"
             placeholder='내용'
-            vlaue={record.record_content}
+            value={record.record_content}
             onChange={handleInputChange}
             />
           </div>
@@ -199,11 +262,7 @@ export default function WriteStamp({card, openModal}) {
             
       </div>
       : null}
-    </Layout>
-    
+    </div>    
   );
   
 }
-
-
-// export default WriteStamp;

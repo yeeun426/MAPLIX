@@ -229,6 +229,18 @@ app.post("/api/post/likelistcheck", (req, res) => {
 });
 })
 
+app.post("/api/post/deletelikelist", (req, res) => {
+  const id = req.body.id;
+  const l_num = req.body.l_num;
+
+  console.log(id, l_num)
+  const sqlQuery = "DELETE FROM test.likelist WHERE id = ? AND l_num = ?";
+  db.query(sqlQuery, [id, l_num], (err, result) => {
+    res.send('즐겨찾기에서 삭제되었습니다.'); 
+    console.log(result)
+});
+})
+
 app.post("/signup", (req, res) => {
   const email = req.body.email;
   const id = req.body.id;

@@ -67,7 +67,8 @@ function SearchPage () {
         }
       }).then(function (response) {
         console.log(response.data);
-        setCardList(response.data)
+        setCardList(response.data);
+        setFiltered(response.data);
       });
 
     } else if ( searchCate === "area"){
@@ -77,7 +78,8 @@ function SearchPage () {
         }
       }).then(function (response) {
         console.log(response.data);
-        setCardList(response.data)
+        setCardList(response.data);
+        setFiltered(response.data);
       });
     }
 
@@ -125,17 +127,23 @@ const filterOn = (e) => {
   document.getElementsByClassName('filterOn')[0].classList.remove('filterOn') 
   }
 
+  const newnew = cardList.filter((card) => card.category === e.target.id)
+
+  console.log(newnew)
+
   console.log("필터 버튼 눌림" + e.target.id);
   e.target.parentElement.classList.add('filterOn');
   // debugger
-  const newKeywords = activeCate.map(k => {
-    if (k.category === e.target.id) {
-      return {...k, flag : true};
-    }else {
-      return {...k, flag : false};
-    }
-  });
-  setActiveCate((prev) => {return newKeywords});
+  // const newKeywords = activeCate.map(k => {
+  //   if (k.category === e.target.id) {
+  //     return {...k, flag : true};
+  //   }else {
+  //     return {...k, flag : false};
+  //   }
+  // });
+  // setActiveCate((prev) => {return newKeywords});
+
+  setFiltered(newnew);
   //console.log(Object.values(activeCate));
   // 버튼 눌릴때마다 true인 것들의 이름만 찾아서 cardlist filter해줘야함 
 };
@@ -148,7 +156,7 @@ const handleUserInput = (e) => {
 
 const onSubmitSearchbar = (e) => {
   console.log(e);
-  //e.preventDefault();
+  e.preventDefault();
   if(e.key === 'Enter') {
   onClickSearchbar(e);
   }
@@ -156,14 +164,17 @@ const onSubmitSearchbar = (e) => {
 
 const onClickSearchbar = (e) => {
   setSearch(e.target.value);
-  navigate(`/search/${searchCate}/${search}`);
+  e.preventDefault();
+  var temp = document.getElementById('searchbox').value
+  navigate(`/search/${searchCate}/${temp}`);
   console.log('파라미터'+ search);
 }
 
 const ClickedSearchCate = (e) => {
   e.preventDefault();
   searchCate = e.target.id;
-  navigate(`/search/${searchCate}/${search}`);
+  var temp = document.getElementById('searchbox').value
+  navigate(`/search/${searchCate}/${temp}`);
 }
 const clickall = () => {
   setActiveCate((activeCate) =>  activeCate.map(k => {
@@ -178,7 +189,7 @@ const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터�
 const indexOfFirst = indexOfLast - postsPerPage;
 const currentPosts = (posts) => {
   let currentPosts = 0;
-  currentPosts = cardList.slice(indexOfFirst, indexOfLast);
+  currentPosts = filtered.slice(indexOfFirst, indexOfLast);
   return currentPosts;
 };
 
@@ -191,47 +202,47 @@ const currentPosts = (posts) => {
           <div className='Filter'>
 
             <button className='FilterIcons'  onClick={filterOn}>
-              <img src={mountain} alt = "mountain" id="mountain" idx="0" />
+              <img src={mountain} alt = "mountain" id="산" idx="0" kid="산"/>
               <li>#산</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={forest} alt = "forest" id="forest" idx="1"/>
+              <img src={forest} alt = "forest" id="숲" idx="1"/>
               <li>#숲</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={sea} alt = "sea" id="sea" idx="2"/>
+              <img src={sea} alt = "sea" id="바다" idx="2"/>
               <li>#바다</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={river} alt = "river" id="river" idx="3"/>
+              <img src={river} alt = "river" id="강" idx="3"/>
               <li>#강</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={restaurant} alt = "restaurant" id="restaurant" idx="4"/>
+              <img src={restaurant} alt = "restaurant" id="음식점" idx="4"/>
               <li>#음식점</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={cafe} alt = "cafe" id="cafe" idx="5"/>
+              <img src={cafe} alt = "cafe" id="카페" idx="5"/>
               <li>#카페</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={acitivity} alt = "activity" id="activity" idx="6"/>
+              <img src={acitivity} alt = "activity" id="액티비티" idx="6"/>
               <li>#액티비티</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={tour} alt = "tour" id="tour" idx="7"/>
+              <img src={tour} alt = "tour" id="관광지" idx="7"/>
               <li>#관광지</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={etc} alt = "etc" id="etc" idx="8" />
+              <img src={etc} alt = "etc" id="기타" idx="8" />
               <li>#기타</li>            
             </button>
           </div>
@@ -246,21 +257,22 @@ const currentPosts = (posts) => {
             </div>
             
             <input
+                id="searchbox"
                 type="text" 
                 onChange={handleUserInput}
                 onKeyPress={onSubmitSearchbar}
-                placeholder="search"
-                defaultValue={searchWord}
+                placeholder={search}
+                // defaultValue={search}
                 value={search}
                 />
             
-            <button type='submit' onClick={onClickSearchbar}>검색</button>
+            <button type='submit' onClick={onClickSearchbar} value={search}>검색</button>
             {/* <button className='FilterIcons'  onClick={clickall}>
               <li>#전체 결과 조회하기</li>
             </button> */}
 
             <div className={styles.card_list}>
-                { cardList && currentPosts(cardList).map((card, index) => {
+                { filtered && currentPosts(filtered).map((card, index) => {
                     return (
                         <div card =  {card}>
                             <SearchResultCard 
@@ -277,11 +289,11 @@ const currentPosts = (posts) => {
             
             <Pagination
                 postsPerPage={postsPerPage}
-                totalPosts={cardList.length}
+                totalPosts={filtered.length}
                 paginate={setCurrentPage}
               />
         </div>
-        <MapContainer activeCate={activeCate} cardList={cardList}/>
+        <MapContainer activeCate={activeCate} cardList={filtered}/>
 
 
         </div>
