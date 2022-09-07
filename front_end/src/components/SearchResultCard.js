@@ -41,10 +41,6 @@ export default function SearchResultCard({card}) {
         e.target.parentElement.parentElement.children[1].classList.add('modalOn');
   }
 
-  const test = (e) => {
-    debugger
-  }
-
   const addLikelist = () => {
     console.log(id, l_num);
     if (id == undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
