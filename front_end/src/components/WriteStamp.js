@@ -85,7 +85,7 @@ export default function WriteStamp({card, openModal}) {
       console.log(record_title, record_content);
       e.preventDefault();
       const part = window.localStorage.getItem("part");
-
+      console.log("PART" + part);
       const res = axios.post("http://localhost:8000/api/writestamp", {
         id,
         m_num,
@@ -96,7 +96,20 @@ export default function WriteStamp({card, openModal}) {
       })
       .then((res) => {
         alert("success!")
-        document.location.href = '/mypage/stamp'
+        // document.location.href = '/mypage/stamp'
+        if (part == 1) {
+          setRecord1(true);
+        }
+        else if (part == 2) {
+          setRecord2(true);
+        }
+        else if (part == 3) {
+          setRecord3(true);
+        }
+        else if (part == 4) {
+          setRecord4(true);
+        }
+        setStampModal(false);
         console.log(res.data[0])
       })
     }
@@ -226,7 +239,7 @@ export default function WriteStamp({card, openModal}) {
       }
       </div>
       {stampModal ?
-      <div className={styles2.mycourse_modal}>
+      <div className={styles2.stamp_modal}>
         글쓰기
         <form 
           className={styles.form_container}
@@ -255,7 +268,6 @@ export default function WriteStamp({card, openModal}) {
             onChange={handleInputChange}
             />
           </div>
-
           <input className={styles.btn_submit} type="submit" value="등록" />        
 
         </form>
