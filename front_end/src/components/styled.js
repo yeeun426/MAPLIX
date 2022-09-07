@@ -23,6 +23,8 @@ export const CourseResultCardStyle = styled.div`
 
 export const RecommendStyle = styled.div`
     background-color: #E0E3E8;
+    position: relative;
+    
     .recommend_course_area{
         margin-top: 25px;
     }
@@ -63,6 +65,7 @@ export const RecommendStyle = styled.div`
         font-family: 'yg-jalnan';
         font-size: 17px;
         text-align: center;
+        margin-top: 7px;
     }
 
     .recommend_course_item{
@@ -84,12 +87,12 @@ export const RecommendStyle = styled.div`
         left: 0px;
         right: auto;
         top: 20px;
-        background: black;
+        color: #395C3C;
     }
 
     .swiper-button-next{
         right: 0px;
         top: 20px;
-        background: black;
+        color: #395C3C;
     }
 `;

@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import axios from 'axios';
 import {RecommendStyle} from "../components/styled"
 import styles from "./RecommendCourse.module.css"
+import Loading from '../components/Loading'
 SwiperCore.use([Navigation, Pagination]);
 
 function RecommendCourse() {
@@ -22,6 +23,7 @@ function RecommendCourse() {
   const [incheonCourse, setIncheonCourse] = useState([])
   const [busanCourse, setBusanCourse] = useState([])
   
+  const [loading, setLoading] = useState(true);
   const RecommendCourses = async(e) => {
     try {
         const data = await axios({
@@ -36,14 +38,19 @@ function RecommendCourse() {
               || data.data.response.body.items.item[i].crsContents.includes('촬영') === true) {
             if(data.data.response.body.items.item[i].sigun.includes('강릉') === true) {
               setGangneungCourse(prev => {return[...prev, data.data.response.body.items.item[i]]})
+              setLoading(false);
             }else if(data.data.response.body.items.item[i].sigun.includes('서울') === true) {
               setSeoulCourse(prev => {return[...prev, data.data.response.body.items.item[i]]})
+              setLoading(false);
             }else if(data.data.response.body.items.item[i].sigun.includes('제주') === true) {
               setJejuCourse(prev => {return[...prev, data.data.response.body.items.item[i]]})
+              setLoading(false);
             }else if(data.data.response.body.items.item[i].sigun.includes('인천') === true) {
               setIncheonCourse(prev => {return[...prev, data.data.response.body.items.item[i]]})
+              setLoading(false);
             }else if(data.data.response.body.items.item[i].sigun.includes('부산') === true) {
               setBusanCourse(prev => {return[...prev, data.data.response.body.items.item[i]]})
+              setLoading(false);
             }
         }
       }      
@@ -127,7 +134,9 @@ function RecommendCourse() {
             <button id="jeju" onClick={ActiveRecommendArea}>제주</button>
           </div>
 
-        <div className="recommend_course_container">
+        {loading
+        ?<Loading />
+        :<div className="recommend_course_container">
           <div className="recommend_course_list active">
           <Swiper
             slidesPerView={1}
@@ -142,9 +151,9 @@ function RecommendCourse() {
                 {course.crsKorNm}
               </div>
 
-              <div className="course_info">
+              <div className="course_info" style={{marginTop:"15px"}}>
                 <div className="course_sub">course</div>
-                <div className="tq">
+                <div>
                 {course.crsTourInfo.replace(/<br>/gdi,"\n")}
                 </div>
               </div>
@@ -178,9 +187,9 @@ function RecommendCourse() {
                 {course.crsKorNm}
               </div>
 
-              <div className="course_info">
+              <div className="course_info" style={{marginTop:"15px"}}>
                 <div className="course_sub">course</div>
-                <div className="tq">
+                <div>
                 {course.crsTourInfo.replace(/<br>/gdi,"\n")}
                 </div>
               </div>
@@ -214,9 +223,9 @@ function RecommendCourse() {
                 {course.crsKorNm}
               </div>
 
-              <div className="course_info">
+              <div className="course_info" style={{marginTop:"15px"}}>
                 <div className="course_sub">course</div>
-                <div className="tq">
+                <div>
                 {course.crsTourInfo.replace(/<br>/gdi,"\n")}
                 </div>
               </div>
@@ -250,9 +259,9 @@ function RecommendCourse() {
                 {course.crsKorNm}
               </div>
 
-              <div className="course_info">
+              <div className="course_info" style={{marginTop:"15px"}}>
                 <div className="course_sub">course</div>
-                <div className="tq">
+                <div>
                 {course.crsTourInfo.replace(/<br>/gdi,"\n")}
                 </div>
               </div>
@@ -286,9 +295,9 @@ function RecommendCourse() {
                 {course.crsKorNm}
               </div>
 
-              <div className="course_info">
+              <div className="course_info" style={{marginTop:"15px"}}>
                 <div className="course_sub">course</div>
-                <div className="tq">
+                <div>
                 {course.crsTourInfo.replace(/<br>/gdi,"\n")}
                 </div>
               </div>
@@ -308,6 +317,7 @@ function RecommendCourse() {
           </Swiper>
           </div>
         </div>
+        }
       </div>
 
           {/* Recommended course 
