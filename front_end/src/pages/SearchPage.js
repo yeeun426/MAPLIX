@@ -88,7 +88,7 @@ function SearchPage () {
 
 //const [cnt, setCnt] = useState(0);
 const [activeCate, setActiveCate] = useState(null); // 필터 어떤거 클릭됐는지, true : 클릭된상태
-  
+const [courselist, setCourselist] = useState([])
 
 useEffect(() => {
   if (activeCate){
@@ -293,7 +293,7 @@ const currentPosts = (posts) => {
                 paginate={setCurrentPage}
               />
         </div>
-        <MapContainer activeCate={activeCate} cardList={filtered}/>
+        <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist}/>
 
 
         </div>
