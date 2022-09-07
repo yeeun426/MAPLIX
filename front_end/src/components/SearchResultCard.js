@@ -18,8 +18,8 @@ export default function SearchResultCard({card}) {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
     , {id, l_num}
     );
-    console.log(response.data[0].l_num);
-    if (response.data[0].l_num == l_num) 
+    // console.log(response.data[0].l_num);
+    if (response.data[0].l_num === l_num) 
       return setLike(true);
   };
 

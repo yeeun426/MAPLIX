@@ -15,6 +15,8 @@ const CourseAdd = (props) => {
 
     const {activeCate} = props;
     const {cardList} = props;
+    const {courselist} = props;
+    const {setCourselist} = props;
 
     // 첫 페이지 들어오면 즐겨찾기 true로 초기값
     // 필터 클릭은 course.js에서 -> 필터 클릭하면 그 activecate 혹은 filtered값을 courseAdd.js로 넘겨주기
@@ -27,7 +29,6 @@ const CourseAdd = (props) => {
     const [modal1, setModal1] = useState(false);
     const [changeNum1, setChangeNum1] = useState(false);
     const [result1, setResult1] = useState([]);
-    const [clickedPlace, setClickedPlace] = useState(1);
 
     const [modal2, setModal2] = useState(false);
     const [changeNum2, setChangeNum2] = useState(false);
@@ -63,55 +64,66 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result1).length > 0){
-            setModal1(false); setChangeNum1(true)
+            setModal1(false); setChangeNum1(true);
+            setCourselist(courselist => [...courselist, {1: result1}]);
         }
+        
     }, [result1])
 
     useEffect(() => {
         if (Object.values(result2).length > 0){
-            setModal2(false); setChangeNum2(true)
+            setModal2(false); setChangeNum2(true);
+            setCourselist(courselist => [...courselist, {2: result2}]);
+            console.log('코스리스트', courselist)
         }
     }, [result2])
 
     useEffect(() => {
         if (Object.values(result3).length > 0){
-            setModal3(false); setChangeNum3(true)
+            setModal3(false); setChangeNum3(true);
+            setCourselist(courselist => [...courselist, {3: result3}]);
         }
     }, [result3])
 
     useEffect(() => {
         if (Object.values(result4).length > 0){
-            setModal4(false); setChangeNum4(true)
+            setModal4(false); setChangeNum4(true);
+            setCourselist(courselist => [...courselist, {4: result4}]);
         }
     }, [result4])
 
     useEffect(() => {
         if (Object.values(result5).length > 0){
-            setModal5(false); setChangeNum5(true)
+            setModal5(false); setChangeNum5(true);
+            setCourselist(courselist => [...courselist, {5: result5}]);
         }
     }, [result5])
 
     useEffect(() => {
         if (Object.values(result6).length > 0){
-            setModal6(false); setChangeNum6(true)
+            setModal6(false); setChangeNum6(true);
+            setCourselist(courselist => [...courselist, {6: result6}]);
         }
     }, [result6])
 
     useEffect(() => {
         if (Object.values(result7).length > 0){
-            setModal7(false); setChangeNum7(true)
+            setModal7(false); setChangeNum7(true);
+            setCourselist(courselist => [...courselist, {7: result7}]);
         }
     }, [result7])
 
     useEffect(() => {
         if (Object.values(result8).length > 0){
-            setModal8(false); setChangeNum8(true)
+            setModal8(false); setChangeNum8(true);
+            setCourselist(courselist => [...courselist, {8: result8}]);
         }
     }, [result8])
 
     useEffect(() => {
         if (Object.values(result9).length > 0){
-            setModal9(false); setChangeNum9(true)
+            setModal9(false); setChangeNum9(true);
+            setCourselist(courselist => [...courselist, {9: result9}]);
         }
     }, [result9])
 
