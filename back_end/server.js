@@ -118,6 +118,113 @@ app.post("/api/mycourse", (req, res) => {
   });
 });
 
+// mycourse 생성
+app.post("/api/coursecreate", (req, res) => {
+  const id = req.body.id;
+  const mc_title = req.body.mc_title;
+  const mc_content = req.body.mc_content;
+  const count = req.body.count;
+  const course1 = req.body.course1;
+  const course2 = req.body.course2;
+  const course3 = req.body.course3;
+  const course4 = req.body.course4;
+  const course5 = req.body.course5;
+  const course6 = req.body.course6;
+  const course7 = req.body.course7;
+  const course8 = req.body.course8;
+  const course9 = req.body.course9;
+
+  console.log(id, mc_title, mc_content, count);
+
+  console.log(course1);
+
+  if (count == 1) {
+    const my_course = course1;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 2) {
+    const my_course = course1 + "/" + course2;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 3) {
+    const my_course = course1 + "/" + course2 + "/" + course3;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 4) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 5) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 6) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 7) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 8) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+
+  else if (count == 9) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8 + "/" + course9;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+
+});
 
 app.get("/api", (req, res) => {
   // 데이터베이스에 제대로 들어오는거 확인하면 쿼리문 삭제하세유

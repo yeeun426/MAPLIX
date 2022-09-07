@@ -20,6 +20,7 @@ function Course(){
 
   
   const [result, setResult] = useState([]);
+  const [courselist, setCourselist] = useState([]);
   const [activeCate, setActiveCate] = useState(null);
   
   const [inputText, setInputText] = useState("");
@@ -233,9 +234,9 @@ useEffect(()=> {
 
           <div className="course-sidebar">
             <div id="course-line"></div>
-            <CourseAdd activeCate={activeCate} cardList={cardList}/>
+            <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist}/>
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} setCardList={setCardList} searchPlace={place} />      
+          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist}/>      
           {/* <div
           id="kakaoMap"
           style={{

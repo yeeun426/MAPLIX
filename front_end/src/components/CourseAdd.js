@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import styles from './CourseAdd.module.css';
+import styles2 from "./CommunityCard.module.css";
 import axios from "axios";
 import '../pages/Course.css'
 
@@ -13,8 +14,12 @@ import MapContainer from '../components/MapContainer';
 
 const CourseAdd = (props) => {
 
+    const id = window.localStorage.getItem("id");
+
     const {activeCate} = props;
     const {cardList} = props;
+    const {courselist} = props;
+    const {setCourselist} = props;
 
     // 첫 페이지 들어오면 즐겨찾기 true로 초기값
     // 필터 클릭은 course.js에서 -> 필터 클릭하면 그 activecate 혹은 filtered값을 courseAdd.js로 넘겨주기
@@ -61,57 +66,78 @@ const CourseAdd = (props) => {
     const [changeNum9, setChangeNum9] = useState(false);
     const [result9, setResult9] = useState([]);
 
+
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
         if (Object.values(result1).length > 0){
             setModal1(false); setChangeNum1(true)
+            setCourselist(courselist => [...courselist, {1: result1}]);
+            setCount(1);
         }
     }, [result1])
 
     useEffect(() => {
         if (Object.values(result2).length > 0){
             setModal2(false); setChangeNum2(true)
+            setCourselist(courselist => [...courselist, {2: result2}]);
+            setCount(2);
         }
     }, [result2])
 
     useEffect(() => {
         if (Object.values(result3).length > 0){
             setModal3(false); setChangeNum3(true)
+            setCourselist(courselist => [...courselist, {3: result3}]);
+            setCount(3);
         }
     }, [result3])
 
     useEffect(() => {
         if (Object.values(result4).length > 0){
             setModal4(false); setChangeNum4(true)
+            setCourselist(courselist => [...courselist, {4: result4}]);
+            setCount(4);
         }
     }, [result4])
 
     useEffect(() => {
         if (Object.values(result5).length > 0){
             setModal5(false); setChangeNum5(true)
+            setCourselist(courselist => [...courselist, {5: result5}]);
+            setCount(5);
         }
     }, [result5])
 
     useEffect(() => {
         if (Object.values(result6).length > 0){
             setModal6(false); setChangeNum6(true)
+            setCourselist(courselist => [...courselist, {6: result6}]);
+            setCount(6);
         }
     }, [result6])
 
     useEffect(() => {
         if (Object.values(result7).length > 0){
             setModal7(false); setChangeNum7(true)
+            setCourselist(courselist => [...courselist, {7: result7}]);
+            setCount(7);
         }
     }, [result7])
 
     useEffect(() => {
         if (Object.values(result8).length > 0){
             setModal8(false); setChangeNum8(true)
+            setCourselist(courselist => [...courselist, {8: result8}]);
+            setCount(8);
         }
     }, [result8])
 
     useEffect(() => {
         if (Object.values(result9).length > 0){
             setModal9(false); setChangeNum9(true)
+            setCourselist(courselist => [...courselist, {9: result9}]);
+            setCount(9);
         }
     }, [result9])
 
@@ -126,7 +152,66 @@ const CourseAdd = (props) => {
             </div>
         )
     }  
-    
+    const initialMyCourse = {
+        mc_title: "",
+        mc_content: "",
+      };
+
+    const [myCourse, setMyCourse] = useState(initialMyCourse);
+    const {mc_title, mc_content} = myCourse;
+    const [allCourse, setAllCourse] = useState();
+    const [courseCreateModal, setcourseCreateModal] = useState(false);
+
+
+    const courseCreate = (e) => {
+        e.preventDefault();
+        console.log("course create!!!");
+        console.log(result1.p_name);
+        // console.log(courselist.length);
+        console.log(count);
+        if (id == undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
+        else return (
+            setcourseCreateModal(!courseCreateModal)
+        )
+      }
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setMyCourse({ ...myCourse, [name]: value });
+      };
+  
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const course1 = result1.p_name;
+        const course2 = result2.p_name;
+        const course3 = result3.p_name;
+        const course4 = result4.p_name;
+        const course5 = result5.p_name;
+        const course6 = result6.p_name;
+        const course7 = result7.p_name;
+        const course8 = result8.p_name;
+        const course9 = result9.p_name;
+
+        const res = axios.post("http://localhost:8000/api/coursecreate", {
+          id,
+          mc_title,
+          mc_content,
+          count,
+          course1,
+          course2,
+          course3,
+          course4,
+          course5,
+          course6,
+          course7,
+          course8,
+          course9
+        })
+        .then((res) => {
+          alert("success!")
+        })
+      }
+
 
     // const ResultCard = (e) => {
     //     return(
@@ -437,6 +522,43 @@ const CourseAdd = (props) => {
                 : null }
             </div>
             :null}
+            <button onClick={courseCreate}>만들기</button>
+            {courseCreateModal ?
+            <div className={styles2.stamp_modal}>
+                글쓰기
+                <form 
+                className={styles.form_container}
+                onSubmit={handleSubmit}
+                >
+                <div className={styles.write_item}>
+                    <label htmlFor='mc_title'>제목</label>
+                    <input
+                    type="text"
+                    id="mc_title"
+                    name="mc_title"
+                    placeholder='제목'
+                    value={myCourse.mc_title}
+                    onChange={handleInputChange}
+                    />
+                </div>
+
+                <div className={styles.write_item}>
+                    <label htmlFor='mc_content'>내용</label>
+                    <input className={styles.content}
+                    type="text"
+                    id="mc_content"
+                    name="mc_content"
+                    placeholder='내용'
+                    value={myCourse.mc_content}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <input className={styles.btn_submit} type="submit" value="등록" />        
+
+                </form>
+                    
+            </div>
+            : null}
         </div>
     )
 }
