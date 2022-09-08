@@ -160,7 +160,6 @@ const CourseAdd = (props) => {
 
     const [myCourse, setMyCourse] = useState(initialMyCourse);
     const {mc_title, mc_content} = myCourse;
-    const [allCourse, setAllCourse] = useState();
     const [courseCreateModal, setcourseCreateModal] = useState(false);
 
 

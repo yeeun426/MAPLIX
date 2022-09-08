@@ -92,9 +92,9 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
               // 마커에 표시할 인포윈도우를 생성합니다 
                 var infowindow = new kakao.maps.InfoWindow({
                 //content: positions[i].content // 인포윈도우에 표시할 내용
-                content: content
+                // content: content
                 
-                //content:////'<div style="width:170px;text-align:center;padding:6px 0;">'+ cardList[i].p_name +'</div>' // 인포윈도우에 표시할 내용
+                content: '<div style="width:170px;text-align:center;padding:6px 0;">'+ cardList[i].p_name +'</div>' // 인포윈도우에 표시할 내용
               });
               //infowindow.open(map, marker);
               kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
