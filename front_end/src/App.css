@@ -10,6 +10,10 @@ input{
   padding: 0 10px;
 }
 
+img{
+  object-fit: cover;
+}
+
 .first_container{
   list-style: none;
   background-color: #E0E3E8;
@@ -69,8 +73,4 @@ input{
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
-
-.infowindowtext {
-  font-size: 30px;
 }

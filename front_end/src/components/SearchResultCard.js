@@ -69,23 +69,23 @@ export default function SearchResultCard({card}) {
     <div className={styles.SearchResultCard}>
       <div className={styles.search_container} onClick={onClickPlace}>    
         <div className={styles.search_title}>{card.p_name}</div>
-        {/* <div className={styles.search_address}>{card.address}</div>
+        <div className={styles.search_address}>{card.address}</div>
         <div className={styles.search_detail_tag}>#{card.m_name}</div>
         <div className={styles.search_detail_tag}>#{card.category}</div>
-        <button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button> */}
-        <div img_box>
-            <ol>
-                <ul className={styles.search_address}>{card.address}</ul>
-                <ul>#{card.m_name}</ul>
-                <ul>#{card.category}</ul>
+        <button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>
+        {/* <div img_box> */}
+            {/* <ol> */}
+                {/* <ul className={styles.search_address}>{card.address}</ul> */}
+                {/* <ul>#{card.m_name}</ul> */}
+                {/* <ul>#{card.category}</ul> */}
                 {
                 (function() {
                   if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
                   else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
                 })()
                 }
-            </ol>
-        </div>
+            {/* </ol> */}
+        {/* </div> */}
       </div>
 
       <div className="search_detail">

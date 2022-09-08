@@ -11,7 +11,7 @@
 
 .sidebar_category {
     display: flex;
-    margin-top: 15px;
+    margin: 15px 0px 0px 15px;
 }
 
 .sidebar_category li {
@@ -20,7 +20,7 @@
 }
 
 .search-sidebar input {
-    width: 88%;
+    width: 92%;
     height: 30px;
     border-style: none;
     border-radius: 5px;

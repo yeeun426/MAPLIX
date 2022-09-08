@@ -196,8 +196,12 @@ ol, ul {
 
 :global .search_detail {
   display: none;
-}
 
+
+}
+:global .search_detail img{
+  object-fit: cover;
+}
 :global .search_detail.modalOn {
   display: block;
   background-color: #E0E3E8;

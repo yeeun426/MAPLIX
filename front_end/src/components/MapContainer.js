@@ -85,7 +85,7 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
 
               var content = '<div className="customoverlay">' +
               '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-              '    <span className="infowindowtext">구의야구공원</span>' +
+              '    <span>구의야구공원</span>' +
               '  </a>' +
               '</div>';
 
@@ -94,7 +94,7 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
                 //content: positions[i].content // 인포윈도우에 표시할 내용
                 // content: content
                 
-                content: '<div style="width:170px;text-align:center;padding:6px 0;">'+ cardList[i].p_name +'</div>' // 인포윈도우에 표시할 내용
+                content: '<div class="infowindow_text" style="width:170px;text-align:center;padding:6px 0;">'+ cardList[i].p_name +'</div>' // 인포윈도우에 표시할 내용
               });
               //infowindow.open(map, marker);
               kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
@@ -130,7 +130,7 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
         <div
           id="kakaoMap"
           style={{
-            height: '1000px',
+            height: '1020px',
           }}></div>
     );
   } 

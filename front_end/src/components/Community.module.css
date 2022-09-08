@@ -185,6 +185,16 @@
   font-size: 18px !important;
 }
 
+.search_map_input{
+  position: relative;
+}
+
+.search_map_input button{
+  position: absolute;
+  top: 12px;
+  right: 17px;
+}
+
 :global #before_img {
   width: 200px;
   opacity: 0.5;
@@ -193,3 +203,4 @@
 :global #after_img {
   width: 200px;
 }
+

@@ -7,7 +7,7 @@
     /* #E0E3E8 */
     position: absolute;
     z-index: 10;
-    margin: 30px 0 0 30px;
+    margin: 10px 0 0 30px;
 }
 
 #course-line{
@@ -51,6 +51,6 @@ button{
     left: 100%;
 }
 
-.infowindowtext {
-    font-size: 30px !important;
+.infowindow_text {
+    font-size: 30px;
   }

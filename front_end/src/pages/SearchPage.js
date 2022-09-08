@@ -10,6 +10,8 @@ import acitivity from "../img/activity.png";
 import tour from "../img/tour.png";
 import etc from "../img/etc.png";
 import MapContainer from '../components/MapContainer';
+import { GoSearch } from "react-icons/go";
+
 import SearchSidebar from '../components/SearchSidebar';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -247,6 +249,7 @@ const currentPosts = (posts) => {
               <li><button className={searchCate === 'area' && "btn_active"} onClick={ClickedSearchCate} id="area">area</button></li>
             </div>
             
+          <div className={styles.search_map_input}>
             <input
                 id="searchbox"
                 type="text" 
@@ -257,10 +260,11 @@ const currentPosts = (posts) => {
                 value={search}
                 />
             
-            <button type='submit' onClick={onClickSearchbar} value={search}>검색</button>
+            <button type='submit' onClick={onClickSearchbar} value={search}><GoSearch/></button>
             {/* <button className='FilterIcons'  onClick={clickall}>
               <li>#전체 결과 조회하기</li>
             </button> */}
+          </div>
 
           {filtered.length !== 0 ?
             <div className={styles.card_list}>

@@ -8,7 +8,6 @@ function Menu({ activeMenu }) {
   return (
     <div className={styles.menu}>
       <div className={styles.user_img}>
-        user 사진
       </div>
       <div className={styles.user_nickname}>
         user 닉네임

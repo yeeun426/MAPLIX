@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import styles from './CourseAdd.module.css';
-import styles2 from "./CommunityCard.module.css";
 import axios from "axios";
 import '../pages/Course.css'
 import Pagination from '../components/Pagination';
 
 import click from '../img/click.png';
+import addcourse from '../img/addcourse.png'
+
 import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
 
@@ -212,9 +213,9 @@ const CourseAdd = (props) => {
         })
       }
 
-
+        //cardList
+        const [postsPerPage, setPostsPerPage] = useState(4); //페이지 당 게시물 수 
         const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
-        const [postsPerPage, setPostsPerPage] = useState(4);
 
         const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
         const indexOfFirst = indexOfLast - postsPerPage;
@@ -539,41 +540,36 @@ const CourseAdd = (props) => {
                 : null }
             </div>
             :null}
-            <button onClick={courseCreate}>만들기</button>
+            <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
-            <div className={styles2.stamp_modal}>
+            <div className={styles.course_modal}>
                 글쓰기
-                <form 
-                className={styles.form_container}
-                onSubmit={handleSubmit}
-                >
-                <div className={styles.write_item}>
-                    <label htmlFor='mc_title'>제목</label>
-                    <input
-                    type="text"
-                    id="mc_title"
-                    name="mc_title"
-                    placeholder='제목'
-                    value={myCourse.mc_title}
-                    onChange={handleInputChange}
-                    />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.course_modal_title}>
+                        <label htmlFor='mc_title'>제목</label>
+                        <input
+                        type="text"
+                        id="mc_title"
+                        name="mc_title"
+                        placeholder='제목'
+                        value={myCourse.mc_title}
+                        onChange={handleInputChange}
+                        />
+                    </div>
 
-                <div className={styles.write_item}>
-                    <label htmlFor='mc_content'>내용</label>
-                    <input className={styles.content}
-                    type="text"
-                    id="mc_content"
-                    name="mc_content"
-                    placeholder='내용'
-                    value={myCourse.mc_content}
-                    onChange={handleInputChange}
-                    />
-                </div>
-                <input className={styles.btn_submit} type="submit" value="등록" />        
-
+                    <div className={styles.course_modal_container}>
+                        <label htmlFor='mc_content'>내용</label>
+                        <input className={styles.content}
+                        type="text"
+                        id="mc_content"
+                        name="mc_content"
+                        placeholder='내용'
+                        value={myCourse.mc_content}
+                        onChange={handleInputChange}
+                        />
+                    </div>
+                    <input className={styles.btn_submit} type="submit" value="등록" />        
                 </form>
-                    
             </div>
             : null}
         </div>
