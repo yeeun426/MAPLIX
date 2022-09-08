@@ -11,7 +11,7 @@ import tour from "../img/tour.png";
 import etc from "../img/etc.png";
 import MapContainer from '../components/MapContainer';
 import SearchSidebar from '../components/SearchSidebar';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from "../components/Community.module.css";
 import SearchResultCard from '../components/SearchResultCard';
@@ -133,15 +133,6 @@ const filterOn = (e) => {
 
   console.log("필터 버튼 눌림" + e.target.id);
   e.target.parentElement.classList.add('filterOn');
-  // debugger
-  // const newKeywords = activeCate.map(k => {
-  //   if (k.category === e.target.id) {
-  //     return {...k, flag : true};
-  //   }else {
-  //     return {...k, flag : false};
-  //   }
-  // });
-  // setActiveCate((prev) => {return newKeywords});
 
   setFiltered(newnew);
   //console.log(Object.values(activeCate));
@@ -182,7 +173,7 @@ const clickall = () => {
   }));
 }
 
-const [currentPage, setCurrentPage] = useState(1);
+const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
 const [postsPerPage, setPostsPerPage] = useState(5);
 
 const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
@@ -271,6 +262,7 @@ const currentPosts = (posts) => {
               <li>#전체 결과 조회하기</li>
             </button> */}
 
+          {filtered.length !== 0 ?
             <div className={styles.card_list}>
                 { filtered && currentPosts(filtered).map((card, index) => {
                     return (
@@ -280,12 +272,30 @@ const currentPosts = (posts) => {
                                 card={card}
                                 // isWishList={wishList.includes(card.lecture_id)}
                                  />
-                           
-
                         </div>
                     );
                 })}
             </div>
+            :
+            <div className={styles.none_wrapper}>
+              <span className={styles.none_title}>'{search}'</span>
+              <span className={styles.none_result_title}>에 대한 검색결과가 없습니다.</span>
+              <div className={styles.none_result_txt}>
+                단어의 철자가 정확한지 확인해 보세요.<br />
+                한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br />
+                검색어의 단어 수를 줄이거나,<br/> 보다 일반적인 검색어로 다시 검색해 보세요.<br />
+                두 단어 이상의 검색어인 경우,<br/> 띄어쓰기를 확인해 보세요.<br />
+                키워드 수를 줄여보세요.
+              </div>
+              <div styles={{fontSize: "18px"}}>Contact Us</div>
+              <span>원하는 드라마, 영화, 예능의 촬영지가 없다면 </span>
+              <span className={styles.none_result_request}>'요청하기'</span>
+              <span>를 이용하세요</span>
+              <Link to='/mypage/request'>
+                <button>요청하기</button>
+              </Link>
+            </div>
+            }
             
             <Pagination
                 postsPerPage={postsPerPage}

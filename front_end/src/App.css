@@ -6,6 +6,10 @@ body {
   font-family:'nanumsquare';
 }
 
+input{
+  padding: 0 10px;
+}
+
 .first_container{
   list-style: none;
   background-color: #E0E3E8;

@@ -42,6 +42,10 @@
   height: 200px; 
 }
 
+.card_list{
+  margin-top: 10px;
+}
+
 .write_item{
   display: flex;
   flex-direction: row;
@@ -145,10 +149,41 @@
   gap: 17px;
 }
 
-/* .stamp_form_container img{
-  width: 200px;
-  opacity: 0.5;
-} */
+.none_wrapper{
+  padding: 30px 10px;
+}
+
+.none_wrapper span{
+  font-size: 14px;
+  word-break: keep-all;
+}
+
+.none_wrapper button{
+  font-size: 14px;
+  background: white;
+  border-radius: 5px;
+  padding: 10px 80px;
+  margin-top: 20px;
+  box-shadow: 3px 3px 6px rgb(0 0 0 / 27%);
+  cursor: pointer;
+}
+
+.none_result_txt{
+  font-size: 14px;
+  word-break: keep-all;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.none_title{
+  font-size: 18px !important;
+  font-weight: bold;
+  font-family: 'yg-jalnan';
+}
+
+.none_result_title{
+  font-size: 18px !important;
+}
 
 :global #before_img {
   width: 200px;

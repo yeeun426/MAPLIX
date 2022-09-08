@@ -137,9 +137,12 @@ useEffect(()=> {
 
   // 단일필터
   const filterOn = (e) => {
-  
+    if(document.getElementsByClassName('filterOn').length !== 0) {
+      document.getElementsByClassName('filterOn')[0].classList.remove('filterOn') 
+      }
     const newKeywords = activeCate.map(k => {
       if (k.category === e.target.id) {
+        e.target.parentElement.classList.add('filterOn');
 
         return {...k, flag : true};
       }else {

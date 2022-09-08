@@ -4,6 +4,7 @@ import styles from './CourseAdd.module.css';
 import styles2 from "./CommunityCard.module.css";
 import axios from "axios";
 import '../pages/Course.css'
+import Pagination from '../components/Pagination';
 
 import click from '../img/click.png';
 import CourseResultCard from './CourseResultCard'
@@ -213,6 +214,17 @@ const CourseAdd = (props) => {
       }
 
 
+        const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
+        const [postsPerPage, setPostsPerPage] = useState(4);
+
+        const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
+        const indexOfFirst = indexOfLast - postsPerPage;
+        const currentPosts = (posts) => {
+        let currentPosts = 0;
+        currentPosts = cardList.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+        };
+
     // const ResultCard = (e) => {
     //     return(
     //         <div className="modal_course_list">
@@ -251,13 +263,13 @@ const CourseAdd = (props) => {
                 { modal1 ? 
                 <ModalCourse ModalTop="3%">
                     {/* <div onClick={()=>{setModal1(false); setChangeNum1(true)}}>모달</div> */}
-                
+
                     
                     <ClickedCate/>
                     
                     <div className="modal_course_list">
                         
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult1}/>
@@ -265,6 +277,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={cardList.length}
+                paginate={setCurrentPage}
+                />
+                    
                 </ModalCourse>
                 : null }
             </div>
@@ -381,7 +399,7 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult5}/>
@@ -578,7 +596,7 @@ const CourseAdd = (props) => {
     const ModalCourse = styled.div`
         background-color: #e0edf1;
         width: 280px;
-        height: 430px;
+        height: 560px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
 

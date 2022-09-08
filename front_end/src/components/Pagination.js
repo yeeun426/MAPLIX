@@ -16,11 +16,11 @@ const PageUl = styled.ul`
 
 const PageLi = styled.div`
   display: inline-block;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   padding: 5px;
   border-radius: 50%;
-  width: 25px;
+  width: 20px;
   margin-bottom: 5px;
   
   &:hover {
