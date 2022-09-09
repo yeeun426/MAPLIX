@@ -212,10 +212,13 @@ ol, ul {
   padding: 10px;
   text-align: -webkit-center;
   width: 290px;
+  padding-bottom: 20px;
 }
 
 :global .search_detail ul {
   font-size: 14px;
+  text-align: left;
+  padding: 0px 40px;
 }
 
 :global .search_detail button {

@@ -28,9 +28,6 @@ const CourseAdd = (props) => {
     // courseAdd.js는 course에서 온 필터값 기반으로 api 요청
     // 이때 api는 즐겨찾기 결과 값 + 
 
-
-
-
     const [modal1, setModal1] = useState(false);
     const [changeNum1, setChangeNum1] = useState(false);
     const [result1, setResult1] = useState([]);
@@ -149,7 +146,6 @@ const CourseAdd = (props) => {
                 { activeCate.map((obj) => {
                     if (obj.flag === true)
                     return <span key={obj.category}>#{obj.realCate}&nbsp;</span> 
-                    
                 })}
             </div>
         )
@@ -239,10 +235,19 @@ const CourseAdd = (props) => {
     //     )
     // }
 
+    const courseModalClick = (e) => {
+        if(document.getElementsByClassName('modalOn').length !== 0) {
+            document.getElementsByClassName('modalOn')[0].classList.remove('modalOn') 
+        }
+        // debugger
+        e.target.parentElement.lastChild.classList.add('modalOn')
+    }
+
     return(
         <div className={styles.course_make}>
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal1(!modal1)}} top = "3%">
+                {/* <CourseNum className="add-course" onClick={() => {setModal1(!modal1)}} top = "3%"> */}
+                <CourseNum className="add-course" onClick={courseModalClick} top = "3%">
                     {!changeNum1 ? "+" : "1"}
                 </CourseNum>
 
@@ -260,13 +265,10 @@ const CourseAdd = (props) => {
                     }
                 </CourseList>
 
-                { modal1 ? 
+                {/* { modal1 ?  */}
                 <ModalCourse ModalTop="3%">
                     {/* <div onClick={()=>{setModal1(false); setChangeNum1(true)}}>모달</div> */}
-
-                    
                     <ClickedCate/>
-                    
                     <div className="modal_course_list">
                         
                         {currentPosts(cardList).map((card, index) => {
@@ -284,13 +286,13 @@ const CourseAdd = (props) => {
                 />
                     
                 </ModalCourse>
-                : null }
+                {/* : null } */}
             </div>
 
 {/* 2 --------------------------------- */}
             {changeNum1 ?
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal2(!modal2)}}  backColor="#F7EA70" top = "14%">
+                <CourseNum className="add-course" onClick={courseModalClick} backColor="#F7EA70" top = "14%">
                     {!changeNum2 ? "+" : "2"}
                 </CourseNum>
 
@@ -299,7 +301,7 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result2.category}</div>
                 </CourseList>
 
-                { modal2 ? 
+                {/* { modal2 ?  */}
                 <ModalCourse ModalTop = "14%">
                     {/* <span onClick={()=>{setModal2(false); setChangeNum2(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -313,14 +315,14 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
+                {/* : null } */}
             </div>
             : null}
 
 {/* 3 --------------------------------- */}
             {changeNum1 && changeNum2 ?
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal3(!modal3)}} top="25%">
+                <CourseNum className="add-course" onClick={courseModalClick} top="25%">
                     {!changeNum3 ? "+" : "3"}
                 </CourseNum>
 
@@ -329,7 +331,7 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result3.category}</div>
                 </CourseList>
 
-                { modal3 ? 
+                {/* { modal3 ?  */}
                 <ModalCourse ModalTop = "25%">
                     {/* <span onClick={()=>{setModal3(false); setChangeNum3(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -344,7 +346,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
+                {/* : null } */}
             </div>
             :null}
 
@@ -352,7 +354,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 ?
             <div className="course_list">
-                <CourseNum className="add-course" backColor="#F7EA70" onClick={() => {setModal4(!modal4)}} top="36%">
+                <CourseNum className="add-course" backColor="#F7EA70" onClick={courseModalClick} top="36%">
                     {!changeNum4 ? "+" : "4"}
                 </CourseNum>
 
@@ -361,7 +363,6 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result4.category}</div>
                 </CourseList>
 
-                { modal4 ? 
                 <ModalCourse ModalTop="36%">
                     {/* <span onClick={()=>{setModal4(false); setChangeNum4(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -376,7 +377,6 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
             </div>
             :null}
 
@@ -384,7 +384,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 ?
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal5(!modal5)}} top="47%">
+                <CourseNum className="add-course" onClick={courseModalClick} top="47%">
                     {!changeNum5 ? "+" : "5"}
                 </CourseNum>
 
@@ -393,11 +393,8 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result5.category}</div>
                 </CourseList>
 
-                { modal5 ? 
                 <ModalCourse ModalTop="47%">
-                    {/* <span onClick={()=>{setModal5(false); setChangeNum5(true)}}>모달</span>  */}
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
                         {currentPosts(cardList).map((card, index) => {
                             return (
@@ -408,7 +405,6 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
             </div>
             :null}
 
@@ -416,7 +412,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 ?
             <div className="course_list">
-                <CourseNum className="add-course" backColor="#F7EA70" onClick={() => {setModal6(!modal6)}} top="58%">
+                <CourseNum className="add-course" backColor="#F7EA70" onClick={courseModalClick} top="58%">
                     {!changeNum6 ? "+" : "6"}
                 </CourseNum>
 
@@ -425,7 +421,6 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result6.category}</div>
                 </CourseList>
 
-                { modal6 ? 
                 <ModalCourse ModalTop="58%">
                     {/* <span onClick={()=>{setModal6(false); setChangeNum6(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -440,7 +435,6 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
             </div>
             :null}
 
@@ -448,7 +442,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 && changeNum6 ?
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal7(!modal7)}} top="69%">
+                <CourseNum className="add-course" onClick={courseModalClick} top="69%">
                     {!changeNum7 ? "+" : "7"}
                 </CourseNum>
 
@@ -457,11 +451,8 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result7.category}</div>
                 </CourseList>
 
-                { modal7 ? 
                 <ModalCourse ModalTop="53%">
-                    <span onClick={()=>{setModal7(false); setChangeNum7(true)}}>모달</span> 
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
@@ -473,7 +464,6 @@ const CourseAdd = (props) => {
                     </div>
                     
                 </ModalCourse>
-                : null }
             </div>
             :null}
 
@@ -481,7 +471,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 && changeNum6 && changeNum7?
             <div className="course_list">
-                <CourseNum className="add-course" backColor="#F7EA70" onClick={() => {setModal8(!modal8)}} top="80%">
+                <CourseNum className="add-course" backColor="#F7EA70" onClick={courseModalClick} top="80%">
                     {!changeNum8 ? "+" : "8"}
                 </CourseNum>
 
@@ -490,11 +480,8 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result8.category}</div>
                 </CourseList>
 
-                { modal8 ? 
                 <ModalCourse ModalTop="53%">
-                    <span onClick={()=>{setModal8(false); setChangeNum8(true)}}>모달</span> 
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
@@ -505,7 +492,6 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
             </div>
             :null}
 
@@ -513,7 +499,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 && changeNum6 && changeNum7 && changeNum8 ?
             <div className="course_list">
-                <CourseNum className="add-course" onClick={() => {setModal9(!modal9)}} top="91%">
+                <CourseNum className="add-course" onClick={courseModalClick} top="91%">
                     {!changeNum9 ? "+" : "9"}
                 </CourseNum>
 
@@ -522,22 +508,18 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result9.category}</div>
                 </CourseList>
 
-                { modal9 ? 
                 <ModalCourse ModalTop="53%">
-                    <span onClick={()=>{setModal9(false); setChangeNum9(true)}}>모달</span> 
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
                             return (
-                                <div card = {card}>
+                                <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult9}/>
                                 </div>
                             );
                         })}      
                     </div>
                 </ModalCourse>
-                : null }
             </div>
             :null}
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
@@ -589,12 +571,13 @@ const CourseAdd = (props) => {
     `
 
     const ModalCourse = styled.div`
+        display: none;
         background-color: #e0edf1;
         width: 280px;
         height: 560px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
-
+        z-index: 3;
         position: absolute;
         top: ${(props)=>props.ModalTop};
         left: 100%;

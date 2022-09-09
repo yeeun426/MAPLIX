@@ -54,3 +54,7 @@ button{
 .infowindow_text {
     font-size: 30px;
   }
+
+.modalOn{
+    display: block !important;;
+}
