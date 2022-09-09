@@ -210,6 +210,7 @@ const CourseAdd = (props) => {
         })
         .then((res) => {
           alert("success!")
+          setcourseCreateModal(false)
         })
       }
 

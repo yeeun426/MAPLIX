@@ -403,7 +403,7 @@ app.post("/api/stamp", (req, res) => {
 
   console.log(id, m_type, media_name)
   // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
   // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
   // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
   

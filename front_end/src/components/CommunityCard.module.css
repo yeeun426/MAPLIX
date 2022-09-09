@@ -225,13 +225,13 @@ ol, ul {
 .stamp_modal{
   background-color: #e0edf1;
   width: 400px;
-  height: 470px;
   box-shadow: 5px 3px 5px #0000003d;
   border-radius: 30px;
-  border-top-left-radius: 0px;
   margin-left: 3px;
   position: absolute;
   top: 65%;
-  left: 390px;
+  left: 800px;
   z-index: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
