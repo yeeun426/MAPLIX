@@ -12,6 +12,9 @@ export default function SearchResultCard({card, setResult}) {
         setResult(card);
         alert("추가되었습니다")
     }
+    if(document.getElementsByClassName('modalOn').length !== 0) {
+      document.getElementsByClassName('modalOn')[0].classList.remove('modalOn') 
+  }
   }
   
   return (

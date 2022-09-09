@@ -1,4 +1,4 @@
-:global .course_list img {
+:global .course_click_btn {
     width: 45px;
     top: 6%;
     position: absolute;
@@ -33,4 +33,17 @@
     left: 128%;
     padding: 10px;
     box-sizing: border-box;
+}
+
+.course_modal_filter img{
+    width: 45px;
+}
+
+.course_modal_filter{
+    background: rgb(0 0 0 / 10%);
+    text-align: -webkit-center;
+    width: 70px;
+    border-radius: 50%;
+    font-size: 13px;
+    margin: 15px 20px 0px;
 }
