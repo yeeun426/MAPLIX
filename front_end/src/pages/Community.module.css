@@ -73,6 +73,9 @@ button.active{
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 35px;
   margin-left: 75px;
+}
+
+#likelist_container{
   overflow: auto;
   height: 350px;
 }
