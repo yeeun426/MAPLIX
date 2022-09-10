@@ -560,10 +560,10 @@ const CourseAdd = (props) => {
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>
-                글쓰기
+                <div className={styles.course_modal_header}>내 코스 만들기</div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.course_modal_title}>
-                        <label htmlFor='mc_title'>제목</label>
+                        <div htmlFor='mc_title'>제목</div>
                         <input
                         type="text"
                         id="mc_title"
@@ -575,7 +575,7 @@ const CourseAdd = (props) => {
                     </div>
 
                     <div className={styles.course_modal_container}>
-                        <label htmlFor='mc_content'>내용</label>
+                        <div htmlFor='mc_content'>내용</div>
                         <input className={styles.content}
                         type="text"
                         id="mc_content"
