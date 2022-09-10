@@ -17,12 +17,14 @@ export default function WriteStamp({card, openModal}) {
     };
 
     const [stampModal, setStampModal] = useState(false);
+    const [stampRecordModal, setStampRecordModal] = useState(false);
     
     console.log(id, poster, m_num);
 
     const [record, setRecord] = useState(initialRecord);
     const {record_title, record_content} = record;
 
+    const [part, setPart] = useState(0);
 
     // 데이터 가져오기
   const loadPost = async () => {
@@ -117,130 +119,211 @@ export default function WriteStamp({card, openModal}) {
     const clickPoster1 = (e) => {
       e.preventDefault();
       console.log("poster1 click!");
-      const part = 1;
+      setPart(1)
       window.localStorage.setItem('part', 1);
 
-      const res = axios.post("http://localhost:8000/api/stampcheck", {
-        id,
-        m_num,
-        poster,
-        part
-      })
-      .then((res) => {
-        if (res.data[0].record_title1 != undefined) {
-          console.log(res.data[0].record_title1, res.data[0].record_content1);
+      if (record1 != true) {
+        setStampRecordModal(false);
+        setStampModal(!stampModal);
+      }
+      else if (record1 == true) {
+        const res = axios.post("http://localhost:8000/api/stampcheck", {
+          id,
+          m_num,
+          poster,
+          part
+        })
+        .then((res) => {
+          setStampModal(false);
           setRecord({record_title: res.data[0].record_title1, record_content: res.data[0].record_content1});
-          console.log(record)
-        }
-        else {
-          setRecord({record_title: "", record_content: ""});
-        }
-      })
-      setStampModal(!stampModal);
+          setStampRecordModal(!stampRecordModal);
+        })
+      }
+      // const res = axios.post("http://localhost:8000/api/stampcheck", {
+      //   id,
+      //   m_num,
+      //   poster,
+      //   part
+      // })
+      // .then((res) => {
+      //   if (res.data[0].record_title1 != undefined) {
+      //     console.log(res.data[0].record_title1, res.data[0].record_content1);
+      //     setRecord({record_title: res.data[0].record_title1, record_content: res.data[0].record_content1});
+      //     console.log(record)
+      //     setStampRecordModal(!stampRecordModal);
+      //   }
+      //   else {
+      //     // setRecord({record_title: "", record_content: ""});
+      //     setStampModal(!stampModal);
+      //   }
+      // })
     }
 
     const clickPoster2 = (e) => {
       e.preventDefault();
       console.log("poster2 click!")
-      const part = 2
+      setPart(2)
       window.localStorage.setItem('part', 2);
 
-      const res = axios.post("http://localhost:8000/api/stampcheck", {
-        id,
-        m_num,
-        poster,
-        part
-      })
-      .then((res) => {
-        if (res.data[0].record_title2 != undefined) {
+      if (record2 != true) {
+        setStampRecordModal(false);
+        setStampModal(!stampModal);
+      }
+      else if (record2 == true) {
+        const res = axios.post("http://localhost:8000/api/stampcheck", {
+          id,
+          m_num,
+          poster,
+          part
+        })
+        .then((res) => {
+          setStampModal(false);
           setRecord({record_title: res.data[0].record_title2, record_content: res.data[0].record_content2});
-        }
-        else {
-          setRecord({record_title: "", record_content: ""});
-        }
-      })
-      setStampModal(!stampModal);
+          setStampRecordModal(!stampRecordModal);
+        })
+      }
+      // const res = axios.post("http://localhost:8000/api/stampcheck", {
+      //   id,
+      //   m_num,
+      //   poster,
+      //   part
+      // })
+      // .then((res) => {
+      //   if (res.data[0].record_title2 != undefined) {
+      //     setRecord({record_title: res.data[0].record_title2, record_content: res.data[0].record_content2});
+      //     setStampRecordModal(!stampRecordModal);
+      //   }
+      //   else {
+      //     // setRecord({record_title: "", record_content: ""});
+      //     setStampModal(!stampModal);
+      //   }
+      // })
     }
 
     const clickPoster3 = (e) => {
       e.preventDefault();
       console.log("poster3 click!");
-      const part = 3;
+      setPart(3)
       window.localStorage.setItem('part', 3);
 
-      const res = axios.post("http://localhost:8000/api/stampcheck", {
-        id,
-        m_num,
-        poster,
-        part
-      })
-      .then((res) => {
-        if (res.data[0].record_title3 != undefined) {
+      if (record3 != true) {
+        setStampRecordModal(false);
+        setStampModal(!stampModal);
+      }
+      else if (record3 == true) {
+        setStampModal(false);
+        const res = axios.post("http://localhost:8000/api/stampcheck", {
+          id,
+          m_num,
+          poster,
+          part
+        })
+        .then((res) => {
           setRecord({record_title: res.data[0].record_title3, record_content: res.data[0].record_content3});
-        }
-        else {
-          setRecord({record_title: "", record_content: ""});
-        }
-      })
-      setStampModal(!stampModal);
+          setStampRecordModal(!stampRecordModal);
+        })
+      }
+
+      // const res = axios.post("http://localhost:8000/api/stampcheck", {
+      //   id,
+      //   m_num,
+      //   poster,
+      //   part
+      // })
+      // .then((res) => {
+      //   if (res.data[0].record_title3 != undefined) {
+      //     setRecord({record_title: res.data[0].record_title3, record_content: res.data[0].record_content3});
+      //     setStampRecordModal(!stampRecordModal);
+      //   }
+      //   else {
+      //     // setRecord({record_title: "", record_content: ""});
+      //     setStampModal(!stampModal);
+      //   }
+      // })
     }
 
     const clickPoster4 = (e) => {
       e.preventDefault();
       console.log("poster4 click!");
-      const part = 4;
+      setPart(4)
       window.localStorage.setItem('part', 4);
 
-      const res = axios.post("http://localhost:8000/api/stampcheck", {
-        id,
-        m_num,
-        poster,
-        part
-      })
-      .then((res) => {
-        if (res.data[0].record_title4 != undefined) {
+      if (record4 != true) {
+        setStampRecordModal(false);
+        setStampModal(!stampModal);
+      }
+      else if (record4 == true) {
+        setStampModal(false);
+        const res = axios.post("http://localhost:8000/api/stampcheck", {
+          id,
+          m_num,
+          poster,
+          part
+        })
+        .then((res) => {
+          // setStampModal(false);
           setRecord({record_title: res.data[0].record_title4, record_content: res.data[0].record_content4});
-        }
-        else {
-          setRecord({record_title: "", record_content: ""});
-        }
-      })
-      setStampModal(!stampModal);
+          setStampRecordModal(!stampRecordModal);
+        })
+      }
+      // const res = axios.post("http://localhost:8000/api/stampcheck", {
+      //   id,
+      //   m_num,
+      //   poster,
+      //   part
+      // })
+      // .then((res) => {
+      //   if (res.data[0].record_title4 != undefined) {
+      //     setRecord({record_title: res.data[0].record_title4, record_content: res.data[0].record_content4});
+      //     setStampRecordModal(!stampRecordModal);
+      //   }
+      //   else {
+      //     // setRecord({record_title: "", record_content: ""});
+      //     setStampModal(!stampModal);
+      //   }
+      // })
     }
 
+    const updateRecord = (e) => {
+      e.preventDefault();
+      setStampRecordModal(false);
+      setStampModal(!stampModal);
+    }
 
   return (
     <div>
       <div className={styles.stamp_form_container}>
-      {
-        (function() {
-          if (record1 == true) return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "after_img" onClick={clickPoster1}></img>);
-          else return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "before_img" onClick={clickPoster1}></img>);
-        })()
-      }
-      {
-        (function() {
-          console.log(record2)
-          if (record2 == true) return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "after_img" onClick={clickPoster2}></img>);
-          else return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "before_img" onClick={clickPoster2}></img>);
-        })()
-      }
-      {
-        (function() {
-          if (record3 == true) return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "after_img" onClick={clickPoster3}></img>);
-          else return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "before_img" onClick={clickPoster3}></img>);
-        })()
-      }
-      {
-        (function() {
-          if (record4 == true) return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "after_img" onClick={clickPoster4}></img>);
-          else return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "before_img" onClick={clickPoster4}></img>);
-        })()
-      }
+        <ul id="stamp_title">{card.m_name}</ul>
+        <div>
+        {
+          (function() {
+            if (record1 == true) return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "after_img" onClick={clickPoster1}></img>);
+            else if (record1 != true) return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "before_img" onClick={clickPoster1}></img>);
+          })()
+        }
+        {
+          (function() {
+            if (record2 == true) return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "after_img" onClick={clickPoster2}></img>);
+            else if (record2 != true)return (<img src={'/poster/poster_' + m_num + '_2.jpg'} id = "before_img" onClick={clickPoster2}></img>);
+          })()
+        }
+        {
+          (function() {
+            if (record3 == true) return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "after_img" onClick={clickPoster3}></img>);
+            else if (record3 != true)return (<img src={'/poster/poster_' + m_num + '_3.jpg'} id = "before_img" onClick={clickPoster3}></img>);
+          })()
+        }
+        {
+          (function() {
+            if (record4 == true) return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "after_img" onClick={clickPoster4}></img>);
+            else if (record4 != true) return (<img src={'/poster/poster_' + m_num + '_4.jpg'} id = "before_img" onClick={clickPoster4}></img>);
+          })()
+        }
+        </div>
       </div>
       {stampModal ?
       <div className={styles2.stamp_modal}>
-        글쓰기
+        <ul id="stamp_title">도장깨기 글쓰기 #{part} <button id="modalCloseBtn" onClick={() => setStampModal(false)}>✖</button></ul>
         <form 
           className={styles.form_container}
           onSubmit={handleSubmit}
@@ -252,7 +335,7 @@ export default function WriteStamp({card, openModal}) {
             id="record_title"
             name="record_title"
             placeholder='제목'
-            value={record.record_title}
+            // value={record.record_title}
             onChange={handleInputChange}
             />
           </div>
@@ -264,7 +347,7 @@ export default function WriteStamp({card, openModal}) {
             id="record_content"
             name="record_content"
             placeholder='내용'
-            value={record.record_content}
+            // value={record.record_content}
             onChange={handleInputChange}
             />
           </div>
@@ -272,6 +355,26 @@ export default function WriteStamp({card, openModal}) {
 
         </form>
             
+      </div>
+      : null}
+
+      {stampRecordModal ?
+      <div className={styles2.stamp_modal}>
+        <ul id="stamp_title">도장깨기 #{part} <button id="modalCloseBtn" onClick={() => setStampRecordModal(false)}>✖</button></ul>
+        <div className={styles.form_container}>
+          <div className={styles.write_item}>
+            {/* <label htmlFor='record_title'>제목</label> */}
+            <ul id="stamp_record_title">{record.record_title}</ul>
+          </div>
+
+          <div className={styles.write_item}>
+            {/* <label htmlFor='record_content'>내용</label> */}
+            <ul id="stamp_record_content">{record.record_content}</ul>
+          </div>
+          <br></br>
+          <button className={styles.btn_submit} onClick={updateRecord}>수정</button>
+        </div>
+        
       </div>
       : null}
     </div>    
