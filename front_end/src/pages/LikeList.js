@@ -62,8 +62,11 @@ function MyPage() {
               </div>
             );
           })}
-
-        </div>
+      </div>
+      
+      <div className={styles.likelist_map_container}>
+          지도
+      </div>
       </Layout>
             
     </div>

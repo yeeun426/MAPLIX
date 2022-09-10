@@ -8,18 +8,14 @@
                 "number" : 1,
                 "location" : "제주시 구좌읍 비자림로 2134-47",
                 "content" : "런닝맨, 푸른 바다의 전설",
-                "img_1":"https://mblogthumb-phinf.pstatic.net/MjAxODA0MTNfMTc2/MDAxNTIzNTg1OTA0Njg5.RPz73zOvPDyPkHTYKVVSW4lEHec-1mdzLKkZxey42fkg.Id-NuY2KprDjbXG8vM2fYWTktMF6j36BblAw4pejidAg.PNG.terry9903/%EC%A0%9C%EC%A3%BC%EB%8F%99%EB%B6%80%EA%B6%8C%EA%B4%80%EA%B4%91%EC%A7%80_%EC%A4%91_%EA%BC%AD_%ED%95%9C%EB%B2%88_%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3%2C_%EB%A9%94%EC%9D%B4%EC%A6%88%EB%9E%9C%EB%93%9C001.png?type=w2",
-                "img_2":"https://d3s201wgs37zfp.cloudfront.net/wp-content/uploads/2017/01/15.png",
-                "img_3":"https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_19181/20210917043703_Kk9Re/jpg"
+                "img":"https://d3s201wgs37zfp.cloudfront.net/wp-content/uploads/2017/01/15.png"
             },
             "course2": {
                 "name" : "제주광해 애월",
                 "number" : 2,
                 "location" : "제주 제주시 애월읍 애월해안로 867 2층",
                 "content" : "맛있는 녀석들",
-                "img_1":"https://blog.kakaocdn.net/dn/bKYaGq/btrmgsH3Eug/k1LRuskfqCEfsz0rU4pZKk/img.png",
-                "img_2":"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180706_269%2F15308603890736BOXy_JPEG%2FLjaxbO_L5Cq96ny-ey56XVEw.jpg",
-                "img_3":"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180224_172%2F1519441411390hbrtr_JPEG%2FUVV3JmyibomT1S8WTSPkdh8t.jpg"
+                "img":"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180706_269%2F15308603890736BOXy_JPEG%2FLjaxbO_L5Cq96ny-ey56XVEw.jpg"
             },
 
             "course3": {
@@ -27,32 +23,22 @@
                 "number" : 3,
                 "location" : "제주특별자치도 제주시 애월읍 어음리 산 131-3",
                 "content" : "환승연애",
-                "img_1":"https://blog.kakaocdn.net/dn/dqnyKE/btrgCGr2Ocw/xGOx2JQWgFAkvkQOYfLA41/img.jpg",
-                "img_2":"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200623_53%2F15928963571678dsbD_JPEG%2FNeAihaWvwCBL9enRE0S3ql_E.jpg",
-                "img_3":"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200430_162%2F1588217173765HCmkY_JPEG%2Fnu2HLkvhMmxF91rmh5MiFyIV.jpg"
+                "img":"https://blog.kakaocdn.net/dn/dqnyKE/btrgCGr2Ocw/xGOx2JQWgFAkvkQOYfLA41/img.jpg"
             },
             "course4": {
                 "name" : "바당고지",
                 "number" : 4,
                 "location" : "제주 제주시 한림읍 협재로6",
                 "content" : "하트 시그널 시즌3",
-                "img_1":"https://mblogthumb-phinf.pstatic.net/MjAyMDA3MDJfMTcg/MDAxNTkzNjY2MjIzNjE5.AUiCNW0WHdSScBm1qFfbsIFRD1cwfy9oc-ae2qt9M3kg.tWtfLxH8pqT94mugCKossJYO7rfF-L0sXf1lyiJ_Fywg.JPEG.muhwa0/%ED%95%98%ED%8A%B8%EC%8B%9C%EA%B7%B8%EB%84%90%EC%8B%9C%EC%A6%8C3-%EA%B9%80%EA%B0%95%EC%97%B4-%EB%B0%95%EC%A7%80%ED%98%84-%ED%9D%91%EB%8F%BC%EC%A7%80-%EA%B3%A0%EA%B8%B0%EC%A7%91-%EB%B0%94%EB%8B%B9%EA%B3%A0%EC%A7%802.jpg?type=w800",
-                "img_2":"https://t1.daumcdn.net/cfile/tistory/999E434D5F04723F0B",
-                "img_3":"https://mblogthumb-phinf.pstatic.net/MjAxOTA4MDdfNzEg/MDAxNTY1MTQ4Nzg1MTkw.IgjTi-QJyZYs8_vZ0_AR3MWMh3UPQZh8oUJbW1qVY_Mg.d-dOM4IFHcS0neGdhdBqC8aJROf-hIoVnRbNRwU7Hq8g.JPEG.thormommy/SAM_6692.jpg?type=w800"
+                "img":"https://t1.daumcdn.net/cfile/tistory/999E434D5F04723F0B"
             },
             "cousre5": {
                 "name" : "돌담해변길",
                 "number" : 5,
                 "location" : "제주시 한림읍 금능리 1488-2",
                 "content" : "우리들의 블루스",
-                "img_1":"https://img.insight.co.kr/static/2022/03/12/700/img_20220312095812_4ps0v801.webp",
-                "img_2":"https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/8f05e548-21a0-4079-9d6a-ec23be627d0a.jpeg",
-                "img_3":"https://inblu.kr/uploads/place/1280x/image_1650377204_99844.jpg"
-            },
-            "distance12" : "3.2km",
-            "distance23" : "21.1km",
-            "distance34" : "20.5km",
-            "distance45" : "2.1km"
+                "img":"https://img.insight.co.kr/static/2022/03/12/700/img_20220312095812_4ps0v801.webp"
+            }
         },
         {
             "id" : 2,

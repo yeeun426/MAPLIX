@@ -13,6 +13,7 @@ import Map from "../img/Map.png";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import Footer from '../components/Footer'
+import MediaCourse from '../data/RecommendCourse.json';
 
 function Search() {
 
@@ -80,9 +81,18 @@ function Search() {
         <div style={{margin:'10px 0 10px 0', 'font-size':'18px'}}>Recommended Course</div>
       
         <div className = "third_list">
-          <button className='third_img'>
-            <img src={Jeonju} alt = "Jeonju" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Jeonju} alt = "Jeonju" />
+            </button>
+            {/* <div> */}
+              {/* {MediaCourse.map((course) => (
+                <div key={course.id}>
+                  {course.id}
+                </div>
+              ))} */}
+            {/* </div> */}
+          </div>
 
           <button className='third_img'>
             <img src={Busan} alt = "Busan" />
