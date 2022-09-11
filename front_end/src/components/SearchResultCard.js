@@ -13,6 +13,10 @@ export default function SearchResultCard({card}) {
   const l_num = card.l_num;
   const [detail, setDetail] = useState(false); 
 
+  const [png, setPng] = useState(false);
+  const [jpg, setJpg] = useState(false);
+  const [webp, setWebp] = useState(false);
+
   // 데이터 가져오기
   const loadPost = async () => {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
@@ -23,6 +27,32 @@ export default function SearchResultCard({card}) {
       return setLike(true);
   };
 
+  // 촬영지 이미지 가져오기
+  const loadImage = async () => {
+    const response = await axios.get('http://localhost:8000/api/locationimage');
+    // console.log(response.data)
+    const locationImg = 'location_' + l_num;
+    console.log(locationImg);
+    function findLocationImg(element) {
+      if (element.includes(locationImg))
+        return true
+    }
+    const locationIndex  = response.data.findIndex(findLocationImg)
+    const findLocation = response.data[locationIndex];
+    const ext = findLocation.split(".")[1]
+
+    if (ext == 'png') {
+      setPng(true)
+    }
+    else if (ext == 'jpg') {
+      setJpg(true)
+    }
+    else if (ext == 'webp') {
+      setWebp(true)
+    }
+    console.log(findLocation, ext);
+  }
+
 
   // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
   const [check_like, setLike] = useState();
@@ -30,6 +60,7 @@ export default function SearchResultCard({card}) {
   // 컴포넌트가 렌더링 될때마다 특정 작업 실행되도록
   useEffect(()=> {
       loadPost();
+      loadImage();
     }, [] );
 
   const onClickPlace =(e)=> {
@@ -90,7 +121,15 @@ export default function SearchResultCard({card}) {
 
       <div className="search_detail">
           <div>
-            <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'} alt=""></img>
+            {
+              (function() {
+                if (png == true) return <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'} alt="" ></img> 
+                else if (jpg == true) return <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.jpg'} alt=""></img>
+                else if (webp == true) return <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.webp'} alt=""></img>
+              })()
+            }
+            {/* <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'} alt="" onerror="this.src='/location/location_9.jpg"></img> */}
+
           </div>
           <div className={styles.sm_title}>{card.p_name}</div>
           <ul>{card.address}</ul>

@@ -252,21 +252,45 @@ app.post("/api/community/writepost", (req, res) =>{
   });
 });
 
-app.post("/api/mypage/request", (req, res) =>{
+const multer = require('multer');
+const upload = multer({dest : './upload'})
+
+app.use('/image', express.static('./upload'))
+
+app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
   const media_name = req.body.media_name; 
   const r_content = req.body.r_content;
   const id = req.body.id; 
   const m_type = req.body.m_type; 
-  // const r_image = req.body.r_image; 
+  const r_image = '/image/' + req.file.filename; 
+  // const r_image = req.file.file; 
   // const fd = req.body.fd;
   
   // console.log(media_name, fd);
 
-  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
-  db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
-      res.send('success!'); 
+  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`, r_image) VALUES (?,?,?,?,?);";
+  db.query(sqlQuery, [media_name, r_content, id, m_type, r_image], (err, result, fields) => {
+      res.send(result); 
+      console.log(result)
   });
 });
+
+
+// app.post("/api/mypage/request", (req, res) =>{
+//   const media_name = req.body.media_name; 
+//   const r_content = req.body.r_content;
+//   const id = req.body.id; 
+//   const m_type = req.body.m_type; 
+//   // const r_image = req.body.r_image; 
+//   // const fd = req.body.fd;
+  
+//   // console.log(media_name, fd);
+
+//   // const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
+//   // db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
+//   //     res.send('success!'); 
+//   // });
+// });
 
 app.post("/api/checkid", (req, res) => {
   const id = req.body.id;
@@ -539,6 +563,15 @@ app.post("/api/community/writepost", (req, res) =>{
   });
 });
 
+app.get("/api/locationimage", (req, res) => {
+  var Folder = '../front_end/public/location/';
+      var fs = require('fs');
+  
+      fs.readdir(Folder, function(error, filelist){
+        console.log(filelist);
+        res.send(filelist);
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
