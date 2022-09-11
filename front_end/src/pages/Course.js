@@ -8,12 +8,11 @@ import restaurant from "../img/restaurant.png";
 import cafe from "../img/cafe.png";
 import acitivity from "../img/activity.png";
 import tour from "../img/tour.png";
-import like from "../img/like.png";
+import mediaplace from "../img/mediaplace.png";
+import likelist from "../img/likelist.png";
 import MapContainer from '../components/MapContainer';
 import CourseAdd from '../components/CourseAdd'
-import Footer from '../components/Footer';
 
-import styled from 'styled-components';
 import axios from "axios";
 const { kakao } = window;
 function Course(){
@@ -139,6 +138,7 @@ useEffect(()=> {
 
   // 단일필터
   const filterOn = (e) => {
+
     if(document.getElementsByClassName('filterOn').length !== 0) {
       document.getElementsByClassName('filterOn')[0].classList.remove('filterOn') 
       }
@@ -179,12 +179,12 @@ useEffect(()=> {
           <h1>Maplix</h1>
           <div className='Filter'>
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={like} alt = "likelist" id='likelist' />
+              <img src={likelist} alt = "likelist" id='likelist' />
               <li>#즐겨찾기</li>            
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={like} alt = "mediaplace" id='mediaplace' />
+              <img src={mediaplace} alt = "mediaplace" id='mediaplace' />
               <li>#촬영지</li>            
             </button>
 
@@ -219,7 +219,7 @@ useEffect(()=> {
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={acitivity} alt = "activity" />
+              <img src={acitivity} alt = "activity" id="activity" />
               <li>#액티비티</li>
             </button>
 

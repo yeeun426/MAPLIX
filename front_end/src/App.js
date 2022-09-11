@@ -17,7 +17,7 @@ import UpdateInfo from './pages/UpdateInfo';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import SearchSidebar from './components/SearchSidebar';
-import WriteStamp from './pages/WriteStamp';
+// import WriteStamp from './pages/WriteStamp';
 
 // import Modal from "react-modal";
 function App() {
@@ -40,7 +40,7 @@ function App() {
           <Route path="/mypage/mycourse" element={<MyCourse />} />
           <Route path="/mypage/request" element={<Request />} />
           <Route path="/mypage/updateinfo" element={<UpdateInfo />} />
-          <Route path="/mypage/writestamp" element={<WriteStamp />} />
+          {/* <Route path="/mypage/writestamp" element={<WriteStamp />} /> */}
           
           <Route path='/signup' element={<SignUp/>}></Route>
           <Route path='/login' element={<Login/>}></Route>

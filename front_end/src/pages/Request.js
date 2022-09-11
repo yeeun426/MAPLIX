@@ -14,15 +14,16 @@ import {RiQuestionnaireFill} from 'react-icons/ri';
 const initialState = {
   media_name: "",
   r_content: "",
-  id: "",
   m_type: "",
 };
 
 const Request = () => {
+  const id = window.localStorage.getItem("id");
+
   const [state, setState] = useState(initialState);
   const [img, setImg] = useState({r_image: ""});
 
-  const {media_name, r_content, id, m_type} = state;
+  const {media_name, r_content, m_type} = state;
   const {r_image} = img;
 
   const history = useNavigate();
@@ -35,39 +36,30 @@ const Request = () => {
     // formData.append('file', img);
     console.log(r_image);
     // console.log(formData);
-    
-    if (!media_name || !r_content || !id || !m_type || !r_image) {
-      // toast.error("Please provide value into each input field");
-    } else {
-      const res = axios.post("http://localhost:8000/mypage/request", {
+
+      const res = axios.post("http://localhost:8000/api/mypage/request", {
         media_name,
         r_content,
         id,
         m_type,
-        r_image
+        r_image,
         // formData
       })
       .then((res) => {
-        setState({media_name: "", r_content: "", id: "", m_type: ""});
+        setState({media_name: "", r_content: "", m_type: ""});
         setImg({r_image: ""});
         alert("success!")
       })
       console.log(res);
       // .catch((err) => toast.error(err.response.data));
     setTimeout(() => history.push("/mypage"), 500);
-    }
+    
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-
-  const handleImgChange = (e) => {
-    console.log(e.target.files[0].name);
-    setImg(e.target.files[0].name);
-  }
-
 
   return (
     <div className={styles2.main_container}>
@@ -112,20 +104,9 @@ const Request = () => {
             </div>
 
             <div className={styles.write_item}>
-              <label htmlFor='id'>ID</label>
-              <input
-              type="text"
-              id="id"
-              name="id"
-              placeholder='ID'
-              vlaue={id}
-              onChange={handleInputChange}
-              />
-            </div>
-
-            <div className={styles.write_item}>
               <label htmlFor='m_type'>유형</label>
               <select name="m_type" onChange={handleInputChange} vlaue={m_type} id="m_type">
+                  <option value="none">요청할 컨텐츠 분류를 선택해주세요.</option>
                   <option value="드라마">드라마</option>
                   <option value="영화">영화</option>
                   <option value="예능">예능</option>

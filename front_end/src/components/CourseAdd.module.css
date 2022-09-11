@@ -1,4 +1,4 @@
-:global .course_list img {
+:global .course_click_btn {
     width: 45px;
     top: 6%;
     position: absolute;
@@ -33,4 +33,56 @@
     left: 128%;
     padding: 10px;
     box-sizing: border-box;
+    text-align: left;
+    padding: 10px 20px;
+}
+
+.course_modal_filter img{
+    width: 45px;
+}
+
+.course_modal_filter{
+    background: rgb(0 0 0 / 10%);
+    text-align: -webkit-center;
+    width: 70px;
+    border-radius: 50%;
+    font-size: 13px;
+    margin: 15px 20px 5px;
+}
+
+.course_modal input{
+    margin: 0;
+    width: 100%;
+    border: none;
+}
+
+.course_modal_header{
+    font-family: 'yg-jalnan';
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.course_modal_title{
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.course_modal_container{
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.course_modal_container input{
+    height: 220px;
+    width: 100%;
+}
+
+.btn_submit{
+    background: gainsboro;
+    cursor: pointer;
+}
+
+.btn_submit:hover{
+    background-color: rgb(0,0,0,10%);
 }

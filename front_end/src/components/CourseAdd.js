@@ -11,7 +11,6 @@ import addcourse from '../img/addcourse.png'
 import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
 
-
 // ㅈㄴ 노답버전
 
 const CourseAdd = (props) => {
@@ -27,39 +26,39 @@ const CourseAdd = (props) => {
     // courseAdd.js는 course에서 온 필터값 기반으로 api 요청
     // 이때 api는 즐겨찾기 결과 값 + 
 
-    const [modal1, setModal1] = useState(false);
+    // const [modal1, setModal1] = useState(false);
     const [changeNum1, setChangeNum1] = useState(false);
     const [result1, setResult1] = useState([]);
 
-    const [modal2, setModal2] = useState(false);
+    // const [modal2, setModal2] = useState(false);
     const [changeNum2, setChangeNum2] = useState(false);
     const [result2, setResult2] = useState([]);
 
-    const [modal3, setModal3] = useState(false);
+    // const [modal3, setModal3] = useState(false);
     const [changeNum3, setChangeNum3] = useState(false);
     const [result3, setResult3] = useState([]);
 
-    const [modal4, setModal4] = useState(false);
+    // const [modal4, setModal4] = useState(false);
     const [changeNum4, setChangeNum4] = useState(false);
     const [result4, setResult4] = useState([]);
 
-    const [modal5, setModal5] = useState(false);
+    // const [modal5, setModal5] = useState(false);
     const [changeNum5, setChangeNum5] = useState(false);
     const [result5, setResult5] = useState([]);
 
-    const [modal6, setModal6] = useState(false);
+    // const [modal6, setModal6] = useState(false);
     const [changeNum6, setChangeNum6] = useState(false);
     const [result6, setResult6] = useState([]);
     
-    const [modal7, setModal7] = useState(false);
+    // const [modal7, setModal7] = useState(false);
     const [changeNum7, setChangeNum7] = useState(false);
     const [result7, setResult7] = useState([]);
     
-    const [modal8, setModal8] = useState(false);
+    // const [modal8, setModal8] = useState(false);
     const [changeNum8, setChangeNum8] = useState(false);
     const [result8, setResult8] = useState([]);
 
-    const [modal9, setModal9] = useState(false);
+    // const [modal9, setModal9] = useState(false);
     const [changeNum9, setChangeNum9] = useState(false);
     const [result9, setResult9] = useState([]);
 
@@ -70,8 +69,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result1).length > 0){
-            setModal1(false); setChangeNum1(true)
-            // setCourselist(courselist => [...courselist, {one : result1} ]);
+            // setModal1(false); 
+            setChangeNum1(true);
+            // setCourselist(courselist => [...courselist, {1: result1}]);
             courselist[0] = result1;
             setCount(1);
         }
@@ -81,8 +81,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result2).length > 0){
-            setModal2(false); setChangeNum2(true)
-            // setCourselist(courselist => [...courselist, {two: result2}]);
+            // setModal2(false); 
+            setChangeNum2(true)
+            // setCourselist(courselist => [...courselist, {2: result2}]);
             courselist[1] = result2;
             setCount(2);
         }
@@ -90,8 +91,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result3).length > 0){
-            setModal3(false); setChangeNum3(true)
-            // setCourselist(courselist => [...courselist, {three: result3}]);
+            // setModal3(false); 
+            setChangeNum3(true)
+            // setCourselist(courselist => [...courselist, {3: result3}]);
             courselist[2] = result3;
             setCount(3);
         }
@@ -99,8 +101,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result4).length > 0){
-            setModal4(false); setChangeNum4(true)
-            // setCourselist(courselist => [...courselist, {four: result4}]);
+            // setModal4(false); 
+            setChangeNum4(true)
+            // setCourselist(courselist => [...courselist, {4: result4}]);
             courselist[3] = result4;
             setCount(4);
         }
@@ -108,8 +111,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result5).length > 0){
-            setModal5(false); setChangeNum5(true)
-            // setCourselist(courselist => [...courselist, {five: result5}]);
+            // setModal5(false); 
+            setChangeNum5(true)
+            // setCourselist(courselist => [...courselist, {5: result5}]);
             courselist[4] = result5;
             setCount(5);
         }
@@ -117,8 +121,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result6).length > 0){
-            setModal6(false); setChangeNum6(true)
-            // setCourselist(courselist => [...courselist, {six: result6}]);
+            // setModal6(false); 
+            setChangeNum6(true)
+            // setCourselist(courselist => [...courselist, {6: result6}]);
             courselist[5] = result6;
             setCount(6);
         }
@@ -126,8 +131,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result7).length > 0){
-            setModal7(false); setChangeNum7(true)
-            // setCourselist(courselist => [...courselist, {seven: result7}]);
+            // setModal7(false); 
+            setChangeNum7(true)
+            // setCourselist(courselist => [...courselist, {7: result7}]);
             courselist[6] = result7;
             setCount(7);
         }
@@ -135,8 +141,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result8).length > 0){
-            setModal8(false); setChangeNum8(true)
-            // setCourselist(courselist => [...courselist, {eight: result8}]);
+            // setModal8(false); 
+            setChangeNum8(true)
+            // setCourselist(courselist => [...courselist, {8: result8}]);
             courselist[7] = result8;
             setCount(8);
         }
@@ -144,8 +151,9 @@ const CourseAdd = (props) => {
 
     useEffect(() => {
         if (Object.values(result9).length > 0){
-            setModal9(false); setChangeNum9(true)
-            // setCourselist(courselist => [...courselist, {nine: result9}]);
+            // setModal9(false); 
+            setChangeNum9(true)
+            // setCourselist(courselist => [...courselist, {9: result9}]);
             courselist[8] = result9;
             setCount(9);
         }
@@ -155,9 +163,16 @@ const CourseAdd = (props) => {
         
         return(
             <div>
-                { activeCate && activeCate.map((obj) => {
-                    if (obj.flag === true)
-                    return <span key={obj.category}>#{obj.realCate}&nbsp;</span> 
+                {activeCate && activeCate.map((obj) => {
+                    if (obj.flag === true) {
+                    console.log(obj.category)
+                        return (
+                        <div className={styles.course_modal_filter}>
+                            <img src={require('../img/' + obj.category + '.png')} alt={obj.category} />
+                            <div key={obj.category}>#{obj.realCate}</div>
+                        </div>
+                        )
+                    }
                 })}
             </div>
         )
@@ -218,6 +233,7 @@ const CourseAdd = (props) => {
         })
         .then((res) => {
           alert("success!")
+          setcourseCreateModal(false)
         })
       }
 
@@ -268,7 +284,7 @@ const CourseAdd = (props) => {
 
 {/* 1 --------------------------------- */}
                 {!changeNum1 ?
-                <img src={click} alt="" />
+                <img className='course_click_btn' src={click} alt="" />
                 : null}
 
                 <CourseList listTop="2%">
@@ -288,7 +304,7 @@ const CourseAdd = (props) => {
                         
                         {currentPosts(cardList).map((card, index) => {
                             return (
-                                <div className="modal_course_container" card = {card}>
+                                <div key={card.l_num} className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult1}/>
                                 </div>
                             );
@@ -307,6 +323,7 @@ const CourseAdd = (props) => {
 {/* 2 --------------------------------- */}
             {changeNum1 ?
             <div className="course_list">
+                {/* <CourseNum className="add-course" onClick={() => {setModal2(!modal2)}}  backColor="#F7EA70" top = "14%"> */}
                 <CourseNum className="add-course" onClick={courseModalClick} backColor="#F7EA70" top = "14%">
                     {!changeNum2 ? "+" : "2"}
                 </CourseNum>
@@ -330,7 +347,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
-                {/* : null } */}
+                {/* : null }  */}
             </div>
             : null}
 
@@ -378,6 +395,7 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result4.category}</div>
                 </CourseList>
 
+                {/* { modal4 ?  */}
                 <ModalCourse ModalTop="36%">
                     {/* <span onClick={()=>{setModal4(false); setChangeNum4(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -392,6 +410,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -399,6 +418,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 ?
             <div className="course_list">
+                {/* <CourseNum className="add-course" onClick={() => {setModal5(!modal5)}} top="47%"> */}
                 <CourseNum className="add-course" onClick={courseModalClick} top="47%">
                     {!changeNum5 ? "+" : "5"}
                 </CourseNum>
@@ -408,7 +428,9 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result5.category}</div>
                 </CourseList>
 
+                {/* { modal5 ?  */}
                 <ModalCourse ModalTop="47%">
+                    {/* <span onClick={()=>{setModal5(false); setChangeNum5(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
                         {currentPosts(cardList).map((card, index) => {
@@ -420,6 +442,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -427,6 +450,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 ?
             <div className="course_list">
+                {/* <CourseNum className="add-course" backColor="#F7EA70" onClick={() => {setModal6(!modal6)}} top="58%"> */}
                 <CourseNum className="add-course" backColor="#F7EA70" onClick={courseModalClick} top="58%">
                     {!changeNum6 ? "+" : "6"}
                 </CourseNum>
@@ -436,6 +460,7 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result6.category}</div>
                 </CourseList>
 
+                {/* { modal6 ?  */}
                 <ModalCourse ModalTop="58%">
                     {/* <span onClick={()=>{setModal6(false); setChangeNum6(true)}}>모달</span>  */}
                     <ClickedCate/>
@@ -450,6 +475,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -466,7 +492,9 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result7.category}</div>
                 </CourseList>
 
+                {/* { modal7 ?  */}
                 <ModalCourse ModalTop="53%">
+                    {/* <span onClick={()=>{setModal7(false); setChangeNum7(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
@@ -479,6 +507,7 @@ const CourseAdd = (props) => {
                     </div>
                     
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -495,7 +524,9 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result8.category}</div>
                 </CourseList>
 
+                {/* { modal8 ?  */}
                 <ModalCourse ModalTop="53%">
+                    {/* <span onClick={()=>{setModal8(false); setChangeNum8(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
@@ -507,6 +538,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -514,6 +546,7 @@ const CourseAdd = (props) => {
 
             {changeNum1 && changeNum2 && changeNum3 && changeNum4 && changeNum5 && changeNum6 && changeNum7 && changeNum8 ?
             <div className="course_list">
+                 {/* <CourseNum className="add-course" onClick={() => {setModal9(!modal9)}} top="91%"> */}
                 <CourseNum className="add-course" onClick={courseModalClick} top="91%">
                     {!changeNum9 ? "+" : "9"}
                 </CourseNum>
@@ -523,7 +556,9 @@ const CourseAdd = (props) => {
                     <div className="course-add-cate">▶{result9.category}</div>
                 </CourseList>
 
+                {/* { modal9 ?  */}
                 <ModalCourse ModalTop="53%">
+                    {/* <span onClick={()=>{setModal9(false); setChangeNum9(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
                         {cardList.map((card, index) => {
@@ -535,6 +570,7 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 </ModalCourse>
+                {/* : null } */}
             </div>
             :null}
 
@@ -543,10 +579,10 @@ const CourseAdd = (props) => {
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>
-                글쓰기
+                <div className={styles.course_modal_header}>내 코스 만들기</div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.course_modal_title}>
-                        <label htmlFor='mc_title'>제목</label>
+                        <div htmlFor='mc_title'>제목</div>
                         <input
                         type="text"
                         id="mc_title"
@@ -558,7 +594,7 @@ const CourseAdd = (props) => {
                     </div>
 
                     <div className={styles.course_modal_container}>
-                        <label htmlFor='mc_content'>내용</label>
+                        <div htmlFor='mc_content'>내용</div>
                         <input className={styles.content}
                         type="text"
                         id="mc_content"

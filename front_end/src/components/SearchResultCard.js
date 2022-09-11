@@ -90,7 +90,7 @@ export default function SearchResultCard({card}) {
 
       <div className="search_detail">
           <div>
-            <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'}></img>
+            <img className={styles.sm_img} src={'/location/location_' + card.l_image + '.png'} alt=""></img>
           </div>
           <div className={styles.sm_title}>{card.p_name}</div>
           <ul>{card.address}</ul>

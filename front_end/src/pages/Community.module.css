@@ -75,6 +75,17 @@ button.active{
   margin-left: 75px;
 }
 
+#likelist_container{
+  overflow: auto;
+  height: 350px;
+}
+
+.likelist_map_container{
+  border: 1px solid black;
+  margin: 37px 70px 0;
+  height: 450px;
+}
+
 .title_like {
   font-family: 'yg-jalnan';
   text-align: left;

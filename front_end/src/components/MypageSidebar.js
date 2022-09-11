@@ -10,7 +10,7 @@ function Menu({ activeMenu }) {
       <div className={styles.user_img}>
       </div>
       <div className={styles.user_nickname}>
-        user 닉네임
+        {window.localStorage.getItem("nick_name")}
       </div>
       <div className={styles.my_list}>
         <Link

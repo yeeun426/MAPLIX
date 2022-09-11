@@ -252,19 +252,21 @@ app.post("/api/community/writepost", (req, res) =>{
   });
 });
 
-// app.post("/mypage/request", (req, res) =>{
-//   const media_name = req.body.media_name; 
-//   const r_content = req.body.r_content;
-//   const id = req.body.id; 
-//   const m_type = req.body.m_type; 
-//   const r_image = req.body.r_image; 
+app.post("/api/mypage/request", (req, res) =>{
+  const media_name = req.body.media_name; 
+  const r_content = req.body.r_content;
+  const id = req.body.id; 
+  const m_type = req.body.m_type; 
+  // const r_image = req.body.r_image; 
+  // const fd = req.body.fd;
   
+  // console.log(media_name, fd);
 
-//   const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`, `r_image`) VALUES (?,?,?,?,?);";
-//   db.query(sqlQuery, [media_name, r_content, id, m_type, r_image], (err, result) => {
-//       res.send('success!'); 
-//   });
-// });
+  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
+  db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
+      res.send('success!'); 
+  });
+});
 
 app.post("/api/checkid", (req, res) => {
   const id = req.body.id;
@@ -403,7 +405,7 @@ app.post("/api/stamp", (req, res) => {
 
   console.log(id, m_type, media_name)
   // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
   // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
   // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
   
