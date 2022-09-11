@@ -20,11 +20,13 @@ function Course(){
 
   
   const [result, setResult] = useState([]);
-  const [courselist, setCourselist] = useState([]);
+  // const [courselist, setCourselist] = useState([]);
   const [activeCate, setActiveCate] = useState(null);
   
   const [inputText, setInputText] = useState("");
   const [place, setPlace] = useState("");
+
+  let courselist = [{}, {}, {}, {},{}, {},{}, {},{}]
 
 
   const id = window.localStorage.getItem("id");
@@ -241,7 +243,7 @@ useEffect(()=> {
 
           <div className="course-sidebar">
             <div id="course-line"></div>
-            <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist}/>
+            <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} />
           </div>
           <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist}  />      
           {/* <div
