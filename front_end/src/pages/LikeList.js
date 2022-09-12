@@ -49,7 +49,7 @@ function MyPage() {
         즐겨찾기
       </div>
 
-      <div className={styles.like_list}>
+      <div className={styles.like_list} id={styles.likelist_container}>
           {post.map((card, index) => {
             return (
               
@@ -62,8 +62,11 @@ function MyPage() {
               </div>
             );
           })}
-
-        </div>
+      </div>
+      
+      <div className={styles.likelist_map_container}>
+          지도
+      </div>
       </Layout>
             
     </div>

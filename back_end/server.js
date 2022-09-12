@@ -36,7 +36,7 @@ app.get("/api/community", (req, res) => {
 app.get("/api/search/title", (req, res) => {
   const params = "%" + req.query.media + "%";
   //let sqlGet = "SELECT * FROM `test`.`media` WHERE `m_name2` LIKE ? OR `m_name` LIKE ?";
-  let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
+  let sqlGet = "SELECT L.l_num, L.description, L.l_image, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
   sqlGet += "JOIN test.place AS P ON L.p_num = P.p_num JOIN test.media AS M ON L.m_num = M.m_num "; 
   sqlGet += "WHERE L.m_num = any (SELECT media.m_num FROM test.media WHERE media.m_name LIKE ? OR media.m_name2 LIKE ?) ";
   

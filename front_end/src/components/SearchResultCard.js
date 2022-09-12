@@ -135,6 +135,7 @@ export default function SearchResultCard({card}) {
           <ul>{card.address}</ul>
           <ul>#{card.m_name}</ul>
           <ul>#{card.category}</ul>
+          <ul>#{card.description}</ul>
           <button className="modal_close_btn" onClick={(e)=>{e.target.parentElement.classList.remove('modalOn')}}>X</button>
       </div> 
     </div>

@@ -30,7 +30,7 @@ function Navbar() {
         <div className="navbar_my">
           {
             (function() {
-              if (window.localStorage.getItem("nick_name") != undefined) return (<li>{window.localStorage.getItem("nick_name")}님</li>);
+              if (window.localStorage.getItem("nick_name") != undefined) return (<li style={{marginRight: "10px"}}>{window.localStorage.getItem("nick_name")}님</li>);
             })()
           }
           <li><Link to ='/Request'>CONSULTATION</Link></li>
