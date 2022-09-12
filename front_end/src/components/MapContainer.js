@@ -9,37 +9,12 @@ const { kakao } = window;
 
 const MapContainer = ({activeCate, cardList, courselist}) => {
 
-    // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-  // var linePath = [
-  //   new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
-  //   new kakao.maps.LatLng(33.452739313807456, 126.5709308145358),
-  //   new kakao.maps.LatLng(33.45178067090639, 126.5726886938753) 
-  // ];
-
-  // 지도에 표시할 선을 생성합니다
-  // var polyline = new kakao.maps.Polyline({
-  //   path: linePath, // 선을 구성하는 좌표배열 입니다
-  //   strokeWeight: 5, // 선의 두께 입니다
-  //   strokeColor: '#FFAE00', // 선의 색깔입니다
-  //   strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  //   strokeStyle: 'solid' // 선의 스타일입니다
-  // });
-
-  useEffect(() => {
-    if (courselist.length > 0){
-      
-    }
-  }, [courselist])
-
-
-
  
   // 검색결과 배열에 담아줌W
   useEffect(() => {
     if (cardList ){
       if (activeCate){
         console.log('코스리스트', courselist)  
-
         var mapContainer = document.getElementById('kakaoMap'), // 지도를 표시할 div  
             mapOption = { 
                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -73,6 +48,7 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
             if (status === kakao.maps.services.Status.OK) {
               
               var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+              console.log(coords)
               if (i === cardList.length - 1){
                 position.push(result[0].y,  result[0].x)
               }
@@ -105,9 +81,25 @@ const MapContainer = ({activeCate, cardList, courselist}) => {
           });
         }
 
-        // var final_coords = new kakao.maps.LatLng(position[0], position[1]);
-
         // map.setCenter(final_coords);
+
+        var linePath = [];
+        linePath.push(new kakao.maps.LatLng(37.0064939748182, 127.873440340097));
+        linePath.push(new kakao.maps.LatLng(37.4399921311893, 126.378658948826));
+        linePath.push(new kakao.maps.LatLng(33.45178067090639, 126.5726886938753));
+
+        console.log(linePath)
+
+        // 지도에 표시할 선을 생성합니다
+    var polyline = new kakao.maps.Polyline({
+      path: linePath, // 선을 구성하는 좌표배열 입니다
+      strokeWeight: 5, // 선의 두께 입니다
+      strokeColor: '#FFAE00', // 선의 색깔입니다
+      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+      strokeStyle: 'solid' // 선의 스타일입니다
+  });
+
+  polyline.setMap(map);
 
         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
         function makeOverListener(map, marker, infowindow) {

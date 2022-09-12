@@ -20,7 +20,6 @@ const CourseAdd = (props) => {
     const {activeCate} = props;
     const {cardList} = props;
     const {courselist} = props;
-    const {setCourselist} = props;
 
     // 첫 페이지 들어오면 즐겨찾기 true로 초기값
     // 필터 클릭은 course.js에서 -> 필터 클릭하면 그 activecate 혹은 filtered값을 courseAdd.js로 넘겨주기
@@ -66,13 +65,17 @@ const CourseAdd = (props) => {
 
     const [count, setCount] = useState(0);
 
+    
+
     useEffect(() => {
         if (Object.values(result1).length > 0){
             // setModal1(false); 
             setChangeNum1(true);
-            setCourselist(courselist => [...courselist, {1: result1}]);
+            // setCourselist(courselist => [...courselist, {1: result1}]);
+            courselist[0] = result1;
             setCount(1);
         }
+        console.log(courselist);
         
     }, [result1])
 
@@ -80,7 +83,8 @@ const CourseAdd = (props) => {
         if (Object.values(result2).length > 0){
             // setModal2(false); 
             setChangeNum2(true)
-            setCourselist(courselist => [...courselist, {2: result2}]);
+            // setCourselist(courselist => [...courselist, {2: result2}]);
+            courselist[1] = result2;
             setCount(2);
         }
     }, [result2])
@@ -89,7 +93,8 @@ const CourseAdd = (props) => {
         if (Object.values(result3).length > 0){
             // setModal3(false); 
             setChangeNum3(true)
-            setCourselist(courselist => [...courselist, {3: result3}]);
+            // setCourselist(courselist => [...courselist, {3: result3}]);
+            courselist[2] = result3;
             setCount(3);
         }
     }, [result3])
@@ -98,7 +103,8 @@ const CourseAdd = (props) => {
         if (Object.values(result4).length > 0){
             // setModal4(false); 
             setChangeNum4(true)
-            setCourselist(courselist => [...courselist, {4: result4}]);
+            // setCourselist(courselist => [...courselist, {4: result4}]);
+            courselist[3] = result4;
             setCount(4);
         }
     }, [result4])
@@ -107,7 +113,8 @@ const CourseAdd = (props) => {
         if (Object.values(result5).length > 0){
             // setModal5(false); 
             setChangeNum5(true)
-            setCourselist(courselist => [...courselist, {5: result5}]);
+            // setCourselist(courselist => [...courselist, {5: result5}]);
+            courselist[4] = result5;
             setCount(5);
         }
     }, [result5])
@@ -116,7 +123,8 @@ const CourseAdd = (props) => {
         if (Object.values(result6).length > 0){
             // setModal6(false); 
             setChangeNum6(true)
-            setCourselist(courselist => [...courselist, {6: result6}]);
+            // setCourselist(courselist => [...courselist, {6: result6}]);
+            courselist[5] = result6;
             setCount(6);
         }
     }, [result6])
@@ -125,7 +133,8 @@ const CourseAdd = (props) => {
         if (Object.values(result7).length > 0){
             // setModal7(false); 
             setChangeNum7(true)
-            setCourselist(courselist => [...courselist, {7: result7}]);
+            // setCourselist(courselist => [...courselist, {7: result7}]);
+            courselist[6] = result7;
             setCount(7);
         }
     }, [result7])
@@ -134,7 +143,8 @@ const CourseAdd = (props) => {
         if (Object.values(result8).length > 0){
             // setModal8(false); 
             setChangeNum8(true)
-            setCourselist(courselist => [...courselist, {8: result8}]);
+            // setCourselist(courselist => [...courselist, {8: result8}]);
+            courselist[7] = result8;
             setCount(8);
         }
     }, [result8])
@@ -143,12 +153,14 @@ const CourseAdd = (props) => {
         if (Object.values(result9).length > 0){
             // setModal9(false); 
             setChangeNum9(true)
-            setCourselist(courselist => [...courselist, {9: result9}]);
+            // setCourselist(courselist => [...courselist, {9: result9}]);
+            courselist[8] = result9;
             setCount(9);
         }
     }, [result9])
 
     const ClickedCate = () => {
+        
         return(
             <div>
                 {activeCate && activeCate.map((obj) => {
@@ -181,7 +193,7 @@ const CourseAdd = (props) => {
         console.log(result1.p_name);
         // console.log(courselist.length);
         console.log(count);
-        if (id == undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
+        if (id === undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
         else return (
             setcourseCreateModal(!courseCreateModal)
         )
@@ -224,6 +236,9 @@ const CourseAdd = (props) => {
           setcourseCreateModal(false)
         })
       }
+
+      const [courseSea, setCourseSea] = useState(false);
+
 
         //cardList
         const [postsPerPage, setPostsPerPage] = useState(4); //페이지 당 게시물 수 
@@ -558,6 +573,9 @@ const CourseAdd = (props) => {
                 {/* : null } */}
             </div>
             :null}
+
+
+            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}} >코스 확인하기</button>
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>

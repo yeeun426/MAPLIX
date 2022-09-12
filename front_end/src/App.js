@@ -28,7 +28,7 @@ function App() {
 
       <Navbar />
       <Routes>
-          <Route exact path='/*' element={<Search/>}></Route>
+          <Route exact path='/' element={<Search/>}></Route>
           <Route path='/course' element={<Course/>}></Route>
           <Route path='/recommend' element={<Recommend/>}></Route>
           <Route path='/community/*' element={<Community/>}></Route>
