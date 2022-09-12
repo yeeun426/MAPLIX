@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './SearchMain.css';
 import area from "../img/cansearch.png";
 import Jeonju from "../img/Jeonju.png";
@@ -13,9 +13,9 @@ import Map from "../img/Map.png";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import Footer from '../components/Footer'
-import MediaCourse from '../data/RecommendCourse.json';
+import RecommendMediaCourse from '../components/RecommendMediaCourse';
 
-function Search() {
+function Search({id}) {
 
   const navigate = useNavigate(); // Link 같은 역할
 
@@ -85,42 +85,57 @@ function Search() {
             <button>
               <img src={Jeonju} alt = "Jeonju" />
             </button>
-            {/* <div> */}
-              {/* {MediaCourse.map((course) => (
-                <div key={course.id}>
-                  {course.id}
-                </div>
-              ))} */}
-            {/* </div> */}
+            <RecommendMediaCourse id={2} />
           </div>
 
-          <button className='third_img'>
-            <img src={Busan} alt = "Busan" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Busan} alt = "Busan" />
+            </button>
+            <RecommendMediaCourse id={3} />
+          </div>
 
-          <button className='third_img'>
-            <img src={Suwon} alt = "Suwon" />
-          </button>
+          <div className='third_img'>
+            <button>
+             <img src={Suwon} alt = "Suwon" />
+            </button>
+            <RecommendMediaCourse id={4} />
+          </div>
 
-          <button className='third_img'>
-            <img src={Jeju} alt = "Jeju" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Jeju} alt = "Jeju" />
+            </button>
+            <RecommendMediaCourse id={1} />
+          </div>
 
-          <button className='third_img'>
-            <img src={Gangneung} alt = "Gangneung" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Gangneung} alt = "Gangneung" />
+            </button>
+            <RecommendMediaCourse id={5} />
+          </div>
 
-          <button className='third_img'>
-            <img src={Daegu} alt = "Daegu" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Daegu} alt = "Daegu" />
+            </button>
+            <RecommendMediaCourse id={6} />
+          </div>
 
-          <button className='third_img'>
-            <img src={Pohang} alt = "Pohang" />
-          </button>
-
-          <button className='third_img'>
-            <img src={Incheon} alt = "Incheon" />
-          </button>
+          <div className='third_img'>
+            <button>
+              <img src={Pohang} alt = "Pohang" />
+              <RecommendMediaCourse id={7} />
+            </button>
+          </div>
+          
+          <div className='third_img'>
+            <button>
+              <img src={Incheon} alt = "Incheon" />
+            </button>
+            <RecommendMediaCourse id={8} />
+          </div>       
         </div>
       </div>
 

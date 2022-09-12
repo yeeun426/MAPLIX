@@ -70,3 +70,55 @@
     font-size: 16px;
     padding: 10px 20px;
 }
+
+.recommend_media_item{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.recommend_media_item img{
+        width: 100px;
+        height: 100px;
+        margin-top: 0px;
+}
+
+.third_img{
+    position: relative;
+}
+
+.RecommendMediaCourse{
+    position: absolute;
+    display: none;
+    z-index: 1;
+    background: #eff1f0;
+    padding: 10px;
+    border-radius: 4px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.third_img:hover .RecommendMediaCourse{
+    display: block !important;
+}
+
+.third_img img:hover{
+    cursor: pointer;
+}
+
+.recommend_media_name{
+    font-size: 14px;
+    font-family: 'yg-jalnan';
+    text-align: center;
+}
+
+.recommend_media_txt{
+    font-size: 13px;
+    text-align: left;
+    word-break: keep-all;
+    align-self: center;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.recommend_media_location{
+}
