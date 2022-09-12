@@ -40,12 +40,17 @@ export default function CommunityCard({card, openModal}) {
     setCourseModal(!courseModal);
   }
 
+  const handleImgError = (e) => {
+    e.preventDefault();
+    e.target.src = "/favicon.ico"
+  }
+
   return (
     <div className={styles.MyCourseCard}>
       {/* <div className={styles.likeList_container} onClick={() => {setCourseModal(!courseModal)}}>     */}
       <div className={styles.likeList_container} onClick={clickCourseModal}>    
           <div className={styles.like_img}>
-            이미지 넣을 공간
+          <img className={styles.like_img} src={'http://localhost:8000' + card.mc_image} onError={handleImgError}></img>
           </div> 
 
           <div className={styles.like_txt}>
