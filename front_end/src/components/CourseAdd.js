@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 
 import click from '../img/click.png';
 import addcourse from '../img/addcourse.png'
+import checkcourse from '../img/checkcourse.png'
 
 import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
@@ -678,7 +679,7 @@ const CourseAdd = (props) => {
             :null}
 
 
-            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}} >코스 확인하기</button>
+            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}}><img src={checkcourse} alt="checkcourse" /></button>
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>
@@ -709,8 +710,8 @@ const CourseAdd = (props) => {
                     </div>
 
                     <div className={styles.write_item}>
-                        <label htmlFor='cm_image'>이미지</label>
-                        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
+                        <label htmlFor='cm_image' style={{fontSize:"14px"}}>이미지</label>
+                        <input style={{padding:"0px"}} type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
                     </div>
                     <input className={styles.btn_submit} type="submit" value="등록" />        
                 </form>

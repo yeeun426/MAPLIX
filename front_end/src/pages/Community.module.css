@@ -81,7 +81,7 @@ button.active{
 }
 
 .likelist_map_container{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 37px 70px 0;
   height: 450px;
 }

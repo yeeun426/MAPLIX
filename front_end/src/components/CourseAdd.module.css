@@ -22,10 +22,26 @@
     box-sizing: border-box;
 }
 
+.course_sea_btn img{
+    width: 100%;
+}
+
+.course_sea_btn{
+    background: #e0edf1;
+    bottom: 90px;    
+    position: absolute;
+    right: -74px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
 .course_modal{
     background-color: #e0edf1;
     width: 400px;
-    height: 470px;
+    height: 515px;
     box-shadow: 5px 3px 5px #0000003d;
     border-radius: 5px;
     position: absolute;
