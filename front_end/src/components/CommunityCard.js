@@ -11,6 +11,11 @@ export default function CommunityCard({card}) {
   //     const clickId = Number (e.currentTarget.id)
   // }
 
+  const handleImgError = (e) => {
+    e.preventDefault();
+    e.target.src = "/favicon.ico"
+  }
+
   return (
     <div className={styles.card_container} id={card.cm_num}>    
         <div className={styles.card_title}>{card.cm_title}</div>
@@ -21,7 +26,7 @@ export default function CommunityCard({card}) {
             </ol>
 
             <div className={styles.img_item}>
-              임시 이미지123
+              <img className={styles.img_item} src={'http://localhost:8000' + card.cm_image} onError={handleImgError}></img>
             </div>
         </div>
 
