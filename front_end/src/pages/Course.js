@@ -254,7 +254,7 @@ useEffect(()=> {
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} />
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} />      
+          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} pagename={'Course'}/>      
           {/* <div
           id="kakaoMap"
           style={{
