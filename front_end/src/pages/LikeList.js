@@ -26,7 +26,7 @@ function MyPage() {
   // 현재상태값, 그 상태값을 갱신해주는 함수 / post 초기값 ( 빈배열 )
   const [post, setPost] = useState([]);
   //const [filtered, setFiltered] = useState([]);
-  //const [activeCate, setActiveCate] = useState("전체");
+  const [activeCate, setActiveCate] = useState([]);
 
   const [modal, setModal] = useState(false);
   
@@ -67,8 +67,7 @@ function MyPage() {
       </div>
       
       <div className={styles.likelist_map_container}>
-          지도
-          <MapContainer cardList={post} courselist={courselist}/>
+          <MapContainer cardList={post} courselist={courselist} activeCate={activeCate} pagename={'LikeList'}/>
       </div>
       </Layout>
             
