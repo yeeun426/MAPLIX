@@ -46,20 +46,28 @@ const Stamp = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const res = axios.post("http://localhost:8000/api/stamp", {
-        media_name,
-        id,
-        m_type
-      })
-      .then((res) => {
-        alert("success!")
-        console.log(res.data[0])
-        setPoster({poster: res.data[0].poster})
-        setMNum({m_num: res.data[0].m_num})
-        setState(res.data[0]);
-        setPost(res.data);
-        console.log(poster, m_num);
-      })
+      console.log(m_type, media_name)
+      if (m_type == "") {
+        alert("컨텐츠 분류를 선택해주세요")
+      }
+      else if (media_name == "") {
+        alert("컨텐츠 제목을 입력해주세요")
+      }
+      else {
+        const res = axios.post("http://localhost:8000/api/stamp", {
+          media_name,
+          id,
+          m_type
+        })
+        .then((res) => {
+          console.log(res.data[0])
+          setPoster({poster: res.data[0].poster})
+          setMNum({m_num: res.data[0].m_num})
+          setState(res.data[0]);
+          setPost(res.data);
+          console.log(poster, m_num);
+        })
+      }
     }
 
     const [post, setPost] = useState([]);

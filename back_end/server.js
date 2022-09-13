@@ -89,12 +89,14 @@ app.get("/api/search", (req, res) => {
 // 드라마명(m_name <- media) (location과 m_num으로 조인)
 app.post("/api/likelist", (req, res) => {
   const id = req.body.id;
+  console.log(id)
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
   let sqlGet = " SELECT L.*, m_name, m_type, p_name, address, category, P.p_y, P.p_x FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
   sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
   // location (미디어num, 장소num)에서 미디어 num
   db.query(sqlGet, [id], (error, result) => {
+    console.log(error)
     console.log(result);
     res.send(result);
   });
@@ -448,11 +450,11 @@ app.post("/api/stamp", (req, res) => {
 
   console.log(id, m_type, media_name)
   // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? AND M.m_type = ? AND (M.m_name like ? OR M.m_name2 like ?));";
   // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
   // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
   
-  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
+  db.query(sqlQuery, [id, m_type, media_name, media_name], (error, result) => {
     console.log(result);
     res.send(result);
   });

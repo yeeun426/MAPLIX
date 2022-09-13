@@ -9,7 +9,7 @@ const { kakao } = window;
 function MyPage() {
   const id = window.localStorage.getItem("id");
   const [courselist, setCourselist] = useState([])
-
+  console.log(id)
   // 데이터 가져오기
   const loadPost = async () => {
     const response = await axios.post('http://localhost:8000/api/likelist'
