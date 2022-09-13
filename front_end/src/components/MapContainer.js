@@ -1,122 +1,157 @@
 import React, { useEffect, useState } from 'react';
 import { MdSmartDisplay } from 'react-icons/md';
 import markerimg from '../img/marker.png'
+import markerone from '../img/marker_one.png'
+import markertwo from '../img/marker_two.png'
+import markerthree from '../img/marker_three.png'
 import '../pages/Course.css'
 const { kakao } = window;
 
 // if activecate : setcardlist느낌으로
 
 
-const MapContainer = ({activeCate, cardList, courselist}) => {
-
+const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
  
   // 검색결과 배열에 담아줌W
   useEffect(() => {
+    
     if (cardList ){
       if (activeCate){
-        console.log('코스리스트', courselist)  
+        console.log('코스리스트', courselist)
+
         var mapContainer = document.getElementById('kakaoMap'), // 지도를 표시할 div  
-            mapOption = { 
-                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 12 // 지도의 확대 레벨
-            };
+        mapOption = { 
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 12 // 지도의 확대 레벨
+        };
 
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-        var imageSrc = markerimg, // 마커이미지의 주소입니다    
+    
+        var imageSrc = markerimg, // 마커이미지의 주소입니다 
+        
         imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
-        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        imageOption = {offset: new kakao.maps.Point(10, 10)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
+
+        var m_one = markerone;
+        var m_two = markertwo;
+        var m_three = markerthree;
         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
-        // markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-
-        // // 마커를 생성합니다
-        // var marker = new kakao.maps.Marker({
-        //   position: markerPosition,
-        //   image: markerImage // 마커이미지 설정 
-        // });
-
-        var position = []
-
-        var geocoder = new kakao.maps.services.Geocoder();
+        var marker1 = new kakao.maps.MarkerImage(m_one, imageSize, imageOption)
+        var marker2 = new kakao.maps.MarkerImage(m_two, imageSize, imageOption)
+        var marker3 = new kakao.maps.MarkerImage(m_three, imageSize, imageOption)
 
         for (let i=0; i<cardList.length; i++) {
-
-          geocoder.addressSearch(cardList[i].address, function(result, status) {
-            // 정상적으로 검색이 완료됐으면 
-            if (status === kakao.maps.services.Status.OK) {
-              
-              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-              console.log(coords)
-              if (i === cardList.length - 1){
-                position.push(result[0].y,  result[0].x)
-              }
-              // 결과값으로 받은 위치를 마커로 표시합니다
-              var marker = new kakao.maps.Marker({
-                map: map,
-                position: coords,
-                image: markerImage // 마커이미지 설정 
-              });
-
-              var content = '<div className="customoverlay">' +
-              '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-              '    <span>구의야구공원</span>' +
-              '  </a>' +
-              '</div>';
-
-              // 마커에 표시할 인포윈도우를 생성합니다 
-                var infowindow = new kakao.maps.InfoWindow({
-                //content: positions[i].content // 인포윈도우에 표시할 내용
-                // content: content
-                
-                content: '<div class="infowindow_text" style="width:170px;text-align:center;padding:6px 0;">'+ cardList[i].p_name +'</div>' // 인포윈도우에 표시할 내용
-              });
-              //infowindow.open(map, marker);
-              kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-              kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-              //지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-              map.setCenter(coords)
-            }
-          });
+          var coords = new kakao.maps.LatLng(cardList[i].p_y, cardList[i].p_x)
+          displayMarker(cardList[i])
         }
 
-        // map.setCenter(final_coords);
+        //map.setCenter(new kakao.maps.LatLng(cardList[i].p_y, cardList[i].p_x))
 
+        // 지도에 마커를 표시하는 함수입니다    
+        function displayMarker(data) { 
+          var marker = new kakao.maps.Marker({
+              map: map,
+              position: new kakao.maps.LatLng(data.p_y, data.p_x)
+          });
+
+          // var content = '<div class="customoverlay">' +
+          //   '  <a>버튼' +
+          //   '    <span class="title">'+ data.p_name +'</span>' +
+          //   '  </a>' +
+          //   ' <button on></button>'
+          //   '</div>';
+          // content HTMLElement 생성
+          var content = document.createElement('div');
+          content.className = 'customoverlay'
+
+          var content2 = document.createElement('div');
+          content2.className = 'title'
+          content2.appendChild(document.createTextNode(data.p_name));
+
+          content.appendChild(content2);
+         
+          var closeBtn = document.createElement('button');
+          closeBtn.appendChild(document.createTextNode('X'));
+          // 닫기 이벤트 추가
+          closeBtn.onclick = function() {
+              overlay.setMap(null);
+          };
+
+          content.appendChild(closeBtn);
+
+          var overlay = new kakao.maps.CustomOverlay({
+              map: map,
+              content: content,
+              yAnchor: 0.2,
+              position: marker.getPosition()
+          });
+
+          overlay.setMap(null);
+          kakao.maps.event.addListener(marker, 'click', function() {
+              overlay.setMap(map);
+          });
+
+          //map.setCenter(new kakao.maps.LatLng(data.p_y, data.p_x));
+        }        
+        
         var linePath = [];
-        linePath.push(new kakao.maps.LatLng(37.0064939748182, 127.873440340097));
-        linePath.push(new kakao.maps.LatLng(37.4399921311893, 126.378658948826));
-        linePath.push(new kakao.maps.LatLng(33.45178067090639, 126.5726886938753));
+
+        console.log('코스 들어옴', courselist)
+      
+        for (let i=0; i<courselist.length; i++) {
+          if (courselist[i].course !== null){
+            linePath.push(new kakao.maps.LatLng(courselist[i].course.p_y, courselist[i].course.p_x))
+
+            var curimg;
+            if (i === 0){
+              curimg = marker1;
+            }else if (i === 1){
+              curimg = marker2;
+            }else if (i === 2){
+              curimg = marker3;
+            }
+            // }else if (i === 3){
+            //   curimg = marker4;
+            // }else if (i === 4){
+            //   curimg = marker5;
+            // }else if (i === 5){
+            //   curimg = marker6;
+            // }else if (i === 6){
+            //   curimg = marker7;
+            // }else if (i === 7){
+            //   curimg = marker8;
+            // }else if (i === 8){
+            //   curimg = marker9;
+            // }
+            
+            var coursemarker = new kakao.maps.Marker({
+              map: map, // 마커를 표시할 지도
+              position: new kakao.maps.LatLng(courselist[i].course.p_y, courselist[i].course.p_x), // 마커의 위치
+              image : curimg
+            });
+
+            coursemarker.setMap(map)
+          }
+          
+          
+        }  
 
         console.log(linePath)
 
-        // 지도에 표시할 선을 생성합니다
-    var polyline = new kakao.maps.Polyline({
-      path: linePath, // 선을 구성하는 좌표배열 입니다
-      strokeWeight: 5, // 선의 두께 입니다
-      strokeColor: '#FFAE00', // 선의 색깔입니다
-      strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-      strokeStyle: 'solid' // 선의 스타일입니다
-  });
+        var polyline = new kakao.maps.Polyline({
+          path: linePath, // 선을 구성하는 좌표배열 입니다
+          strokeWeight: 5, // 선의 두께 입니다
+          strokeColor: '#d95050', // 선의 색깔입니다
+          strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+          strokeStyle: 'solid' // 선의 스타일입니다
+        });
 
-  polyline.setMap(map);
-
-        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-        function makeOverListener(map, marker, infowindow) {
-          return function() {
-              infowindow.open(map, marker);
-          };
-        }
-
-        // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-        function makeOutListener(infowindow) {
-          return function() {
-              infowindow.close();
-          };
-        }        
+        polyline.setMap(map);
       } 
     } 
-  });
+  }, );
 
     return (
         <div

@@ -307,7 +307,7 @@ const currentPosts = (posts) => {
                 paginate={setCurrentPage}
               />
         </div>
-        <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist}/>
+        <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist} pagename={'SearchPage'}/>
 
 
         </div>

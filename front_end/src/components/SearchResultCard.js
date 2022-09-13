@@ -112,7 +112,7 @@ export default function SearchResultCard({card}) {
                 {/* <ul>#{card.category}</ul> */}
                 {
                 (function() {
-                  if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
+                  if (check_like === true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
                   else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
                 })()
                 }
