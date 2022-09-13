@@ -244,12 +244,20 @@ const CourseAdd = (props) => {
             'content-type': 'multipart/form-data'
           }
         }
-        axios.post("http://localhost:8000/api/coursecreate", formData, config)
-        .then((response) => {
-          console.log(response);
-          alert("나만의 코스 생성 완료")
-          setcourseCreateModal(false)
-        })
+        if (mc_title == "") {
+            alert("제목을 입력해주세요.")
+        }
+        else if (mc_content == "") {
+            alert("내용을 입력해주세요.")
+        }
+        else {
+            axios.post("http://localhost:8000/api/coursecreate", formData, config)
+            .then((response) => {
+                console.log(response);
+                alert("내 코스 만들기 완료")
+                setcourseCreateModal(false)
+            })
+        }
       };
 
       const [courseSea, setCourseSea] = useState(false);

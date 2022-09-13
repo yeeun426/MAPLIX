@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const WritePost = () => {
-  const writer = window.localStorage.getItem("id");
+  const writer = window.localStorage.getItem("nick_name");
 
   const [state, setState] = useState(initialState);
   const [img, setImg] = useState({file: null, fileName:""});
@@ -24,24 +24,42 @@ const WritePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('image', img.file);
-    formData.append('cm_content', cm_content);
-    formData.append('cm_title', cm_title);
-    formData.append('writer', writer);
-    formData.append('cm_type', cm_type);
-    
-    console.log(cm_title, cm_content, writer, cm_type, img);
-
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
+    if (cm_title == "") {
+      alert("제목을 입력해주세요.")
     }
-    axios.post("http://localhost:8000/api/community/writepost", formData, config)
-    .then((response) => {
-      console.log(response);
-    })
+    else if (cm_content == "") {
+      alert("내용을 입력해주세요.")
+    }
+    else if (cm_type == "") {
+      alert("유형을 선택해주세요.")
+    }
+    else {
+      if (img.file == null){
+        axios.post("http://localhost:8000/api/community/writepost", {cm_title, cm_content, writer, cm_type})
+        .then((response) => {
+          console.log(response);
+        })
+      }
+      else {
+        const config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        }
+
+        const formData = new FormData();
+        formData.append('image', img.file);
+        formData.append('cm_content', cm_content);
+        formData.append('cm_title', cm_title);
+        formData.append('writer', writer);
+        formData.append('cm_type', cm_type);
+
+        axios.post("http://localhost:8000/api/community/writepostimg", formData, config)
+        .then((response) => {
+          console.log(response);
+        })
+      }
+    } 
   };
 
   const handleInputChange = (e) => {
@@ -99,6 +117,7 @@ const WritePost = () => {
           <div className={styles.write_item}>
             <label htmlFor='cm_type'>유형</label>
             <select name="cm_type" onChange={handleInputChange} value={cm_type} id="cm_type">
+                <option value="none">커뮤니티 카테고리를 선택해주세요.</option>
                 <option value="동행">동행</option>
                 <option value="질문">질문</option>
                 <option value="자유">자유</option>

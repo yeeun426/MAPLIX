@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './SearchMain.css';
-import area from "../img/cansearch.png";
+import area from "../img/area.png";
+import drama from "../img/drama.png";
+import movie from "../img/movie.png";
+import entertainment from "../img/entertainment.png";
 import Jeonju from "../img/Jeonju.png";
 import Busan from "../img/Busan.png";
 import Suwon from "../img/Suwon.png";
@@ -14,6 +17,12 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import Footer from '../components/Footer'
 import RecommendMediaCourse from '../components/RecommendMediaCourse';
+import MediaCard from "../components/MediaCard";
+import styles2 from "../components/CommunityCard.module.css";
+
+
+import axios from "axios";
+
 
 function Search({id}) {
 
@@ -21,6 +30,12 @@ function Search({id}) {
 
   const [searchKW, setSearchKW ] = useState('');
   const [activeSearchCate, setActiveSearchCate] = useState('title'); // title이랑 area클릭하는거..?
+
+  const [modal, setModal] = useState(false);
+  const [mediaModal, setMediaModal] = useState(false);
+  const [areaModal, setAreaModal] = useState(false);
+  const [mediaType, setMediaType] = useState(null);
+  const [media, setMedia] = useState([]);
 
   const handleUserInput = (e) => {
     e.preventDefault();
@@ -43,6 +58,20 @@ function Search({id}) {
     e.preventDefault();
     setActiveSearchCate(e.target.id);
     console.log(activeSearchCate);
+  }
+
+  const onClickMedia = (m_type) => {
+    setAreaModal(false)
+    axios.post("http://localhost:8000/api/media", {m_type})
+      .then(function (response) {
+        console.log(response.data);
+        setMedia(response.data)
+      })
+    setMediaModal(!mediaModal)
+  }
+
+  const onClickArea = (area) => {
+    navigate(`/search/${activeSearchCate}/${area}`);
   }
 
   return(
@@ -74,7 +103,49 @@ function Search({id}) {
 
       <div className='second_container'>
         everything you can search for
-        <img src={area} alt = "cansearch" />
+        <img src={drama} alt = "drama" onClick={() => {onClickMedia("드라마")}}/>
+        <img src={movie} alt = "movie" onClick={() => {onClickMedia("영화")}}/>
+        <img src={entertainment} alt = "entertainment" onClick={() => {onClickMedia("예능")}}/>
+        <img src={area} alt = "area" onClick={() => {
+          setMediaModal(false)
+          setAreaModal(!areaModal)
+          setActiveSearchCate('area')
+          }}/>
+
+        {mediaModal ? 
+          <div className='media_modal'>
+            <ul>목록</ul>
+
+            <div>
+                {media.map((drama, index)=>(
+                  <MediaCard key={drama.m_num} card={drama} 
+                          openModal={ () => setModal(true)} />
+                ))}
+            </div>
+          </div>
+        :null}
+
+        {areaModal ? 
+          <div className='media_modal'>
+            <ul>목록</ul>
+            <div onClick={() => (onClickArea("서울"))}>서울</div>
+            <div onClick={() => (onClickArea("경기"))}>경기</div>
+            <div onClick={() => (onClickArea("강원"))}>강원</div>
+            <div onClick={() => (onClickArea("충북"))}>충북</div>
+            <div onClick={() => (onClickArea("충남"))}>충남</div>
+            <div onClick={() => (onClickArea("전북"))}>전북</div>
+            <div onClick={() => (onClickArea("전남"))}>전남</div>
+            <div onClick={() => (onClickArea("경북"))}>경북</div>
+            <div onClick={() => (onClickArea("경남"))}>경남</div>
+            <div onClick={() => (onClickArea("제주"))}>제주</div>
+            <div onClick={() => (onClickArea("부산"))}>부산</div>
+            <div onClick={() => (onClickArea("대구"))}>대구</div>
+            <div onClick={() => (onClickArea("인천"))}>인천</div>
+            <div onClick={() => (onClickArea("광주"))}>광주</div>
+            <div onClick={() => (onClickArea("대전"))}>대전</div>
+            <div onClick={() => (onClickArea("울산"))}>울산</div>
+          </div>
+          : null}
       </div>
 
       <div className='third_container'>

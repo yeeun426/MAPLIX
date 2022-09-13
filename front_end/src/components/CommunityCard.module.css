@@ -239,3 +239,7 @@ ol, ul {
   padding: 20px;
   box-sizing: border-box;
 }
+.MediaCard {
+  display: flex;
+  position: relative;
+}

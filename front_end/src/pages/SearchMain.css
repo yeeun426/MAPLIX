@@ -14,6 +14,7 @@
     max-width: fit-content;
     align-self: center;
     margin-top: 18px;
+    z-index: 1;
 }
 
 .third_container {
@@ -121,4 +122,12 @@
 }
 
 .recommend_media_location{
+}
+
+.media_modal {
+  background-color: #e0edf1;
+  box-shadow: 5px 3px 5px #0000003d;
+  border-radius: 30px;
+  position: absolute;
+  z-index: 1;
 }

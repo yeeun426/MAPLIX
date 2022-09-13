@@ -240,7 +240,31 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.post("/api/community/writepost", upload.single('image'), (req, res) =>{
+app.post("/api/media", (req, res) => {
+  const m_type = req.body.m_type;
+
+  const sqlQuery = "SELECT * FROM test.media WHERE m_type = ?"
+
+  db.query(sqlQuery, [m_type], (err, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
+app.post("/api/community/writepost", (req, res) =>{
+  const cm_title = req.body.cm_title; 
+  const cm_content = req.body.cm_content;
+  const writer = req.body.writer; 
+  const cm_type = req.body.cm_type; 
+  
+
+  const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`) VALUES (?,?,?,?);";
+  db.query(sqlQuery, [cm_title, cm_content, writer, cm_type], (err, result) => {
+      res.send('success!'); 
+  });
+});
+
+app.post("/api/community/writepostimg", upload.single('image'), (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
   const writer = req.body.writer; 
@@ -256,7 +280,7 @@ app.post("/api/community/writepost", upload.single('image'), (req, res) =>{
 
 
 
-app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
+app.post("/api/mypage/requestimg", upload.single('image'), (req, res) =>{
   const media_name = req.body.media_name; 
   const r_content = req.body.r_content;
   const id = req.body.id; 
@@ -275,21 +299,17 @@ app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
 });
 
 
-// app.post("/api/mypage/request", (req, res) =>{
-//   const media_name = req.body.media_name; 
-//   const r_content = req.body.r_content;
-//   const id = req.body.id; 
-//   const m_type = req.body.m_type; 
-//   // const r_image = req.body.r_image; 
-//   // const fd = req.body.fd;
-  
-//   // console.log(media_name, fd);
+app.post("/api/mypage/request", (req, res) =>{
+  const media_name = req.body.media_name; 
+  const r_content = req.body.r_content;
+  const id = req.body.id; 
+  const m_type = req.body.m_type; 
 
-//   // const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
-//   // db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
-//   //     res.send('success!'); 
-//   // });
-// });
+  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
+  db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
+      res.send('success!'); 
+  });
+});
 
 app.post("/api/checkid", (req, res) => {
   const id = req.body.id;
@@ -513,55 +533,9 @@ app.post("/api/stampcheck", (req, res) => {
   db.query(sqlQuery, [id, m_num, poster], (err, result) => {
     console.log(result);
     res.send(result);
-  })
-
-  // if (part == 1) {
-  //   const sqlQuery =  "SELECT * FROM test.stamp WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 2) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 3) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 4) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }   
+  })  
 })
 
-app.post("/api/community/writepost", (req, res) =>{
-  const cm_title = req.body.cm_title; 
-  const cm_content = req.body.cm_content;
-  const writer = req.body.writer; 
-  const cm_type = req.body.cm_type; 
-  const cm_image = req.body.cm_image; 
-  
-
-  const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`, `cm_image`) VALUES (?,?,?,?,?);";
-  db.query(sqlQuery, [cm_title, cm_content, writer, cm_type, cm_image], (err, result) => {
-      res.send('success!'); 
-  });
-});
 
 app.get("/api/locationimage", (req, res) => {
   var Folder = '../front_end/public/location/';

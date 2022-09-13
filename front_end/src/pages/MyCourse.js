@@ -35,7 +35,7 @@ function MyCourse() {
 
   return (
     <>
-     {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null}
+     {/* {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null} */}
     <div className={styles.main_container}>
       <Layout activeMenu="mypage">
       <div className={styles.title_like}>
