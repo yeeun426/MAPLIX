@@ -17,16 +17,25 @@ import axios from "axios";
 const { kakao } = window;
 function Course(){
 
+  const initialCourse = [
+    { order : 1 , course : null },
+    { order : 2 , course : null },
+    { order : 3 , course : null },
+    { order : 4 , course : null },
+    { order : 5 , course : null },
+    { order : 6 , course : null },
+    { order : 7 , course : null },
+    { order : 8 , course : null },
+    { order : 9 , course : null },
+  ];
+
   
   const [result, setResult] = useState([]);
-  // const [courselist, setCourselist] = useState([]);
+  const [courselist, setCourselist] = useState(initialCourse);
   const [activeCate, setActiveCate] = useState(null);
   
   const [inputText, setInputText] = useState("");
   const [place, setPlace] = useState("");
-
-  let courselist = [{}, {}, {}, {},{}, {},{}, {},{}]
-
 
   const id = window.localStorage.getItem("id");
 
@@ -94,7 +103,7 @@ const loadData = () => {
           console.log(data)
           const newnew = []
           for (var a=0; a < data.length; a++){
-            newnew.push({address : data[a].address_name, category : nowcate, p_name : data[a].place_name, p_num : a})
+            newnew.push({address : data[a].address_name, category : nowcate, p_name : data[a].place_name, p_num : a, p_y : data[a].y, p_x : data[a].x})
           }
           setCardList(newnew);
           
@@ -243,9 +252,9 @@ useEffect(()=> {
 
           <div className="course-sidebar">
             <div id="course-line"></div>
-            <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} />
+            <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} />
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist}  />      
+          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} />      
           {/* <div
           id="kakaoMap"
           style={{

@@ -18,9 +18,11 @@ export default function SearchResultCard({card}) {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
     , {id, l_num}
     );
-    // console.log(response.data[0].l_num);
-    if (response.data[0].l_num === l_num) 
-      return setLike(true);
+    if (response.data[0] != null){
+      if (response.data[0].l_num === l_num) 
+        return setLike(true);
+    }
+    
   };
 
 
@@ -80,7 +82,7 @@ export default function SearchResultCard({card}) {
                 {/* <ul>#{card.category}</ul> */}
                 {
                 (function() {
-                  if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
+                  if (check_like === true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
                   else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
                 })()
                 }

@@ -20,6 +20,7 @@ const CourseAdd = (props) => {
     const {activeCate} = props;
     const {cardList} = props;
     const {courselist} = props;
+    const {setCourselist} = props;
 
     // 첫 페이지 들어오면 즐겨찾기 true로 초기값
     // 필터 클릭은 course.js에서 -> 필터 클릭하면 그 activecate 혹은 filtered값을 courseAdd.js로 넘겨주기
@@ -64,15 +65,22 @@ const CourseAdd = (props) => {
 
 
     const [count, setCount] = useState(0);
-
-    
+       
 
     useEffect(() => {
         if (Object.values(result1).length > 0){
             // setModal1(false); 
             setChangeNum1(true);
-            // setCourselist(courselist => [...courselist, {1: result1}]);
-            courselist[0] = result1;
+
+            const newnew = courselist.map((data) => { 
+                if (data.order === 1){
+                    return {...data, course : result1}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(1);
         }
         console.log(courselist);
@@ -83,8 +91,16 @@ const CourseAdd = (props) => {
         if (Object.values(result2).length > 0){
             // setModal2(false); 
             setChangeNum2(true)
-            // setCourselist(courselist => [...courselist, {2: result2}]);
-            courselist[1] = result2;
+
+            const newnew = courselist.map((data) => { 
+                if (data.order === 2){
+                    return {...data, course : result2}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(2);
         }
     }, [result2])
@@ -93,8 +109,15 @@ const CourseAdd = (props) => {
         if (Object.values(result3).length > 0){
             // setModal3(false); 
             setChangeNum3(true)
-            // setCourselist(courselist => [...courselist, {3: result3}]);
-            courselist[2] = result3;
+
+            const newnew = courselist.map((data) => { 
+                if (data.order === 3){
+                    return {...data, course : result3}
+                }else{
+                    return {...data}
+                }
+            });
+            setCourselist((prev) => {return newnew})
             setCount(3);
         }
     }, [result3])
@@ -103,8 +126,15 @@ const CourseAdd = (props) => {
         if (Object.values(result4).length > 0){
             // setModal4(false); 
             setChangeNum4(true)
-            // setCourselist(courselist => [...courselist, {4: result4}]);
-            courselist[3] = result4;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 4){
+                    return {...data, course : result4}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(4);
         }
     }, [result4])
@@ -113,8 +143,15 @@ const CourseAdd = (props) => {
         if (Object.values(result5).length > 0){
             // setModal5(false); 
             setChangeNum5(true)
-            // setCourselist(courselist => [...courselist, {5: result5}]);
-            courselist[4] = result5;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 5){
+                    return {...data, course : result5}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(5);
         }
     }, [result5])
@@ -123,8 +160,15 @@ const CourseAdd = (props) => {
         if (Object.values(result6).length > 0){
             // setModal6(false); 
             setChangeNum6(true)
-            // setCourselist(courselist => [...courselist, {6: result6}]);
-            courselist[5] = result6;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 6){
+                    return {...data, course : result6}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(6);
         }
     }, [result6])
@@ -133,8 +177,15 @@ const CourseAdd = (props) => {
         if (Object.values(result7).length > 0){
             // setModal7(false); 
             setChangeNum7(true)
-            // setCourselist(courselist => [...courselist, {7: result7}]);
-            courselist[6] = result7;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 7){
+                    return {...data, course : result7}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(7);
         }
     }, [result7])
@@ -143,8 +194,15 @@ const CourseAdd = (props) => {
         if (Object.values(result8).length > 0){
             // setModal8(false); 
             setChangeNum8(true)
-            // setCourselist(courselist => [...courselist, {8: result8}]);
-            courselist[7] = result8;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 8){
+                    return {...data, course : result8}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(8);
         }
     }, [result8])
@@ -153,8 +211,15 @@ const CourseAdd = (props) => {
         if (Object.values(result9).length > 0){
             // setModal9(false); 
             setChangeNum9(true)
-            // setCourselist(courselist => [...courselist, {9: result9}]);
-            courselist[8] = result9;
+            const newnew = courselist.map((data) => { 
+                if (data.order === 9){
+                    return {...data, course : result9}
+                }else{
+                    return {...data}
+                }
+            });
+
+            setCourselist((prev) => {return newnew})
             setCount(9);
         }
     }, [result9])

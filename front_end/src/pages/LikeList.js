@@ -2,11 +2,13 @@
 import Layout from '../components/Layout';
 import styles from "./Community.module.css";
 import LikeListCard from "..//components/LikeListCard";
+import MapContainer from '../components/MapContainer';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
+const { kakao } = window;
 function MyPage() {
   const id = window.localStorage.getItem("id");
+  const [courselist, setCourselist] = useState([])
 
   // 데이터 가져오기
   const loadPost = async () => {
@@ -56,7 +58,7 @@ function MyPage() {
               <div>
 
               {/* div onClick={() => console.log("커뮤니티에서", card.cm_num)}> */}
-              <LikeListCard key={card.l_num} card={card} onClick={openModal}/>
+              <LikeListCard key={card.like_num} card={card} onClick={openModal}/>
               {/* 모달 이걸로해보기 */}
               {/* https://github.com/marinakim44/mern-img-modal/blob/master/client/src/App.js */}
               </div>
@@ -66,6 +68,7 @@ function MyPage() {
       
       <div className={styles.likelist_map_container}>
           지도
+          <MapContainer cardList={post} courselist={courselist}/>
       </div>
       </Layout>
             

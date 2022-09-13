@@ -47,6 +47,7 @@ function App() {
 
           {/* <Route path='/search' element={<SearchPage/>}></Route> */}
           <Route path="/search/:cate/:word" element={<SearchPage />}></Route>
+          <Route path="/search/:cate/*" element={<SearchPage />}></Route>
           {/* <Route path="/search/area/:word" element={<SearchPage />}></Route> */}
         
           {/* <Route path="/search/title/inpage/:media" element={<SearchPage />}></Route> */}
