@@ -17,6 +17,11 @@ const db = mysql.createPool({
     database: "test",
 });
 
+const multer = require('multer');
+const upload = multer({dest : './upload'})
+
+app.use('/image', express.static('./upload'))
+
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({extended : true}));
@@ -119,7 +124,7 @@ app.post("/api/mycourse", (req, res) => {
 });
 
 // mycourse 생성
-app.post("/api/coursecreate", (req, res) => {
+app.post("/api/coursecreate", upload.single('image'), (req, res) => {
   const id = req.body.id;
   const mc_title = req.body.mc_title;
   const mc_content = req.body.mc_content;
@@ -133,61 +138,58 @@ app.post("/api/coursecreate", (req, res) => {
   const course7 = req.body.course7;
   const course8 = req.body.course8;
   const course9 = req.body.course9;
-
-  console.log(id, mc_title, mc_content, count);
-
-  console.log(course1);
+  const mc_image = '/image/' + req.file.filename; 
 
   if (count == 1) {
     const my_course = course1;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (count == 2) {
     const my_course = course1 + "/" + course2;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (count == 3) {
     const my_course = course1 + "/" + course2 + "/" + course3;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (count == 4) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (count == 5) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (count == 6) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6;
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
@@ -195,9 +197,9 @@ app.post("/api/coursecreate", (req, res) => {
   else if (count == 7) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7;
 
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
@@ -205,9 +207,9 @@ app.post("/api/coursecreate", (req, res) => {
   else if (count == 8) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8;
 
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
@@ -216,9 +218,9 @@ app.post("/api/coursecreate", (req, res) => {
   else if (count == 9) {
     const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8 + "/" + course9;
 
-    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content, mc_image) VALUES (?, ?, ?, ?, ?)"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content, mc_image], (err, result) => {
       console.log(result);
       res.send(result);
     })
@@ -238,24 +240,21 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.post("/api/community/writepost", (req, res) =>{
+app.post("/api/community/writepost", upload.single('image'), (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
   const writer = req.body.writer; 
   const cm_type = req.body.cm_type; 
-  const cm_image = req.body.cm_image; 
+  const cm_image = '/image/' + req.file.filename; 
   
 
   const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`, `cm_image`) VALUES (?,?,?,?,?);";
   db.query(sqlQuery, [cm_title, cm_content, writer, cm_type, cm_image], (err, result) => {
-      res.send('success!'); 
+      res.send(result); 
   });
 });
 
-const multer = require('multer');
-const upload = multer({dest : './upload'})
 
-app.use('/image', express.static('./upload'))
 
 app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
   const media_name = req.body.media_name; 
@@ -457,7 +456,7 @@ app.post("/api/poster", (req, res) => {
 });
 
 // 도장깨기 글쓰기
-app.post("/api/writestamp", (req, res) => {
+app.post("/api/writestamp", upload.single("image"), (req, res) => {
   const id = req.body.id;
   const m_num = req.body.m_num;
   const poster = req.body.poster;
@@ -466,37 +465,38 @@ app.post("/api/writestamp", (req, res) => {
   const record_title = req.body.record_title;
   const record_content = req.body.record_content;
   const part = req.body.part;
+  const record_image = "/image/" + req.file.filename;
   
   console.log(id, m_num, poster, record_content, record_title);
 
   if (part == 1) {
-    const sqlQuery =  "UPDATE test.stamp SET record_title1 = ?, record_content1 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    const sqlQuery =  "UPDATE test.stamp SET record_title1 = ?, record_content1 = ?, record_image1 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, record_image, id, m_num, poster], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (part == 2) {
-    const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ?, record_image2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, record_image, id, m_num, poster], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (part == 3) {
-    const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ?, record_image3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, record_image, id, m_num, poster], (err, result) => {
       console.log(result);
       res.send(result);
     })
   }
   else if (part == 4) {
-    const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
+    const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ?, record_image4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
     // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-    db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [record_title, record_content, record_image, id, m_num, poster], (err, result) => {
       console.log(result);
       res.send(result);
     })

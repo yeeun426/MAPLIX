@@ -26,34 +26,6 @@ const Request = () => {
   const {media_name, r_content, m_type} = state;
   const history = useNavigate();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   // const formData = new FormData();
-  //   const r_image = img;
-  //   // formData.append('file', img);
-  //   console.log(r_image);
-  //   // console.log(formData);
-
-  //     const res = axios.post("http://localhost:8000/api/mypage/request", {
-  //       media_name,
-  //       r_content,
-  //       id,
-  //       m_type,
-  //       r_image,
-  //       // formData
-  //     })
-  //     .then((res) => {
-  //       setState({media_name: "", r_content: "", m_type: ""});
-  //       setImg({r_image: ""});
-  //       alert("success!")
-  //     })
-  //     console.log(res);
-  //     // .catch((err) => toast.error(err.response.data));
-  //   setTimeout(() => history.push("/mypage"), 500);
-    
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 

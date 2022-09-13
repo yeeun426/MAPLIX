@@ -185,6 +185,7 @@ const CourseAdd = (props) => {
     const [myCourse, setMyCourse] = useState(initialMyCourse);
     const {mc_title, mc_content} = myCourse;
     const [courseCreateModal, setcourseCreateModal] = useState(false);
+    const [img, setImg] = useState({file: null, fileName:""});
 
 
     const courseCreate = (e) => {
@@ -203,6 +204,11 @@ const CourseAdd = (props) => {
         const { name, value } = e.target;
         setMyCourse({ ...myCourse, [name]: value });
       };
+
+      const handleImgChange = (e) => {
+        setImg({file: e.target.files[0], fileName: e.target.value});
+        console.log(img)
+      };
   
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -216,26 +222,35 @@ const CourseAdd = (props) => {
         const course8 = result8.p_name;
         const course9 = result9.p_name;
 
-        const res = axios.post("http://localhost:8000/api/coursecreate", {
-          id,
-          mc_title,
-          mc_content,
-          count,
-          course1,
-          course2,
-          course3,
-          course4,
-          course5,
-          course6,
-          course7,
-          course8,
-          course9
-        })
-        .then((res) => {
-          alert("success!")
+        const formData = new FormData();
+
+        formData.append('image', img.file);
+        formData.append('id', id);
+        formData.append('mc_title', mc_title);
+        formData.append('mc_content', mc_content);
+        formData.append('count', count);
+        formData.append('course1', result1.p_name);
+        formData.append('course2', result2.p_name);
+        formData.append('course3', result3.p_name);
+        formData.append('course4', result4.p_name);
+        formData.append('course5', result5.p_name);
+        formData.append('course6', result6.p_name);
+        formData.append('course7', result7.p_name);
+        formData.append('course8', result8.p_name);
+        formData.append('course9', result9.p_name);
+        
+        const config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        }
+        axios.post("http://localhost:8000/api/coursecreate", formData, config)
+        .then((response) => {
+          console.log(response);
+          alert("나만의 코스 생성 완료")
           setcourseCreateModal(false)
         })
-      }
+      };
 
       const [courseSea, setCourseSea] = useState(false);
 
@@ -582,7 +597,7 @@ const CourseAdd = (props) => {
                 <div className={styles.course_modal_header}>내 코스 만들기</div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.course_modal_title}>
-                        <div htmlFor='mc_title'>제목</div>
+                        <label htmlFor='mc_title'>제목</label>
                         <input
                         type="text"
                         id="mc_title"
@@ -594,7 +609,7 @@ const CourseAdd = (props) => {
                     </div>
 
                     <div className={styles.course_modal_container}>
-                        <div htmlFor='mc_content'>내용</div>
+                        <label htmlFor='mc_content'>내용</label>
                         <input className={styles.content}
                         type="text"
                         id="mc_content"
@@ -603,6 +618,11 @@ const CourseAdd = (props) => {
                         value={myCourse.mc_content}
                         onChange={handleInputChange}
                         />
+                    </div>
+
+                    <div className={styles.write_item}>
+                        <label htmlFor='cm_image'>이미지</label>
+                        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
                     </div>
                     <input className={styles.btn_submit} type="submit" value="등록" />        
                 </form>

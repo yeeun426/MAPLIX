@@ -23,6 +23,9 @@ export default function WriteStamp({card, openModal}) {
 
     const [record, setRecord] = useState(initialRecord);
     const {record_title, record_content} = record;
+    
+    const [img, setImg] = useState({file: null, fileName:""});
+    const [record_image, setRecordImg] = useState(null);
 
     const [part, setPart] = useState(0);
 
@@ -31,17 +34,15 @@ export default function WriteStamp({card, openModal}) {
     const response = await axios.post('http://localhost:8000/api/stampcheck'
     , {id, m_num, poster}
     );
-    console.log(response.data[0]);
-    if (response.data[0].record_title1 != undefined) 
-      return setRecord1(true);    
+    if (response.data[0].record_image1 != undefined) 
+      return setRecord1(true);
   };
 
   const loadPost2 = async () => {
     const response = await axios.post('http://localhost:8000/api/stampcheck'
     , {id, m_num, poster}
     );
-    console.log(response.data[0]);
-    if (response.data[0].record_title2 != undefined) 
+    if (response.data[0].record_image2 != undefined) 
       return setRecord2(true);
   };
 
@@ -49,8 +50,7 @@ export default function WriteStamp({card, openModal}) {
     const response = await axios.post('http://localhost:8000/api/stampcheck'
     , {id, m_num, poster}
     );
-    console.log(response.data[0]);
-    if (response.data[0].record_title3 != undefined) 
+    if (response.data[0].record_image3 != undefined) 
       return setRecord3(true);
   };
 
@@ -58,8 +58,7 @@ export default function WriteStamp({card, openModal}) {
     const response = await axios.post('http://localhost:8000/api/stampcheck'
     , {id, m_num, poster}
     );
-    console.log(response.data[0]);
-    if (response.data[0].record_title4 != undefined) 
+    if (response.data[0].record_image4 != undefined) 
       return setRecord4(true);
   };
 
@@ -83,37 +82,54 @@ export default function WriteStamp({card, openModal}) {
       setRecord({ ...record, [name]: value });
     };
 
+    const handleImgChange = (e) => {
+      setImg({file: e.target.files[0], fileName: e.target.value});
+      console.log(img)
+    };
+  
     const handleSubmit = (e) => {
-      console.log(record_title, record_content);
       e.preventDefault();
-      const part = window.localStorage.getItem("part");
-      console.log("PART" + part);
-      const res = axios.post("http://localhost:8000/api/writestamp", {
-        id,
-        m_num,
-        poster,
-        part,
-        record_title,
-        record_content,
-      })
-      .then((res) => {
-        alert("success!")
-        // document.location.href = '/mypage/stamp'
-        if (part == 1) {
-          setRecord1(true);
+
+      const formData = new FormData();
+      formData.append('image', img.file);
+      formData.append('id', id);
+      formData.append('m_num', m_num);
+      formData.append('poster', poster);
+      formData.append('part', part);
+      formData.append('record_title', record_title);
+      formData.append('record_content', record_content);
+      
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
         }
-        else if (part == 2) {
-          setRecord2(true);
-        }
-        else if (part == 3) {
-          setRecord3(true);
-        }
-        else if (part == 4) {
-          setRecord4(true);
-        }
-        setStampModal(false);
-        console.log(res.data[0])
-      })
+      }
+      // console.log(img.file)
+      if (img.file == null) {
+        alert("이미지를 등록해주세요.")
+      }
+      else {
+        axios.post("http://localhost:8000/api/writestamp", formData, config)
+        .then((response) => {
+          if (part == 1) {
+            alert("도장깨기 #1 글 작성 완료")
+            setRecord1(true);
+          }
+          else if (part == 2) {
+            alert("도장깨기 #2 글 작성 완료")
+            setRecord2(true);
+          }
+          else if (part == 3) {
+            alert("도장깨기 #3 글 작성 완료")
+            setRecord3(true);
+          }
+          else if (part == 4) {
+            alert("도장깨기 #4 글 작성 완료")
+            setRecord4(true);
+          }
+          setStampModal(false);
+        })
+      }
     }
 
     const clickPoster1 = (e) => {
@@ -136,27 +152,10 @@ export default function WriteStamp({card, openModal}) {
         .then((res) => {
           setStampModal(false);
           setRecord({record_title: res.data[0].record_title1, record_content: res.data[0].record_content1});
+          setRecordImg(res.data[0].record_image1);
           setStampRecordModal(!stampRecordModal);
         })
       }
-      // const res = axios.post("http://localhost:8000/api/stampcheck", {
-      //   id,
-      //   m_num,
-      //   poster,
-      //   part
-      // })
-      // .then((res) => {
-      //   if (res.data[0].record_title1 != undefined) {
-      //     console.log(res.data[0].record_title1, res.data[0].record_content1);
-      //     setRecord({record_title: res.data[0].record_title1, record_content: res.data[0].record_content1});
-      //     console.log(record)
-      //     setStampRecordModal(!stampRecordModal);
-      //   }
-      //   else {
-      //     // setRecord({record_title: "", record_content: ""});
-      //     setStampModal(!stampModal);
-      //   }
-      // })
     }
 
     const clickPoster2 = (e) => {
@@ -179,25 +178,10 @@ export default function WriteStamp({card, openModal}) {
         .then((res) => {
           setStampModal(false);
           setRecord({record_title: res.data[0].record_title2, record_content: res.data[0].record_content2});
+          setRecordImg(res.data[0].record_image2);
           setStampRecordModal(!stampRecordModal);
         })
       }
-      // const res = axios.post("http://localhost:8000/api/stampcheck", {
-      //   id,
-      //   m_num,
-      //   poster,
-      //   part
-      // })
-      // .then((res) => {
-      //   if (res.data[0].record_title2 != undefined) {
-      //     setRecord({record_title: res.data[0].record_title2, record_content: res.data[0].record_content2});
-      //     setStampRecordModal(!stampRecordModal);
-      //   }
-      //   else {
-      //     // setRecord({record_title: "", record_content: ""});
-      //     setStampModal(!stampModal);
-      //   }
-      // })
     }
 
     const clickPoster3 = (e) => {
@@ -220,26 +204,10 @@ export default function WriteStamp({card, openModal}) {
         })
         .then((res) => {
           setRecord({record_title: res.data[0].record_title3, record_content: res.data[0].record_content3});
+          setRecordImg(res.data[0].record_image3);
           setStampRecordModal(!stampRecordModal);
         })
       }
-
-      // const res = axios.post("http://localhost:8000/api/stampcheck", {
-      //   id,
-      //   m_num,
-      //   poster,
-      //   part
-      // })
-      // .then((res) => {
-      //   if (res.data[0].record_title3 != undefined) {
-      //     setRecord({record_title: res.data[0].record_title3, record_content: res.data[0].record_content3});
-      //     setStampRecordModal(!stampRecordModal);
-      //   }
-      //   else {
-      //     // setRecord({record_title: "", record_content: ""});
-      //     setStampModal(!stampModal);
-      //   }
-      // })
     }
 
     const clickPoster4 = (e) => {
@@ -263,25 +231,10 @@ export default function WriteStamp({card, openModal}) {
         .then((res) => {
           // setStampModal(false);
           setRecord({record_title: res.data[0].record_title4, record_content: res.data[0].record_content4});
+          setRecordImg(res.data[0].record_image4);
           setStampRecordModal(!stampRecordModal);
         })
       }
-      // const res = axios.post("http://localhost:8000/api/stampcheck", {
-      //   id,
-      //   m_num,
-      //   poster,
-      //   part
-      // })
-      // .then((res) => {
-      //   if (res.data[0].record_title4 != undefined) {
-      //     setRecord({record_title: res.data[0].record_title4, record_content: res.data[0].record_content4});
-      //     setStampRecordModal(!stampRecordModal);
-      //   }
-      //   else {
-      //     // setRecord({record_title: "", record_content: ""});
-      //     setStampModal(!stampModal);
-      //   }
-      // })
     }
 
     const updateRecord = (e) => {
@@ -290,6 +243,7 @@ export default function WriteStamp({card, openModal}) {
       setStampModal(!stampModal);
     }
 
+    
   return (
     <div>
       <div className={styles.stamp_form_container}>
@@ -351,6 +305,9 @@ export default function WriteStamp({card, openModal}) {
             onChange={handleInputChange}
             />
           </div>
+          
+          <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
+
           <input className={styles.btn_submit} type="submit" value="등록" />        
 
         </form>
@@ -362,6 +319,8 @@ export default function WriteStamp({card, openModal}) {
       <div className={styles2.stamp_modal}>
         <ul id="stamp_title">도장깨기 #{part} <button id="modalCloseBtn" onClick={() => setStampRecordModal(false)}>✖</button></ul>
         <div className={styles.form_container}>
+          
+          <img  className={styles2.sm_img} src={'http://localhost:8000' + record_image}></img>
           <div className={styles.write_item}>
             {/* <label htmlFor='record_title'>제목</label> */}
             <ul id="stamp_record_title">{record.record_title}</ul>
