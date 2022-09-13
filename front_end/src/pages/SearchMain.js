@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+
 import './SearchMain.css';
+
 import area from "../img/area.png";
 import drama from "../img/drama.png";
 import movie from "../img/movie.png";
@@ -13,15 +16,24 @@ import Daegu from "../img/Daegu.png";
 import Pohang from "../img/Pohang.png";
 import Incheon from "../img/Incheon.png";
 import Map from "../img/Map.png";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+
 import { GoSearch } from "react-icons/go";
+
+import Pagination from '../components/Pagination';
 import Footer from '../components/Footer'
 import RecommendMediaCourse from '../components/RecommendMediaCourse';
 import MediaCard from "../components/MediaCard";
-import styles2 from "../components/CommunityCard.module.css";
 
 
 import axios from "axios";
+
+// import { Swiper, SwiperSlide } from "swiper/react"; // basic
+// import SwiperCore, { Navigation, Pagination } from "swiper";
+// import "swiper/css"; //basic
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+
+// SwiperCore.use([Navigation, Pagination]);
 
 
 function Search({id}) {
@@ -74,6 +86,24 @@ function Search({id}) {
     navigate(`/search/${activeSearchCate}/${area}`);
   }
 
+  const [currentpage, setCurrentpage] = useState(1); //현재페이지
+  const [postsPerPage, setPostsPerPage] = useState(36); //페이지당 아이템 개수
+
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0);
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0);
+  // const [currentPosts, setCurrentPosts] = useState(0);
+
+  useEffect(() => {
+    setIndexOfLastPost(currentpage * postsPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postsPerPage);
+  }, [currentpage, indexOfFirstPost, indexOfLastPost, media, postsPerPage]);
+  
+  const currentPosts = (posts) => {
+    let currentPosts = 0;
+    currentPosts = media.slice(indexOfFirstPost, indexOfLastPost);
+    return currentPosts;
+  };
+
   return(
     <div className='Main_Search'>
       <div className='first_container'>
@@ -103,47 +133,60 @@ function Search({id}) {
 
       <div className='second_container'>
         everything you can search for
-        <img src={drama} alt = "drama" onClick={() => {onClickMedia("드라마")}}/>
-        <img src={movie} alt = "movie" onClick={() => {onClickMedia("영화")}}/>
-        <img src={entertainment} alt = "entertainment" onClick={() => {onClickMedia("예능")}}/>
-        <img src={area} alt = "area" onClick={() => {
-          setMediaModal(false)
-          setAreaModal(!areaModal)
-          setActiveSearchCate('area')
-          }}/>
+        <div className="second_container_items">
+          <img src={drama} alt = "drama" onClick={() => {onClickMedia("드라마"); setCurrentpage(1)}}/>
+          <img src={movie} alt = "movie" onClick={() => {onClickMedia("영화"); setCurrentpage(1)}}/>
+          <img src={entertainment} alt = "entertainment" onClick={() => {onClickMedia("예능"); setCurrentpage(1)}}/>
+          <img src={area} alt = "area" onClick={() => {
+            setMediaModal(false)
+            setAreaModal(!areaModal)
+            setActiveSearchCate('area')
+            }}/>
+        </div>
 
         {mediaModal ? 
           <div className='media_modal'>
-            <ul>목록</ul>
+            <div>List</div>
 
-            <div>
-                {media.map((drama, index)=>(
-                  <MediaCard key={drama.m_num} card={drama} 
-                          openModal={ () => setModal(true)} />
+            <div className="modal_media_list">
+                {currentPosts(media).map((drama)=>(
+                  <div>
+                    <MediaCard key={drama.m_num} card={drama} 
+                      openModal={ () => setModal(true)} />
+                  </div>
                 ))}
+            {/* </Swiper> */}
             </div>
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={media.length}
+                paginate={setCurrentpage}
+                end={10}
+              />
           </div>
         :null}
 
         {areaModal ? 
-          <div className='media_modal'>
-            <ul>목록</ul>
-            <div onClick={() => (onClickArea("서울"))}>서울</div>
-            <div onClick={() => (onClickArea("경기"))}>경기</div>
-            <div onClick={() => (onClickArea("강원"))}>강원</div>
-            <div onClick={() => (onClickArea("충북"))}>충북</div>
-            <div onClick={() => (onClickArea("충남"))}>충남</div>
-            <div onClick={() => (onClickArea("전북"))}>전북</div>
-            <div onClick={() => (onClickArea("전남"))}>전남</div>
-            <div onClick={() => (onClickArea("경북"))}>경북</div>
-            <div onClick={() => (onClickArea("경남"))}>경남</div>
-            <div onClick={() => (onClickArea("제주"))}>제주</div>
-            <div onClick={() => (onClickArea("부산"))}>부산</div>
-            <div onClick={() => (onClickArea("대구"))}>대구</div>
-            <div onClick={() => (onClickArea("인천"))}>인천</div>
-            <div onClick={() => (onClickArea("광주"))}>광주</div>
-            <div onClick={() => (onClickArea("대전"))}>대전</div>
-            <div onClick={() => (onClickArea("울산"))}>울산</div>
+          <div className='media_modal_area'>
+            <div>List</div>
+            <div className="media_modal_area_list">
+              <button onClick={() => (onClickArea("서울"))}>서울</button>
+              <button onClick={() => (onClickArea("경기"))}>경기</button>
+              <button onClick={() => (onClickArea("강원"))}>강원</button>
+              <button onClick={() => (onClickArea("충북"))}>충북</button>
+              <button onClick={() => (onClickArea("충남"))}>충남</button>
+              <button onClick={() => (onClickArea("전북"))}>전북</button>
+              <button onClick={() => (onClickArea("전남"))}>전남</button>
+              <button onClick={() => (onClickArea("경북"))}>경북</button>
+              <button onClick={() => (onClickArea("경남"))}>경남</button>
+              <button onClick={() => (onClickArea("제주"))}>제주</button>
+              <button onClick={() => (onClickArea("부산"))}>부산</button>
+              <button onClick={() => (onClickArea("대구"))}>대구</button>
+              <button onClick={() => (onClickArea("인천"))}>인천</button>
+              <button onClick={() => (onClickArea("광주"))}>광주</button>
+              <button onClick={() => (onClickArea("대전"))}>대전</button>
+              <button onClick={() => (onClickArea("울산"))}>울산</button>
+            </div>
           </div>
           : null}
       </div>

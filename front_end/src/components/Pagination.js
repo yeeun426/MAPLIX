@@ -49,7 +49,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, end}) => {
                 document.getElementsByClassName('nowpage')[0].classList.remove('nowpage');
                 }
                 paginate(number); 
-                e.target.parentElement.classList.add('nowpage')}}>
+                e.target.parentElement.classList.add('nowpage')
+                }}>
                 {number}
               </PageSpan>
             </PageLi>

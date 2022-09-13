@@ -96,3 +96,18 @@ export const RecommendStyle = styled.div`
         color: #395C3C;
     }
 `;
+
+export const MediaCardStyles= styled.div`
+    word-break: keep-all;
+    
+    img{
+        width: 110px;
+    }
+
+    .media_modal_items{
+        font-size: 13px;
+        font-family: 'yg-jalnan';
+        width: 110px;
+    }
+
+`
