@@ -126,8 +126,8 @@ function Search({id}) {
           <div className='third_img'>
             <button>
               <img src={Pohang} alt = "Pohang" />
-              <RecommendMediaCourse id={7} />
             </button>
+            <RecommendMediaCourse id={7} />
           </div>
           
           <div className='third_img'>
