@@ -7,6 +7,7 @@ import free from '../img/free.png';
 import write from '../img/write.png';
 
 function CommunitySidebar({setActiveCate, activeCate, setFiltered, post}){
+  
   useEffect(() => {
     if(activeCate === "전체"){
       setFiltered(post);
@@ -16,6 +17,13 @@ function CommunitySidebar({setActiveCate, activeCate, setFiltered, post}){
     card.cm_type.includes(activeCate));
     setFiltered(filtered);
   }, [activeCate])
+
+  const goWrite = () => {
+    const id = window.localStorage.getItem("id")
+    if (id== undefined) return alert("로그인 후 이용 가능합니다."), document.location.href = '/login';
+    else  return setActiveCate("글쓰기");
+  }
+
   return(
     <div className={styles.filter_container}>
       <ol>
@@ -34,7 +42,8 @@ function CommunitySidebar({setActiveCate, activeCate, setFiltered, post}){
           <img src={free} alt = "free"/>
           자유
         </button></ul>
-        <ul><button className={activeCate === "글쓰기" ? styles.active : ""} onClick={() => setActiveCate("글쓰기")}>
+        {/* <ul><button className={activeCate === "글쓰기" ? styles.active : ""} onClick={() => setActiveCate("글쓰기")}> */}
+        <ul><button className={activeCate === "글쓰기" ? styles.active : ""} onClick={goWrite}>
           <img src={write} alt = "free"/>
           글쓰기
         </button></ul>

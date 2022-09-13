@@ -8,7 +8,6 @@ import { MdBookmarkBorder } from "react-icons/md";
 import { MdBookmark } from "react-icons/md"; 
 
 export default function SearchResultCard({card}) {
-
   const id = window.localStorage.getItem("id");
   const l_num = card.l_num;
   const [detail, setDetail] = useState(false); 
@@ -22,9 +21,11 @@ export default function SearchResultCard({card}) {
     const response = await axios.post('http://localhost:8000/api/post/likelistcheck'
     , {id, l_num}
     );
-    // console.log(response.data[0].l_num);
-    if (response.data[0].l_num === l_num) 
-      return setLike(true);
+    if (response.data[0] != null){
+      if (response.data[0].l_num === l_num) 
+        return setLike(true);
+    }
+    
   };
 
   // 촬영지 이미지 가져오기
@@ -111,7 +112,7 @@ export default function SearchResultCard({card}) {
                 {/* <ul>#{card.category}</ul> */}
                 {
                 (function() {
-                  if (check_like == true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
+                  if (check_like === true) return (<button onClick={addLikelist}><MdBookmark size="20px"/></button>);
                   else  return (<button onClick={addLikelist}><MdBookmarkBorder size="20px"/></button>);
                 })()
                 }

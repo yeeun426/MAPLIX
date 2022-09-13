@@ -243,10 +243,33 @@ export default function WriteStamp({card, openModal}) {
       setStampModal(!stampModal);
     }
 
-    
   return (
     <div>
       <div className={styles.stamp_form_container}>
+      {
+            function() {
+              if (poster == undefined) return (
+                <div className={styles.none_wrapper}>
+              <span className={styles.none_title}>'{card.m_name}'</span>
+              <span className={styles.none_result_title}>에 대한 검색결과가 없습니다.</span>
+              <div className={styles.none_result_txt}>
+                단어의 철자가 정확한지 확인해 보세요.<br />
+                한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br />
+                검색어의 단어 수를 줄이거나,<br/> 보다 일반적인 검색어로 다시 검색해 보세요.<br />
+                두 단어 이상의 검색어인 경우,<br/> 띄어쓰기를 확인해 보세요.<br />
+                키워드 수를 줄여보세요.
+              </div>
+              <div styles={{fontSize: "18px"}}>Contact Us</div>
+              <span>원하는 드라마, 영화, 예능의 가 없다면 </span>
+              <span className={styles.none_result_request}>'요청하기'</span>
+              <span>를 이용하세요</span>
+              <Link to='/mypage/request'>
+                <button>요청하기</button>
+              </Link>
+            </div>
+              )
+            }
+          }
         <ul id="stamp_title">{card.m_name}</ul>
         <div>
         {

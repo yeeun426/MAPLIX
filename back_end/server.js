@@ -41,7 +41,7 @@ app.get("/api/community", (req, res) => {
 app.get("/api/search/title", (req, res) => {
   const params = "%" + req.query.media + "%";
   //let sqlGet = "SELECT * FROM `test`.`media` WHERE `m_name2` LIKE ? OR `m_name` LIKE ?";
-  let sqlGet = "SELECT L.l_num, L.description, L.l_image, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
+  let sqlGet = "SELECT L.l_num, L.description, L.l_image, P.p_name, P.p_num, P.address, P.category, P.p_y, P.p_x, M.m_name FROM test.location AS L "; 
   sqlGet += "JOIN test.place AS P ON L.p_num = P.p_num JOIN test.media AS M ON L.m_num = M.m_num "; 
   sqlGet += "WHERE L.m_num = any (SELECT media.m_num FROM test.media WHERE media.m_name LIKE ? OR media.m_name2 LIKE ?) ";
   
@@ -59,7 +59,7 @@ app.get("/api/search/title", (req, res) => {
 //지역 검색시 
 app.get("/api/search/area", (req, res) => {
   const params = "%" + req.query.media + "%";
-  let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, M.m_name FROM test.location AS L "; 
+  let sqlGet = "SELECT L.*, P.p_name, P.p_num, P.address, P.category, P.p_y, P.p_x, M.m_name FROM test.location AS L "; 
   sqlGet += " JOIN test.media AS M ON L.m_num = M.m_num JOIN test.place AS P ON P.p_num = L.p_num ";
   sqlGet += " WHERE L.p_num = any (SELECT place.p_num FROM test.place WHERE place.address LIKE ? ) " ;
 
@@ -89,12 +89,14 @@ app.get("/api/search", (req, res) => {
 // 드라마명(m_name <- media) (location과 m_num으로 조인)
 app.post("/api/likelist", (req, res) => {
   const id = req.body.id;
+  console.log(id)
   // 현재 로그인한 id를 user에서 찾고, likelist에서 그 id가 좋아요한 장소 num ( l_num )
-  let sqlGet = " SELECT L.*, m_name, m_type, p_name, address, category FROM test.location As L ";
+  let sqlGet = " SELECT L.*, m_name, m_type, p_name, address, category, P.p_y, P.p_x FROM test.location As L ";
   sqlGet += "JOIN test.place AS P ON L.l_num = P.p_num JOIN test.media AS M ON L.l_num = M.m_num ";
   sqlGet += "WHERE L.l_num = any (SELECT l_num FROM test.likelist WHERE likelist.id = ?) ";
   // location (미디어num, 장소num)에서 미디어 num
   db.query(sqlGet, [id], (error, result) => {
+    console.log(error)
     console.log(result);
     res.send(result);
   });
@@ -240,7 +242,31 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.post("/api/community/writepost", upload.single('image'), (req, res) =>{
+app.post("/api/media", (req, res) => {
+  const m_type = req.body.m_type;
+
+  const sqlQuery = "SELECT * FROM test.media WHERE m_type = ?"
+
+  db.query(sqlQuery, [m_type], (err, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
+app.post("/api/community/writepost", (req, res) =>{
+  const cm_title = req.body.cm_title; 
+  const cm_content = req.body.cm_content;
+  const writer = req.body.writer; 
+  const cm_type = req.body.cm_type; 
+  
+
+  const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`) VALUES (?,?,?,?);";
+  db.query(sqlQuery, [cm_title, cm_content, writer, cm_type], (err, result) => {
+      res.send('success!'); 
+  });
+});
+
+app.post("/api/community/writepostimg", upload.single('image'), (req, res) =>{
   const cm_title = req.body.cm_title; 
   const cm_content = req.body.cm_content;
   const writer = req.body.writer; 
@@ -256,7 +282,7 @@ app.post("/api/community/writepost", upload.single('image'), (req, res) =>{
 
 
 
-app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
+app.post("/api/mypage/requestimg", upload.single('image'), (req, res) =>{
   const media_name = req.body.media_name; 
   const r_content = req.body.r_content;
   const id = req.body.id; 
@@ -275,21 +301,17 @@ app.post("/api/mypage/request", upload.single('image'), (req, res) =>{
 });
 
 
-// app.post("/api/mypage/request", (req, res) =>{
-//   const media_name = req.body.media_name; 
-//   const r_content = req.body.r_content;
-//   const id = req.body.id; 
-//   const m_type = req.body.m_type; 
-//   // const r_image = req.body.r_image; 
-//   // const fd = req.body.fd;
-  
-//   // console.log(media_name, fd);
+app.post("/api/mypage/request", (req, res) =>{
+  const media_name = req.body.media_name; 
+  const r_content = req.body.r_content;
+  const id = req.body.id; 
+  const m_type = req.body.m_type; 
 
-//   // const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
-//   // db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
-//   //     res.send('success!'); 
-//   // });
-// });
+  const sqlQuery = "INSERT INTO `test`.`request` (`media_name`, `r_content`, `id`, `m_type`) VALUES (?,?,?,?);";
+  db.query(sqlQuery, [media_name, r_content, id, m_type], (err, result) => {
+      res.send('success!'); 
+  });
+});
 
 app.post("/api/checkid", (req, res) => {
   const id = req.body.id;
@@ -428,31 +450,30 @@ app.post("/api/stamp", (req, res) => {
 
   console.log(id, m_type, media_name)
   // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
+  const sqlQuery = "SELECT * FROM test.stamp as S Join test.media as M ON S.m_num = M.m_num WHERE S.m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? AND M.m_type = ? AND (M.m_name like ? OR M.m_name2 like ?));";
   // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
   // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
   
-  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
+  db.query(sqlQuery, [id, m_type, media_name, media_name], (error, result) => {
     console.log(result);
     res.send(result);
   });
 });
 
-app.post("/api/poster", (req, res) => {
-  const id = req.body.id;
-  const m_type = req.body.m_type;
-  const media_name = "%"  + req.body.media_name + "%";
+app.get("/poster", (req, res) => {
+  const id = 'jisu';
 
-  console.log(id, m_type, media_name)
-  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
-  // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
-  // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
+  for (i = 4; i < 206; i++) {
+    const poster = 'poster' + i;
+    const m_num = i;
+    const sqlQuery = "INSERT INTO test.stamp (id, m_num, poster) VALUES (?, ?, ?);";
   
-  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
-    console.log(result);
-    res.send(result);
+    db.query(sqlQuery, [id, m_num, poster], (error, result) => {
+      console.log(result);
   });
+  }
+  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
+  
 });
 
 // 도장깨기 글쓰기
@@ -513,55 +534,9 @@ app.post("/api/stampcheck", (req, res) => {
   db.query(sqlQuery, [id, m_num, poster], (err, result) => {
     console.log(result);
     res.send(result);
-  })
-
-  // if (part == 1) {
-  //   const sqlQuery =  "SELECT * FROM test.stamp WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 2) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title2 = ?, record_content2 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 3) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title3 = ?, record_content3 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }
-  // else if (part == 4) {
-  //   const sqlQuery =  "UPDATE test.stamp SET record_title4 = ?, record_content4 = ? WHERE id = ? AND m_num = ? AND poster = ?;"
-  //   // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
-  //   db.query(sqlQuery, [record_title, record_content, id, m_num, poster], (err, result) => {
-  //     console.log(result);
-  //     res.send(result);
-  //   })
-  // }   
+  })  
 })
 
-app.post("/api/community/writepost", (req, res) =>{
-  const cm_title = req.body.cm_title; 
-  const cm_content = req.body.cm_content;
-  const writer = req.body.writer; 
-  const cm_type = req.body.cm_type; 
-  const cm_image = req.body.cm_image; 
-  
-
-  const sqlQuery = "INSERT INTO `test`.`community` (`cm_title`, `cm_content`, `writer`, `cm_type`, `cm_image`) VALUES (?,?,?,?,?);";
-  db.query(sqlQuery, [cm_title, cm_content, writer, cm_type, cm_image], (err, result) => {
-      res.send('success!'); 
-  });
-});
 
 app.get("/api/locationimage", (req, res) => {
   var Folder = '../front_end/public/location/';

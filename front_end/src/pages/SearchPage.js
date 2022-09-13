@@ -333,7 +333,7 @@ const onClickSearchbar = (e) => {
                 end={10}
               />
         </div>
-        <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist}/>
+        <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist} pagename={'SearchPage'}/>
 
 
         </div>

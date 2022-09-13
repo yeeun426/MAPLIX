@@ -46,20 +46,34 @@ const Stamp = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const res = axios.post("http://localhost:8000/api/stamp", {
-        media_name,
-        id,
-        m_type
-      })
-      .then((res) => {
-        alert("success!")
-        console.log(res.data[0])
-        setPoster({poster: res.data[0].poster})
-        setMNum({m_num: res.data[0].m_num})
-        setState(res.data[0]);
-        setPost(res.data);
-        console.log(poster, m_num);
-      })
+      console.log(m_type, media_name)
+      if (m_type == "") {
+        alert("컨텐츠 분류를 선택해주세요")
+      }
+      else if (media_name == "") {
+        alert("컨텐츠 제목을 입력해주세요")
+      }
+      else {
+        const res = axios.post("http://localhost:8000/api/stamp", {
+          media_name,
+          id,
+          m_type
+        })
+        .then((res) => {
+          console.log(res.data[0])
+          if (res.data[0] !== undefined){
+            setPoster({poster: res.data[0].poster})
+            setMNum({m_num: res.data[0].m_num})
+            setState(res.data[0]);
+            setPost(res.data);
+            console.log(poster, m_num);
+          }
+          else {
+            setPoster(false)
+            console.log(poster);
+          }
+        })
+      }
     }
 
     const [post, setPost] = useState([]);
@@ -87,7 +101,7 @@ const Stamp = () => {
           <button type='submit'>검색</button>
         </form>
       </div>
-
+      {poster !== undefined ? 
       <div className={styles.like_list}>
         {post.map((card, index) => {
           return (
@@ -103,7 +117,26 @@ const Stamp = () => {
           );
         })}
       </div>
-      
+      :
+      <div className={styles.none_wrapper}>
+        <span className={styles.none_title}>'{media_name}'</span>
+        <span className={styles.none_result_title}>에 대한 도장깨기가 없습니다.</span>
+        <div className={styles.none_result_txt}>
+          단어의 철자가 정확한지 확인해 보세요.<br />
+          한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br />
+          검색어의 단어 수를 줄이거나,<br/> 보다 일반적인 검색어로 다시 검색해 보세요.<br />
+          두 단어 이상의 검색어인 경우,<br/> 띄어쓰기를 확인해 보세요.<br />
+          키워드 수를 줄여보세요.
+        </div>
+        <div styles={{fontSize: "18px"}}>Contact Us</div>
+        <span>원하는 드라마, 영화, 예능의 도장깨기가 없다면 </span>
+        <span className={styles.none_result_request}>'요청하기'</span>
+        <span>를 이용하세요</span>
+        <Link to='/mypage/request'>
+          <button>요청하기</button>
+        </Link>
+      </div>
+    }
     </Layout>
     </div>
     </>
