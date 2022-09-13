@@ -32,7 +32,7 @@ export default function SearchResultCard({card}) {
     const response = await axios.get('http://localhost:8000/api/locationimage');
     // console.log(response.data)
     const locationImg = 'location_' + l_num;
-    console.log(locationImg);
+    // console.log(locationImg);
     function findLocationImg(element) {
       if (element.includes(locationImg))
         return true
@@ -50,7 +50,7 @@ export default function SearchResultCard({card}) {
     else if (ext == 'webp') {
       setWebp(true)
     }
-    console.log(findLocation, ext);
+    // console.log(findLocation, ext);
   }
 
 

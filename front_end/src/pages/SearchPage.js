@@ -17,6 +17,8 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from "../components/Community.module.css";
 import SearchResultCard from '../components/SearchResultCard';
+
+// import Paging from "../components/Pagination"; //v1
 import Pagination from '../components/Pagination';
 
 const { kakao } = window;
@@ -163,28 +165,49 @@ const onClickSearchbar = (e) => {
   console.log('파라미터'+ search);
 }
 
-const ClickedSearchCate = (e) => {
-  e.preventDefault();
-  searchCate = e.target.id;
-  var temp = document.getElementById('searchbox').value
-  navigate(`/search/${searchCate}/${temp}`);
-}
-const clickall = () => {
-  setActiveCate((activeCate) =>  activeCate.map(k => {
-      return { ...k, flag : !k.flag,};
-  }));
-}
+  const ClickedSearchCate = (e) => {
+    e.preventDefault();
+    searchCate = e.target.id;
+    var temp = document.getElementById('searchbox').value
+    navigate(`/search/${searchCate}/${temp}`);
+  }
+  
+  const clickall = () => {
+    setActiveCate((activeCate) =>  activeCate.map(k => {
+        return { ...k, flag : !k.flag,};
+    }));
+  }
 
-const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
-const [postsPerPage, setPostsPerPage] = useState(5);
+  // 페이지네이션
+  const [currentpage, setCurrentpage] = useState(1); //현재페이지
+  const [postsPerPage, setPostsPerPage] = useState(6); //페이지당 아이템 개수
 
-const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
-const indexOfFirst = indexOfLast - postsPerPage;
-const currentPosts = (posts) => {
-  let currentPosts = 0;
-  currentPosts = filtered.slice(indexOfFirst, indexOfLast);
-  return currentPosts;
-};
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0);
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0);
+  // const [currentPosts, setCurrentPosts] = useState(0);
+
+  useEffect(() => {
+    setIndexOfLastPost(currentpage * postsPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postsPerPage);
+    // CurrentPosts(filtered.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentpage, indexOfFirstPost, indexOfLastPost, filtered, postsPerPage]);
+  
+  const currentPosts = (posts) => {
+    let currentPosts = 0;
+    currentPosts = filtered.slice(indexOfFirstPost, indexOfLastPost);
+    return currentPosts;
+  };
+  // debugger
+  // const setPage = (e) => {
+  //   setCurrentpage(e);
+  // };
+
+  // const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
+  // const [postsPerPage, setPostsPerPage] = useState(6);
+
+  // const indexOfLast = currentpage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
+  // const indexOfFirst = indexOfLast - postsPerPage;
+
 
 
 
@@ -268,6 +291,7 @@ const currentPosts = (posts) => {
 
           {filtered.length !== 0 ?
             <div className={styles.card_list}>
+                {/* { filtered.map((card, index) => { */}
                 { filtered && currentPosts(filtered).map((card, index) => {
                     return (
                         <div card =  {card}>
@@ -300,11 +324,13 @@ const currentPosts = (posts) => {
               </Link>
             </div>
             }
-            
+            {/* <Paging page={currentpage} item={6} count={filtered.length} setPage={setPage} /> */}
+           {/* <Paging page={currentpage} count={filtered.length} setPage={setPage} /> */}
             <Pagination
                 postsPerPage={postsPerPage}
                 totalPosts={filtered.length}
-                paginate={setCurrentPage}
+                paginate={setCurrentpage}
+                end={10}
               />
         </div>
         <MapContainer activeCate={activeCate} cardList={filtered} courselist={courselist}/>

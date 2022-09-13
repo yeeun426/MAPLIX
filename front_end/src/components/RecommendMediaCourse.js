@@ -13,7 +13,7 @@ const RecommendMediaCourse = ({id}) => {
         })
     }, [id])
 
-    console.log(course);
+    // console.log(course);
     // debugger
 
     return (
