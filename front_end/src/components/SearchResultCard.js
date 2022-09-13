@@ -8,7 +8,6 @@ import { MdBookmarkBorder } from "react-icons/md";
 import { MdBookmark } from "react-icons/md"; 
 
 export default function SearchResultCard({card}) {
-
   const id = window.localStorage.getItem("id");
   const l_num = card.l_num;
   const [detail, setDetail] = useState(false); 
