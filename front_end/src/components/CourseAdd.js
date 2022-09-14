@@ -403,7 +403,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div key={card.l_num} className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult1}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult1} lastCourse={{course : {p_y : '37.56681518862139', p_x : '126.97862962328479'}}}/>
                                 </div>
                             );
                         })}      
@@ -440,7 +440,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div key={card.l_num} className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2} lastCourse={courselist[0]}/>
                                 </div>
                             );
                         })}      
@@ -477,7 +477,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div key={card.l_num} className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3} lastCourse={courselist[1]}/>
                                 </div>
                             );
                         })}      
@@ -516,7 +516,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult4}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult4} lastCourse={courselist[2]}/>
                                 </div>
                             );
                         })}      
@@ -554,7 +554,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult5}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult5} lastCourse={courselist[3]}/>
                                 </div>
                             );
                         })}      
@@ -593,7 +593,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult6}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult6} lastCourse={courselist[4]}/>
                                 </div>
                             );
                         })}      
@@ -630,7 +630,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult7}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult7} lastCourse={courselist[5]}/>
                                 </div>
                             );
                         })}      
@@ -667,7 +667,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult8}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult8} lastCourse={courselist[6]}/>
                                 </div>
                             );
                         })}      
@@ -705,7 +705,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult9}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult9} lastCourse={courselist[7]}/>
                                 </div>
                             );
                         })}      
