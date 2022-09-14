@@ -31,7 +31,7 @@ const CourseAdd = (props) => {
 
         moveLine.setPath(temp)
 
-        return Math.round(moveLine.getLength()) / 1000
+        return (Math.round(moveLine.getLength()) / 1000) + " Km"
 
     }
 
