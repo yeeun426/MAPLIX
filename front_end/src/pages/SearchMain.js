@@ -146,8 +146,7 @@ function Search({id}) {
 
         {mediaModal ? 
           <div className='media_modal'>
-            <div>List</div>
-
+            <div>List <button onClick={() => setMediaModal(false)}>✖</button></div>
             <div className="modal_media_list">
                 {currentPosts(media).map((drama)=>(
                   <div>
@@ -168,7 +167,7 @@ function Search({id}) {
 
         {areaModal ? 
           <div className='media_modal_area'>
-            <div>List</div>
+            <div>List <button onClick={() => setAreaModal(false)}>✖</button></div>
             <div className="media_modal_area_list">
               <button onClick={() => (onClickArea("서울"))}>서울</button>
               <button onClick={() => (onClickArea("경기"))}>경기</button>
