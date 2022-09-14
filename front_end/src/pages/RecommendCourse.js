@@ -10,6 +10,9 @@ import axios from 'axios';
 import {RecommendStyle} from "../components/styled"
 import styles from "./RecommendCourse.module.css"
 import Loading from '../components/Loading'
+// import RecommendGangneungImg from '../components/RecommendGangneungImg'
+
+import RecommendImg from '../data/RecommendImg.json'
 SwiperCore.use([Navigation, Pagination]);
 
 function RecommendCourse() {
@@ -122,7 +125,7 @@ function RecommendCourse() {
         </div>
 
         <div>
-        TV, 영화 속 장면에 대한 촬영지 정보를 중심으로 <br/>주변 관광정보를 종합 제공하는 통합여행정보 서비스인 '두루누비'의 코스 정보
+          TV, 영화 속 장면에 대한 촬영지 정보를 중심으로 <br/>주변 관광정보를 종합 제공하는 통합여행정보 서비스인 '두루누비'의 코스 정보
         </div>
 
         <div className="recommend_course_wrapper">
@@ -138,15 +141,24 @@ function RecommendCourse() {
         ?<Loading />
         :<div className="recommend_course_container">
           <div className="recommend_course_list active">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          >
-          {gangneungCourse.map((course) => (
-            <SwiperSlide>
-            <div className="recommend_course_item" key={course.crsIdx}>
+          > */}
+          {gangneungCourse.map((course, index) => (
+            // <SwiperSlide>
+            <div className="recommend_course_item" key={index}>
+            {RecommendImg.gangneung.map((img)=>(
+            <>
+              {index === img.id && 
+                <div className="course_img">
+                  <img src={img.img} alt=""/>
+                </div>
+                }
+            </>
+              ))}
               <div className="course_title">
                 {course.crsKorNm}
               </div>
@@ -168,21 +180,31 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-          </SwiperSlide>
+
+          // </SwiperSlide>
           ))}
-          </Swiper>
+          {/* </Swiper> */}
           </div>
 
           <div className="recommend_course_list">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          >
-          {seoulCourse.map((course) => (
-            <SwiperSlide>
-            <div className="recommend_course_item" key={course.crsIdx}>
+          > */}
+          {seoulCourse.map((course, index) => (
+            // <SwiperSlide>
+            <div className="recommend_course_item" key={index}>
+            {RecommendImg.seoul.map((img)=>(
+            <>
+              {index === img.id && 
+                <div className="course_img">
+                  <img src={img.img} alt=""/>
+                </div>
+                }
+            </>
+            ))}
               <div className="course_title">
                 {course.crsKorNm}
               </div>
@@ -204,21 +226,30 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            </SwiperSlide>
+            // </SwiperSlide>
           ))}
-            </Swiper>
+            {/* </Swiper> */}
           </div>
 
           <div className="recommend_course_list">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          >
-          {busanCourse.map((course) => (
-            <SwiperSlide>
-            <div className="recommend_course_item" key={course.crsIdx}>
+          > */}
+          {busanCourse.map((course, index) => (
+            // <SwiperSlide>
+            <div className="recommend_course_item" key={index}>
+            {RecommendImg.busan.map((img)=>(
+            <>
+              {index === img.id && 
+                <div className="course_img">
+                  <img src={img.img} alt=""/>
+                </div>
+                }
+            </>
+              ))}
               <div className="course_title">
                 {course.crsKorNm}
               </div>
@@ -240,21 +271,31 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            </SwiperSlide>
+            // </SwiperSlide>
           ))}
-            </Swiper>
+            {/* </Swiper> */}
           </div>
 
           <div className="recommend_course_list">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          >
-          {incheonCourse.map((course) => (
-            <SwiperSlide>
-            <div className="recommend_course_item" key={course.crsIdx}>
+          > */}
+          {incheonCourse.map((course, index) => (
+            
+            // <SwiperSlide>
+            <div className="recommend_course_item" key={index}>
+            {RecommendImg.incheon.map((img)=>(
+              <>
+                {index === img.id && 
+                  <div className="course_img">
+                    <img src={img.img} alt=""/>
+                  </div>
+                  }
+              </>
+            ))}
               <div className="course_title">
                 {course.crsKorNm}
               </div>
@@ -276,21 +317,30 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            </SwiperSlide>
+            // </SwiperSlide>
           ))}
-          </Swiper>
+          {/* </Swiper> */}
           </div>
 
           <div className="recommend_course_list">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          >
-          {jejuCourse.map((course) => (
-            <SwiperSlide>
-            <div className="recommend_course_item" key={course.crsIdx}>
+          > */}
+          {jejuCourse.map((course, index) => (
+            // <SwiperSlide>
+            <div className="recommend_course_item" key={index}>
+            {RecommendImg.jeju.map((img)=>(
+              <>
+                {index === img.id && 
+                  <div className="course_img">
+                    <img src={img.img} alt=""/>
+                  </div>
+                  }
+              </>
+              ))}
               <div className="course_title">
                 {course.crsKorNm}
               </div>
@@ -312,9 +362,9 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            </SwiperSlide>
+            // </SwiperSlide>
           ))}
-          </Swiper>
+          {/* </Swiper> */}
           </div>
         </div>
         }

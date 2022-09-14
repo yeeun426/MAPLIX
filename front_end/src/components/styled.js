@@ -95,6 +95,15 @@ export const RecommendStyle = styled.div`
         top: 20px;
         color: #395C3C;
     }
+
+    .course_img{
+        text-align: center;
+    }
+
+    .course_img img{
+        width: 500px;
+        height: 350px;
+    }
 `;
 
 export const MediaCardStyles= styled.div`
