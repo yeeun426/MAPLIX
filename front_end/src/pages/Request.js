@@ -63,6 +63,7 @@ const Request = () => {
         axios.post("http://localhost:8000/api/mypage/requestimg", formData, config)
         .then((response) => {
           console.log(response);
+          alert("요청 완료")
           document.location.href = '/'
         })
       }
