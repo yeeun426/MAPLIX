@@ -17,7 +17,7 @@ export default function CommunityCard({card}) {
           <div className={styles.like_name}>{card.p_name}</div>
           <div img_box>
               <ol>
-                  {/* <ul>{card.l_num}</ul> */}
+                <br></br>
                   <ul>{card.address}</ul>
                   <ul>#{card.m_name} #{card.m_type} #{card.category}</ul>
               </ol>

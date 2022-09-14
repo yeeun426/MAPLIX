@@ -19,6 +19,13 @@ export const CourseResultCardStyle = styled.div`
     .mci-address{
         color: #293D45 !important;
     }
+
+    .mci-length{
+        
+        color: #000000 !important;
+    }
+
+
 `;
 
 export const RecommendStyle = styled.div`

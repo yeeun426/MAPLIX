@@ -57,6 +57,7 @@ const WritePost = () => {
         axios.post("http://localhost:8000/api/community/writepostimg", formData, config)
         .then((response) => {
           console.log(response);
+          document.location.href = '/community'
         })
       }
     } 

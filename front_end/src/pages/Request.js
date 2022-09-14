@@ -43,6 +43,7 @@ const Request = () => {
         axios.post("http://localhost:8000/api/mypage/request", {media_name, r_content, id, m_type})
         .then((response) => {
           console.log(response);
+          document.location.href = '/'
         })
       }
       else {
@@ -62,6 +63,8 @@ const Request = () => {
         axios.post("http://localhost:8000/api/mypage/requestimg", formData, config)
         .then((response) => {
           console.log(response);
+          alert("요청 완료")
+          document.location.href = '/'
         })
       }
     } 

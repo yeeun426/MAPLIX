@@ -15,6 +15,7 @@ const db = mysql.createPool({
     user: "root",
     password: "1234",
     database: "test",
+    dateStrings:"date"
 });
 
 const multer = require('multer');
@@ -126,7 +127,110 @@ app.post("/api/mycourse", (req, res) => {
 });
 
 // mycourse 생성
-app.post("/api/coursecreate", upload.single('image'), (req, res) => {
+app.post("/api/coursecreate", (req, res) => {
+  const id = req.body.id;
+  const mc_title = req.body.mc_title;
+  const mc_content = req.body.mc_content;
+  const count = req.body.count;
+  const course1 = req.body.course1;
+  const course2 = req.body.course2;
+  const course3 = req.body.course3;
+  const course4 = req.body.course4;
+  const course5 = req.body.course5;
+  const course6 = req.body.course6;
+  const course7 = req.body.course7;
+  const course8 = req.body.course8;
+  const course9 = req.body.course9;
+
+  if (count == 1) {
+    const my_course = course1;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 2) {
+    const my_course = course1 + "/" + course2;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 3) {
+    const my_course = course1 + "/" + course2 + "/" + course3;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 4) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 5) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 6) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6;
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 7) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+  else if (count == 8) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+
+  else if (count == 9) {
+    const my_course = course1 + "/" + course2 + "/" + course3 + "/" + course4 + "/" + course5 + "/" + course6 + "/" + course7 + "/" + course8 + "/" + course9;
+
+    const sqlQuery =  "INSERT INTO test.mycourse (id, my_course, mc_title, mc_content) VALUES (?, ?, ?, ?)"
+    // db.query(sqlQuery, [record_title_var, record_title, record_content_var, record_content, id, m_num, poster], (err, result) => {
+    db.query(sqlQuery, [id, my_course, mc_title, mc_content], (err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+  }
+
+});
+
+app.post("/api/coursecreateimg", upload.single('image'), (req, res) => {
   const id = req.body.id;
   const mc_title = req.body.mc_title;
   const mc_content = req.body.mc_content;
@@ -395,7 +499,7 @@ app.post("/api/post/deletelikelist", (req, res) => {
 });
 })
 
-app.post("/signup", (req, res) => {
+app.post("/api/signup", (req, res) => {
   const email = req.body.email;
   const id = req.body.id;
   const pw = req.body.pw;
@@ -406,8 +510,9 @@ app.post("/signup", (req, res) => {
 
   console.log(email, id, pw, u_name, birth, gender, nick_name);
 
-  const sqlQuery = "INSERT INTO test.test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
+  const sqlQuery = "INSERT INTO test.user(id, pw, u_name, birth, gender, nick_name, email) VALUES (?,?,?,?,?,?,?);";
   db.query(sqlQuery, [id, pw, u_name, birth, gender, nick_name, email], (err, result) => {
+    console.log(err)
     res.send('success!'); 
     console.log(result)
 });
@@ -460,15 +565,17 @@ app.post("/api/stamp", (req, res) => {
   });
 });
 
-app.get("/poster", (req, res) => {
-  const id = 'jisu';
+app.post("/api/poster", (req, res) => {
+  const id = req.body.id;
 
-  for (i = 4; i < 206; i++) {
+  console.log(id)
+  for (i = 1; i < 206; i++) {
     const poster = 'poster' + i;
     const m_num = i;
     const sqlQuery = "INSERT INTO test.stamp (id, m_num, poster) VALUES (?, ?, ?);";
   
     db.query(sqlQuery, [id, m_num, poster], (error, result) => {
+      console.log(error);
       console.log(result);
   });
   }

@@ -131,7 +131,7 @@ const filterOn = (e) => {
   document.getElementsByClassName('filterOn')[0].classList.remove('filterOn') 
   }
 
-  const newnew = cardList.filter((card) => card.category === e.target.id)
+  const newnew = cardList.filter((card) => card.category.includes(e.target.id) )
 
   console.log(newnew)
 
