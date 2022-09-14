@@ -46,7 +46,7 @@ function MyPage() {
 
   return (
     <div className={styles.main_container}>
-      <Layout activeMenu="mypage">
+      <Layout activeMenu="likelist">
       <div className={styles.title_like}>
         즐겨찾기
       </div>

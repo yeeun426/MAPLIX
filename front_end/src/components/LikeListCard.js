@@ -13,7 +13,7 @@ export default function CommunityCard({card}) {
         <div className={styles.like_img}>
           <img className={styles.like_img} src={'/location/location_' + card.l_image + '.png'}></img>
         </div>  
-        <div className={styles.like_txt}>
+        <div className={styles.like_list_txt}>
           <div className={styles.like_name}>{card.p_name}</div>
           <div img_box>
               <ol>

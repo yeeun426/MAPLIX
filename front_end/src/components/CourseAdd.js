@@ -13,8 +13,27 @@ import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
 
 // ㅈㄴ 노답버전
+const { kakao } = window;
 
 const CourseAdd = (props) => {
+
+
+    const calculate = (prevCourse, nextCourse) => {
+
+        //console.log('프리브, 넥스트 ; ', prevCourse, nextCourse)
+
+        var prevPos = new kakao.maps.LatLng(prevCourse.p_y, prevCourse.p_x);
+        var nextPos = new kakao.maps.LatLng(nextCourse.p_y, nextCourse.p_x);
+
+        var temp = [prevPos, nextPos]
+
+        var moveLine = new kakao.maps.Polyline({  });
+
+        moveLine.setPath(temp)
+
+        return Math.round(moveLine.getLength()) / 1000
+
+    }
 
     const id = window.localStorage.getItem("id");
 
@@ -102,6 +121,7 @@ const CourseAdd = (props) => {
             });
 
             setCourselist((prev) => {return newnew})
+            // varesultLength = calculate(result1, result2)
             setCount(2);
         }
     }, [result2])
@@ -379,6 +399,7 @@ const CourseAdd = (props) => {
         }
         // debugger
         e.target.parentElement.lastChild.classList.add('modalOn')
+        setCurrentpage(1);
     }
 
     return(
@@ -412,7 +433,7 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div key={card.l_num} className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult1}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult1} lastCourse={{course : {p_y : '37.56681518862139', p_x : '126.97862962328479'}}}/>
                                 </div>
                             );
                         })}      
@@ -436,6 +457,11 @@ const CourseAdd = (props) => {
                     {!changeNum2 ? "+" : "2"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"10%"}}>
+                { !isNaN(result2) ? '' : calculate(result1, result2)}
+                {/* {calculate(result1, result2)} */}
+                </div>
+
                 <CourseList listTop="13%">
                     <div className="course-add-title">{result2.p_name}</div>
                     <div className="course-add-cate">▶{result2.category}</div>
@@ -446,20 +472,21 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal2(false); setChangeNum2(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
-                                <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
+                                <div key={card.l_num} className="modal_course_container" card = {card}>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2} lastCourse={courselist[0]}/>
                                 </div>
                             );
                         })}      
                     </div>
 
-                    <Pagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={cardList.length}
-                        paginate={setCurrentpage}
-                    />
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null }  */}
             </div>
@@ -472,6 +499,10 @@ const CourseAdd = (props) => {
                     {!changeNum3 ? "+" : "3"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"21%"}}>
+                { !isNaN(result3) ? '' : calculate(result2, result3)}
+                </div>
+
                 <CourseList listTop="24%">
                     <div className="course-add-title">{result3.p_name}</div>
                     <div className="course-add-cate">▶{result3.category}</div>
@@ -481,16 +512,22 @@ const CourseAdd = (props) => {
                 <ModalCourse ModalTop = "25%">
                     {/* <span onClick={()=>{setModal3(false); setChangeNum3(true)}}>모달</span>  */}
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3} lastCourse={courselist[1]}/>
                                 </div>
                             );
                         })}      
                     </div>
+
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -504,6 +541,11 @@ const CourseAdd = (props) => {
                     {!changeNum4 ? "+" : "4"}
                 </CourseNum>
 
+                
+                <div className={styles.course_between_distance} style={{top:"32%"}}>
+                { !isNaN(result4) ? '' : calculate(result3, result4)}
+                </div>
+
                 <CourseList listTop="35%">
                     <div className="course-add-title">{result4.p_name}</div>
                     <div className="course-add-cate">▶{result4.category}</div>
@@ -515,14 +557,20 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult4}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult4} lastCourse={courselist[2]}/>
                                 </div>
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -537,6 +585,10 @@ const CourseAdd = (props) => {
                     {!changeNum5 ? "+" : "5"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"43%"}}>
+                { !isNaN(result5) ? '' : calculate(result4, result5)}
+                </div>
+
                 <CourseList listTop="46%">
                     <div className="course-add-title">{result5.p_name}</div>
                     <div className="course-add-cate">▶{result5.category}</div>
@@ -550,11 +602,17 @@ const CourseAdd = (props) => {
                         {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult5}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult5} lastCourse={courselist[3]}/>
                                 </div>
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -569,6 +627,10 @@ const CourseAdd = (props) => {
                     {!changeNum6 ? "+" : "6"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"54%"}}>
+                { !isNaN(result6) ? '' : calculate(result5, result6)}
+                </div>
+
                 <CourseList listTop="57%">
                     <div className="course-add-title">{result6.p_name}</div>
                     <div className="course-add-cate">▶{result6.category}</div>
@@ -580,14 +642,20 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult6}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult6} lastCourse={courselist[4]}/>
                                 </div>
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -600,7 +668,11 @@ const CourseAdd = (props) => {
                 <CourseNum className="add-course" onClick={courseModalClick} top="69%">
                     {!changeNum7 ? "+" : "7"}
                 </CourseNum>
-
+                
+                <div className={styles.course_between_distance} style={{top:"65%"}}>
+                { !isNaN(result7) ? '' : calculate(result6, result7)}
+                </div>
+                
                 <CourseList listTop="68%">
                     <div className="course-add-title">{result7.p_name}</div>
                     <div className="course-add-cate">▶{result7.category}</div>
@@ -611,15 +683,20 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal7(false); setChangeNum7(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult7}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult7} lastCourse={courselist[5]}/>
                                 </div>
                             );
                         })}      
                     </div>
-                    
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -633,6 +710,10 @@ const CourseAdd = (props) => {
                     {!changeNum8 ? "+" : "8"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"76%"}}>
+                { !isNaN(result8) ? '' : calculate(result7, result8)}
+                </div>
+                
                 <CourseList listTop="79%">
                     <div className="course-add-title">{result8.p_name}</div>
                     <div className="course-add-cate">▶{result8.category}</div>
@@ -643,14 +724,20 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal8(false); setChangeNum8(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult8}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult8} lastCourse={courselist[6]}/>
                                 </div>
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -665,6 +752,10 @@ const CourseAdd = (props) => {
                     {!changeNum9 ? "+" : "9"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"87%"}}>
+                { !isNaN(result9) ? '' : calculate(result8, result9)}
+                </div>
+
                 <CourseList listTop="90%">
                     <div className="course-add-title">{result9.p_name}</div>
                     <div className="course-add-cate">▶{result9.category}</div>
@@ -675,14 +766,20 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal9(false); setChangeNum9(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult9}/>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult9} lastCourse={courselist[7]}/>
                                 </div>
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -747,7 +844,7 @@ const CourseAdd = (props) => {
         display: none;
         background-color: #e0edf1;
         width: 280px;
-        height: 580px;
+        height: 650px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
         z-index: 3;

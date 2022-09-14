@@ -26,7 +26,7 @@ export default function CommunityCard({card}) {
             </ol>
 
             <div className={styles.img_item}>
-              <img className={styles.img_item} src={'http://localhost:8000' + card.cm_image} onError={handleImgError}></img>
+              <img src={'http://localhost:8000' + card.cm_image} onError={handleImgError}></img>
             </div>
         </div>
 

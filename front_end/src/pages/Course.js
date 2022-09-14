@@ -53,15 +53,7 @@ function Course(){
   { category : "etc" , flag : false, realCate: "기타"}
 ];
 
-// let nowkakaocate = activeCate.filter(k => {
-//   if (k.flag !== "likelist" || k.flag !== 'mediaplace'){
-//     if (k.flag )
-//   }
-//       return k.flag === true ? true : false })
-
 const [cardList, setCardList] = useState([])
-
-
 const loadData = () => {
 
   let nowcate = "";
@@ -241,25 +233,11 @@ useEffect(()=> {
         </div>
 
         <div className='Lower'>
-          {/* <form className="inputForm" onSubmit={handleSubmit}>
-            <input
-              placeholder="Search Place..."
-              onChange={onChange}
-              value={inputText}
-            />
-            <button type="submit">검색</button>
-          </form> */}
-
           <div className="course-sidebar">
             <div id="course-line"></div>
             <CourseAdd activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} />
           </div>
-          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} pagename={'Course'}/>      
-          {/* <div
-          id="kakaoMap"
-          style={{
-            height: '1000px',
-          }}></div> */}
+          <MapContainer activeCate={activeCate} cardList={cardList} courselist={courselist} setCourselist={setCourselist} pagename={'Course'} />      
           </div>      
         </div>
     )

@@ -25,7 +25,6 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
     
     if (cardList ){
       if (activeCate){
-        console.log('코스리스트', courselist)
 
         var mapContainer = document.getElementById('kakaoMap'), // 지도를 표시할 div  
         mapOption = { 
@@ -64,11 +63,6 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
               position: new kakao.maps.LatLng(data.p_y, data.p_x),
               image : markerImage
           });
-          // <div id="closeContainer">
-          //     <button id="modalCloseBtn" onClick={()=> {onClose(false);}}>
-          //       ✖
-          //     </button>
-          //   </div>
 
           var content = document.createElement('div');
           content.className = 'customoverlay'
@@ -104,6 +98,7 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
         }        
         
         var linePath = [];
+        // var betweenPath = [];
 
         console.log('코스 들어옴', courselist)
       
@@ -139,12 +134,9 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
             });
 
             coursemarker.setMap(map)
-          }
-          
-          
+          }         
         }  
 
-        console.log(linePath)
 
         var polyline = new kakao.maps.Polyline({
           path: linePath, // 선을 구성하는 좌표배열 입니다
@@ -155,6 +147,7 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
         });
 
         polyline.setMap(map);
+     
       } 
     } 
   }, );

@@ -213,6 +213,12 @@
   right: 17px;
 }
 
+.stamp_img_pieces{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
 :global #before_img {
   width: 200px;
   opacity: 0.5;

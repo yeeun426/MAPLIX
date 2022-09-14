@@ -3,10 +3,19 @@ import {CourseResultCardStyle} from "./styled";
 // import Modal from "./PostModal";
 import React, { useState }from "react";
 
+const { kakao } = window;
 
-export default function SearchResultCard({card, setResult}) {
+export default function SearchResultCard({card, setResult, lastCourse}) {
 
-  
+  var prevPos = new kakao.maps.LatLng(lastCourse.course.p_y, lastCourse.course.p_x);
+  var nextPos = new kakao.maps.LatLng(card.p_y, card.p_x);
+
+  var temp = [prevPos, nextPos]
+
+  var moveLine = new kakao.maps.Polyline({  });
+
+  moveLine.setPath(temp)
+
   const onClickPlace =()=> {
     if (window.confirm('경로에 추가하시겟습니까?')){
         setResult(card);
@@ -26,6 +35,7 @@ export default function SearchResultCard({card, setResult}) {
                 <ul className="mci-address">{card.address}</ul>
                 <ul>#{card.m_name}</ul>
                 <ul>#{card.category}</ul>
+                <ul className="mci-length"># "{lastCourse.course.p_name}" 과(와) {Math.round(moveLine.getLength()) / 1000 + 'Km 떨어진 거리'}</ul>
                 {/* <button onClick={onClickPlace}>추가하기</button> */}
             
             </ol>
