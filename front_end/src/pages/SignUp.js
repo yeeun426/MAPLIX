@@ -221,7 +221,7 @@ const SignUp = () => {
       // toast.error("Please provide value into each input field");
     } else {
         console.log(email, id, pw, u_name, birth, gender, nick_name);
-      const res = axios.post("http://localhost:8000/signup", {
+      const res = axios.post("http://localhost:8000/api/signup", {
         email,
         id,
         pw,
@@ -233,8 +233,9 @@ const SignUp = () => {
         check_id,
       })
       .then((res) => {
+        axios.post("http://localhost:8000/api/poster", {id})
         setState({email:"", id: "", pw: "", confirm_pw:"", u_name: "", birth: "", gender: "", nick_name: "", check_id:false});
-        alert("success!")
+        alert("회원가입 완료")
         document.location.href = '/login'
       })
       console.log(res);
@@ -291,7 +292,6 @@ const SignUp = () => {
                             <option value="woman">여</option>
                             <option value="man">남</option>
                         </select>
-                        <button onClick={gCheck}>성별 확인</button>
                     </div>
 
                     <div className={styles.signup_check}>
