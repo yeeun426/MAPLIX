@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import './SearchPage.css';
-import mountain from "../img/mountain.png";
+import sukso from "../img/sukso.png";
 import forest from "../img/forest.png";
 import sea from "../img/sea.png";
 import river from "../img/river.png";
@@ -48,7 +48,7 @@ function SearchPage () {
   const [filtered, setFiltered] = useState([]); 
 
   const initialCate = [
-    { category : "mountain" , flag : true, realCate: "산"},
+    { category : "sukso" , flag : true, realCate: "숙소"},
     { category : "forest" , flag : true, realCate: "숲"},
     { category : "sea" , flag : true, realCate: "바다"},
     { category : "river" , flag : true, realCate: "강"},
@@ -195,8 +195,8 @@ const currentPosts = (posts) => {
           <div className='Filter'>
 
             <button className='FilterIcons'  onClick={filterOn}>
-              <img src={mountain} alt = "mountain" id="산" idx="0" kid="산"/>
-              <li>#산</li>
+              <img src={sukso} alt = "sukso" id="숙소" idx="0" kid="산"/>
+              <li>#숙소</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
