@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import styles from "./CommunityCard.module.css";
+import { MediaCardStyles } from "./styled.js";
 
 export default function MediaCard({card, openModal}) {
 
@@ -13,14 +13,11 @@ export default function MediaCard({card, openModal}) {
       }
 
     return (
-        <div className={styles.like_list} onClick={onClickMedia} >
-            <div className={styles.like_img}>
-                <img className={styles.like_img} src={'/poster/poster_' + card.m_num + '.jpg'}></img>
-            </div> 
-
-            <div className={styles.like_txt}>
-                <div className={styles.like_name}>{card.m_name}</div>
+        <MediaCardStyles onClick={onClickMedia}>
+            <div className="media_modal_items">
+                <img src={'/poster/poster_' + card.m_num + '.jpg'}></img>
+                <div>{card.m_name}</div>
             </div>
-        </div>
+        </MediaCardStyles>
     );
 }

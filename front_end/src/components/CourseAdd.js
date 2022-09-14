@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 
 import click from '../img/click.png';
 import addcourse from '../img/addcourse.png'
+import checkcourse from '../img/checkcourse.png'
 
 import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
@@ -329,15 +330,23 @@ const CourseAdd = (props) => {
 
 
         //cardList
-        const [postsPerPage, setPostsPerPage] = useState(4); //페이지 당 게시물 수 
-        const [currentPage, setCurrentPage] = useState(1); //현재 페이지 번호
-
-        const indexOfLast = currentPage * postsPerPage; //postsPerPage : 총 데이터를 postsPerPage만큼 등분해서 보여줍니다.
-        const indexOfFirst = indexOfLast - postsPerPage;
+        const [currentpage, setCurrentpage] = useState(1); //현재페이지
+        const [postsPerPage, setPostsPerPage] = useState(4); //페이지당 아이템 개수
+      
+        const [indexOfLastPost, setIndexOfLastPost] = useState(0);
+        const [indexOfFirstPost, setIndexOfFirstPost] = useState(0);
+        // const [currentPosts, setCurrentPosts] = useState(0);
+      
+        useEffect(() => {
+          setIndexOfLastPost(currentpage * postsPerPage);
+          setIndexOfFirstPost(indexOfLastPost - postsPerPage);
+          // CurrentPosts(filtered.slice(indexOfFirstPost, indexOfLastPost));
+        }, [currentpage, indexOfFirstPost, indexOfLastPost, cardList, postsPerPage]);
+        
         const currentPosts = (posts) => {
-        let currentPosts = 0;
-        currentPosts = cardList.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
+          let currentPosts = 0;
+          currentPosts = cardList.slice(indexOfFirstPost, indexOfLastPost);
+          return currentPosts;
         };
 
     // const ResultCard = (e) => {
@@ -399,9 +408,10 @@ const CourseAdd = (props) => {
                         })}      
                     </div>
                 <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={cardList.length}
-                paginate={setCurrentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
                 />
                     
                 </ModalCourse>
@@ -434,6 +444,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={cardList.length}
+                        paginate={setCurrentpage}
+                    />
                 </ModalCourse>
                 {/* : null }  */}
             </div>
@@ -663,7 +679,7 @@ const CourseAdd = (props) => {
             :null}
 
 
-            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}} >코스 확인하기</button>
+            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}}><img src={checkcourse} alt="checkcourse" /></button>
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>
@@ -694,8 +710,8 @@ const CourseAdd = (props) => {
                     </div>
 
                     <div className={styles.write_item}>
-                        <label htmlFor='cm_image'>이미지</label>
-                        <input type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
+                        <label htmlFor='cm_image' style={{fontSize:"14px"}}>이미지</label>
+                        <input style={{padding:"0px"}} type="file" id="file" accept='image/*' onChange={handleImgChange} multiple={false} file={img.file} fileName={img.fileName}/>
                     </div>
                     <input className={styles.btn_submit} type="submit" value="등록" />        
                 </form>
@@ -721,7 +737,7 @@ const CourseAdd = (props) => {
         display: none;
         background-color: #e0edf1;
         width: 280px;
-        height: 560px;
+        height: 580px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
         z-index: 3;

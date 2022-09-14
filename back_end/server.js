@@ -460,21 +460,20 @@ app.post("/api/stamp", (req, res) => {
   });
 });
 
-app.post("/api/poster", (req, res) => {
-  const id = req.body.id;
-  const m_type = req.body.m_type;
-  const media_name = "%"  + req.body.media_name + "%";
+app.get("/poster", (req, res) => {
+  const id = 'jisu';
 
-  console.log(id, m_type, media_name)
-  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
-  const sqlQuery = "SELECT * FROM test.stamp WHERE m_num = any (SELECT M.m_num FROM test.stamp as S, test.media as M WHERE S.id = ? and M.m_type = ? and M.m_name like ? );";
-  // media 테이블에서 m_type, media_name에 해당하는 poster 불러오기
-  // const sqlQuery = "SELECT * FROM test.stamp WHERE m_type = ? AND media_name =?;";
+  for (i = 4; i < 206; i++) {
+    const poster = 'poster' + i;
+    const m_num = i;
+    const sqlQuery = "INSERT INTO test.stamp (id, m_num, poster) VALUES (?, ?, ?);";
   
-  db.query(sqlQuery, [id, m_type, media_name], (error, result) => {
-    console.log(result);
-    res.send(result);
+    db.query(sqlQuery, [id, m_num, poster], (error, result) => {
+      console.log(result);
   });
+  }
+  // media 테이블에서 m_type, media_name에 해당하는 m_num을 가져와서 stamp 테이블에서 검색하기
+  
 });
 
 // 도장깨기 글쓰기
