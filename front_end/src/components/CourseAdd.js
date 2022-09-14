@@ -13,8 +13,27 @@ import CourseResultCard from './CourseResultCard'
 import MapContainer from '../components/MapContainer';
 
 // ㅈㄴ 노답버전
+const { kakao } = window;
 
 const CourseAdd = (props) => {
+
+
+    const calculate = (prevCourse, nextCourse) => {
+
+        //console.log('프리브, 넥스트 ; ', prevCourse, nextCourse)
+
+        var prevPos = new kakao.maps.LatLng(prevCourse.p_y, prevCourse.p_x);
+        var nextPos = new kakao.maps.LatLng(nextCourse.p_y, nextCourse.p_x);
+
+        var temp = [prevPos, nextPos]
+
+        var moveLine = new kakao.maps.Polyline({  });
+
+        moveLine.setPath(temp)
+
+        return Math.round(moveLine.getLength()) / 1000
+
+    }
 
     const id = window.localStorage.getItem("id");
 
@@ -102,6 +121,7 @@ const CourseAdd = (props) => {
             });
 
             setCourselist((prev) => {return newnew})
+            // varesultLength = calculate(result1, result2)
             setCount(2);
         }
     }, [result2])
@@ -428,7 +448,8 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"10%"}}>
-                    123km
+                { !isNaN(result2) ? '' : calculate(result1, result2)}
+                {/* {calculate(result1, result2)} */}
                 </div>
 
                 <CourseList listTop="13%">
@@ -469,7 +490,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"21%"}}>
-                    123km
+                { !isNaN(result3) ? '' : calculate(result2, result3)}
                 </div>
 
                 <CourseList listTop="24%">
@@ -512,7 +533,7 @@ const CourseAdd = (props) => {
 
                 
                 <div className={styles.course_between_distance} style={{top:"32%"}}>
-                    123km
+                { !isNaN(result4) ? '' : calculate(result3, result4)}
                 </div>
 
                 <CourseList listTop="35%">
@@ -555,7 +576,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"43%"}}>
-                    123km
+                { !isNaN(result5) ? '' : calculate(result4, result5)}
                 </div>
 
                 <CourseList listTop="46%">
@@ -597,7 +618,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"54%"}}>
-                    123km
+                { !isNaN(result6) ? '' : calculate(result5, result6)}
                 </div>
 
                 <CourseList listTop="57%">
@@ -639,7 +660,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
                 
                 <div className={styles.course_between_distance} style={{top:"65%"}}>
-                    123km
+                { !isNaN(result7) ? '' : calculate(result6, result7)}
                 </div>
                 
                 <CourseList listTop="68%">
@@ -680,7 +701,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"76%"}}>
-                    123km
+                { !isNaN(result8) ? '' : calculate(result7, result8)}
                 </div>
                 
                 <CourseList listTop="79%">
@@ -722,7 +743,7 @@ const CourseAdd = (props) => {
                 </CourseNum>
 
                 <div className={styles.course_between_distance} style={{top:"87%"}}>
-                    123km
+                { !isNaN(result9) ? '' : calculate(result8, result9)}
                 </div>
 
                 <CourseList listTop="90%">
@@ -813,7 +834,7 @@ const CourseAdd = (props) => {
         display: none;
         background-color: #e0edf1;
         width: 280px;
-        height: 580px;
+        height: 650px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
         z-index: 3;
