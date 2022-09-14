@@ -65,7 +65,7 @@ export default function CommunityCard({card, openModal}) {
       {courseModal ?
       <ModalOverlayStyle>
         <div className="mycourse_modal">
-        <hr/>
+        {/* <hr/> */}
         <div style={{display: 'flex', justifyContent:"space-between"}}>
           <div></div>
           <div className="mycourse_modal_title">{card.mc_title}</div>
