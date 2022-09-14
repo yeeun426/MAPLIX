@@ -83,6 +83,9 @@ const loadData = () => {
         
     } else{
       var ps = new kakao.maps.services.Places(); 
+      if (nowcate === '바다'){
+        nowcate = '해변'
+      }
 
       ps.keywordSearch(nowcate , placesSearchCB); 
       // ps.keywordSearch(nowcate , placesSearchCB, {page: 2 , size : 15}); 
