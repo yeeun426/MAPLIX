@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "http-proxy-middleware": "^2.0.6",
-    "react-js-pagination": "^3.0.3",
-    "swiper": "^8.3.1"
+    "swiper": "^8.4.0"
   }
 }
