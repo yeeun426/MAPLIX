@@ -111,6 +111,13 @@ ol, ul {
   width: 100%;
 }
 
+.like_list_txt{
+  padding: 15px 15px;
+  text-align: left;
+  width: 100%;
+  align-self: center;
+}
+
 .mycourse_modal{
   background-color: #e0edf1;
   width: 400px;
