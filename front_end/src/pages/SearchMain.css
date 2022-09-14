@@ -127,7 +127,7 @@
   box-shadow: 5px 3px 5px #0000003d;
   position: absolute;
   z-index: 1;
-  top: 190px;
+  /* top: 190px; */
   width: 90%;
   padding: 10px;
   box-sizing: border-box;
@@ -151,13 +151,13 @@
     box-shadow: 5px 3px 5px #0000003d;
     position: absolute;
     z-index: 1;
-    top: 190px;
+    /* top: 190px; */
     width: 90%;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
-.media_modal_area button{
+.media_modal_area_list button{
     font-size: 14px;
     font-family: 'yg-jalnan';
     text-align: center;

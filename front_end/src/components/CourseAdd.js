@@ -369,6 +369,7 @@ const CourseAdd = (props) => {
         }
         // debugger
         e.target.parentElement.lastChild.classList.add('modalOn')
+        setCurrentpage(1);
     }
 
     return(
@@ -436,20 +437,21 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal2(false); setChangeNum2(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
-                                <div className="modal_course_container" card = {card}>
+                                <div key={card.l_num} className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
                                 </div>
                             );
                         })}      
                     </div>
 
-                    <Pagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={cardList.length}
-                        paginate={setCurrentpage}
-                    />
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null }  */}
             </div>
@@ -471,16 +473,22 @@ const CourseAdd = (props) => {
                 <ModalCourse ModalTop = "25%">
                     {/* <span onClick={()=>{setModal3(false); setChangeNum3(true)}}>모달</span>  */}
                     <ClickedCate/>
-                    {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
-                                <div className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3}/>
+                                <div key={card.l_num} className="modal_course_container" card = {card}>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
                                 </div>
                             );
                         })}      
                     </div>
+
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -505,7 +513,7 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult4}/>
@@ -513,6 +521,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -545,6 +559,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -570,7 +590,7 @@ const CourseAdd = (props) => {
                     <ClickedCate/>
                     {/* <ResultCard /> */}
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult6}/>
@@ -578,6 +598,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -601,7 +627,7 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal7(false); setChangeNum7(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult7}/>
@@ -609,7 +635,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
-                    
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -633,7 +664,7 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal8(false); setChangeNum8(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult8}/>
@@ -641,6 +672,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>
@@ -665,7 +702,7 @@ const CourseAdd = (props) => {
                     {/* <span onClick={()=>{setModal9(false); setChangeNum9(true)}}>모달</span>  */}
                     <ClickedCate/>
                     <div className="modal_course_list">
-                        {cardList.map((card, index) => {
+                        {currentPosts(cardList).map((card, index) => {
                             return (
                                 <div className="modal_course_container" card = {card}>
                                     <CourseResultCard key={card.l_num} card={card} setResult={setResult9}/>
@@ -673,6 +710,12 @@ const CourseAdd = (props) => {
                             );
                         })}      
                     </div>
+                    <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={cardList.length}
+                    paginate={setCurrentpage}
+                    end={7}
+                />
                 </ModalCourse>
                 {/* : null } */}
             </div>

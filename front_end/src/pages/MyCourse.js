@@ -37,7 +37,7 @@ function MyCourse() {
     <>
      {/* {modal === true ? <Modal open={Modal} closeModal={() => {setModal(false);}} /> : null} */}
     <div className={styles.main_container}>
-      <Layout activeMenu="mypage">
+      <Layout activeMenu="mycourse">
       <div className={styles.title_like}>
         내 경로
       </div>

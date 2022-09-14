@@ -271,7 +271,7 @@ export default function WriteStamp({card, openModal}) {
             }
           }
         <ul id="stamp_title">{card.m_name}</ul>
-        <div>
+        <div className={styles.stamp_img_pieces}>
         {
           (function() {
             if (record1 == true) return (<img src={'/poster/poster_' + m_num + '_1.jpg'} id = "after_img" onClick={clickPoster1}></img>);
