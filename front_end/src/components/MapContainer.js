@@ -104,12 +104,23 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
         }        
         
         var linePath = [];
+        var betweenPath = [];
 
         console.log('코스 들어옴', courselist)
+
+        // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
+        var moveLine = new kakao.maps.Polyline({
+          strokeWeight: 3, // 선의 두께입니다 
+          strokeColor: '#db4040', // 선의 색깔입니다
+          strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+          strokeStyle: 'solid' // 선의 스타일입니다    
+        });
       
         for (let i=0; i<courselist.length; i++) {
           if (courselist[i].course !== null){
             linePath.push(new kakao.maps.LatLng(courselist[i].course.p_y, courselist[i].course.p_x))
+
+            displayLenth(linePath, i)
 
             var curimg;
             if (i === 0){
@@ -144,7 +155,25 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
           
         }  
 
+        function displayLenth(linePath, order){
+          if (order > 0){
+            var temp = [linePath[order], linePath[order-1]]
+            // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
+            var moveLine = new kakao.maps.Polyline({
+              strokeWeight: 3, // 선의 두께입니다 
+              strokeColor: '#db4040', // 선의 색깔입니다
+              strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle: 'solid' // 선의 스타일입니다    
+            });
+
+            moveLine.setPath(temp)
+
+            betweenPath.push(Math.round(moveLine.getLength()) / 1000)
+          }
+        }
+
         console.log(linePath)
+
 
         var polyline = new kakao.maps.Polyline({
           path: linePath, // 선을 구성하는 좌표배열 입니다
@@ -155,6 +184,9 @@ const MapContainer = ({activeCate, cardList, courselist, pagename}) => {
         });
 
         polyline.setMap(map);
+     
+        console.log('총거리 : ' + Math.round(polyline.getLength()) / 1000 + "Km");
+        console.log(betweenPath)
       } 
     } 
   }, );
