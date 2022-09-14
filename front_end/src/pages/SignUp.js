@@ -246,7 +246,7 @@ const SignUp = () => {
 
   return (
         <div className="SignUp">
-            <div id="title">Maplix</div>
+            <div id="titleMain">Maplix</div>
             <div className={styles.sub_txt}>하나의 아이디로 Maplix의 다양한 서비스를 이용해보세요.</div>
 
             <div className="signup_container">
