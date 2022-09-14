@@ -844,7 +844,8 @@ const CourseAdd = (props) => {
         display: none;
         background-color: #e0edf1;
         width: 280px;
-        height: 650px;
+        // height: 650px;
+        padding-bottom: 30px;
         border-radius: 30px;
         box-shadow: 3px 3px 3px #80808075;
         z-index: 3;
