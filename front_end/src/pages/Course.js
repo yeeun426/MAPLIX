@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Course.css';
-import mountain from "../img/mountain.png";
+import sukso from "../img/sukso.png";
 import forest from "../img/forest.png";
 import sea from "../img/sea.png";
 import river from "../img/river.png";
@@ -42,7 +42,7 @@ function Course(){
   const initialCate = [ // 필터 어떤거 클릭됐는지, true : 클릭된상태
   { category : "likelist", flag : true, realCate: "즐겨찾기"},
   { category : "mediaplace", flag : false, realCate: "촬영지"},  
-  { category : "mountain" , flag : false, realCate: "산"},
+  { category : "sukso" , flag : false, realCate: "숙소"},
   { category : "forest" , flag : false, realCate: "숲"},
   { category : "sea" , flag : false, realCate: "바다"},
   { category : "river" , flag : false, realCate: "강"},
@@ -198,8 +198,8 @@ useEffect(()=> {
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
-              <img src={mountain} alt = "mountain" id='mountain'/>
-              <li>#산</li>
+              <img src={sukso} alt = "sukso" id='sukso'/>
+              <li>#숙소</li>
             </button>
 
             <button className='FilterIcons' onClick={filterOn}>
