@@ -141,14 +141,14 @@ function RecommendCourse() {
         ?<Loading />
         :<div className="recommend_course_container">
           <div className="recommend_course_list active">
-          {/* <Swiper
+          <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          > */}
+          >
           {gangneungCourse.map((course, index) => (
-            // <SwiperSlide>
+            <SwiperSlide>
             <div className="recommend_course_item" key={index}>
             {RecommendImg.gangneung.map((img)=>(
             <>
@@ -180,21 +180,20 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-
-          // </SwiperSlide>
+            </SwiperSlide>
           ))}
-          {/* </Swiper> */}
+          </Swiper>
           </div>
 
           <div className="recommend_course_list">
-          {/* <Swiper
+          <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          > */}
+          >
           {seoulCourse.map((course, index) => (
-            // <SwiperSlide>
+            <SwiperSlide>
             <div className="recommend_course_item" key={index}>
             {RecommendImg.seoul.map((img)=>(
             <>
@@ -226,20 +225,20 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            // </SwiperSlide>
+            </SwiperSlide>
           ))}
-            {/* </Swiper> */}
+            </Swiper>
           </div>
 
           <div className="recommend_course_list">
-          {/* <Swiper
+          <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          > */}
+          >
           {busanCourse.map((course, index) => (
-            // <SwiperSlide>
+            <SwiperSlide>
             <div className="recommend_course_item" key={index}>
             {RecommendImg.busan.map((img)=>(
             <>
@@ -271,21 +270,21 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            // </SwiperSlide>
+            </SwiperSlide>
           ))}
-            {/* </Swiper> */}
+            </Swiper>
           </div>
 
           <div className="recommend_course_list">
-          {/* <Swiper
+          <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          > */}
+          >
           {incheonCourse.map((course, index) => (
             
-            // <SwiperSlide>
+            <SwiperSlide>
             <div className="recommend_course_item" key={index}>
             {RecommendImg.incheon.map((img)=>(
               <>
@@ -317,20 +316,20 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            // </SwiperSlide>
+            </SwiperSlide>
           ))}
-          {/* </Swiper> */}
+          </Swiper>
           </div>
 
           <div className="recommend_course_list">
-          {/* <Swiper
+          <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
             navigation
             pagination={{clickable: true}}
-          > */}
+          >
           {jejuCourse.map((course, index) => (
-            // <SwiperSlide>
+            <SwiperSlide>
             <div className="recommend_course_item" key={index}>
             {RecommendImg.jeju.map((img)=>(
               <>
@@ -362,9 +361,9 @@ function RecommendCourse() {
                 {course.travelerinfo.replace(/<br>/gdi,"\n")}
               </div>
             </div>
-            // </SwiperSlide>
+            </SwiperSlide>
           ))}
-          {/* </Swiper> */}
+          </Swiper>
           </div>
         </div>
         }
