@@ -427,6 +427,10 @@ const CourseAdd = (props) => {
                     {!changeNum2 ? "+" : "2"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"10%"}}>
+                    123km
+                </div>
+
                 <CourseList listTop="13%">
                     <div className="course-add-title">{result2.p_name}</div>
                     <div className="course-add-cate">▶{result2.category}</div>
@@ -464,6 +468,10 @@ const CourseAdd = (props) => {
                     {!changeNum3 ? "+" : "3"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"21%"}}>
+                    123km
+                </div>
+
                 <CourseList listTop="24%">
                     <div className="course-add-title">{result3.p_name}</div>
                     <div className="course-add-cate">▶{result3.category}</div>
@@ -476,8 +484,8 @@ const CourseAdd = (props) => {
                     <div className="modal_course_list">
                         {currentPosts(cardList).map((card, index) => {
                             return (
-                                <div key={card.l_num} className="modal_course_container" card = {card}>
-                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult2}/>
+                                <div className="modal_course_container" card = {card}>
+                                    <CourseResultCard key={card.l_num} card={card} setResult={setResult3}/>
                                 </div>
                             );
                         })}      
@@ -501,6 +509,11 @@ const CourseAdd = (props) => {
                 <CourseNum className="add-course" backColor="#F7EA70" onClick={courseModalClick} top="36%">
                     {!changeNum4 ? "+" : "4"}
                 </CourseNum>
+
+                
+                <div className={styles.course_between_distance} style={{top:"32%"}}>
+                    123km
+                </div>
 
                 <CourseList listTop="35%">
                     <div className="course-add-title">{result4.p_name}</div>
@@ -541,6 +554,10 @@ const CourseAdd = (props) => {
                     {!changeNum5 ? "+" : "5"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"43%"}}>
+                    123km
+                </div>
+
                 <CourseList listTop="46%">
                     <div className="course-add-title">{result5.p_name}</div>
                     <div className="course-add-cate">▶{result5.category}</div>
@@ -579,6 +596,10 @@ const CourseAdd = (props) => {
                     {!changeNum6 ? "+" : "6"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"54%"}}>
+                    123km
+                </div>
+
                 <CourseList listTop="57%">
                     <div className="course-add-title">{result6.p_name}</div>
                     <div className="course-add-cate">▶{result6.category}</div>
@@ -616,7 +637,11 @@ const CourseAdd = (props) => {
                 <CourseNum className="add-course" onClick={courseModalClick} top="69%">
                     {!changeNum7 ? "+" : "7"}
                 </CourseNum>
-
+                
+                <div className={styles.course_between_distance} style={{top:"65%"}}>
+                    123km
+                </div>
+                
                 <CourseList listTop="68%">
                     <div className="course-add-title">{result7.p_name}</div>
                     <div className="course-add-cate">▶{result7.category}</div>
@@ -654,6 +679,10 @@ const CourseAdd = (props) => {
                     {!changeNum8 ? "+" : "8"}
                 </CourseNum>
 
+                <div className={styles.course_between_distance} style={{top:"76%"}}>
+                    123km
+                </div>
+                
                 <CourseList listTop="79%">
                     <div className="course-add-title">{result8.p_name}</div>
                     <div className="course-add-cate">▶{result8.category}</div>
@@ -691,6 +720,10 @@ const CourseAdd = (props) => {
                 <CourseNum className="add-course" onClick={courseModalClick} top="91%">
                     {!changeNum9 ? "+" : "9"}
                 </CourseNum>
+
+                <div className={styles.course_between_distance} style={{top:"87%"}}>
+                    123km
+                </div>
 
                 <CourseList listTop="90%">
                     <div className="course-add-title">{result9.p_name}</div>
