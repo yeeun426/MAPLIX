@@ -317,12 +317,22 @@ const CourseAdd = (props) => {
             alert("내용을 입력해주세요.")
         }
         else {
-            axios.post("http://localhost:8000/api/coursecreate", formData, config)
-            .then((response) => {
-                console.log(response);
-                alert("내 코스 만들기 완료")
-                setcourseCreateModal(false)
-            })
+            if (img.file == null){
+                axios.post("http://localhost:8000/api/coursecreate", {id, mc_title, mc_content, count, course1, course2, course3, course4, course5, course6, course7, course8, course9})
+                .then((response) => {
+                    console.log(response);
+                    alert("내 코스 만들기 완료")
+                    setcourseCreateModal(false)
+                })
+            }
+            else {
+                axios.post("http://localhost:8000/api/coursecreateimg", formData, config)
+                .then((response) => {
+                    console.log(response);
+                    alert("내 코스 만들기 완료")
+                    setcourseCreateModal(false)
+                })
+            }
         }
       };
 
@@ -679,7 +689,7 @@ const CourseAdd = (props) => {
             :null}
 
 
-            <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}}><img src={checkcourse} alt="checkcourse" /></button>
+            {/* <button className={styles.course_sea_btn} onClick={()=>{setCourseSea(true);}}><img src={checkcourse} alt="checkcourse" /></button> */}
             <button className={styles.course_create_btn} onClick={courseCreate}><img src={addcourse} alt="addcourse" /></button>
             {courseCreateModal ?
             <div className={styles.course_modal}>

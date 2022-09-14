@@ -33,8 +33,8 @@ function Navbar() {
               if (window.localStorage.getItem("nick_name") != undefined) return (<li style={{marginRight: "10px"}}>{window.localStorage.getItem("nick_name")}님</li>);
             })()
           }
-          <li><Link to ='/Request'>CONSULTATION</Link></li>
-          <li id="cart"><Link to='/mypage'>CART</Link></li>
+          {/* <li><Link to ='/Request'>CONSULTATION</Link></li> */}
+          <li id="cart"><Link to='/mypage'>MYPAGE</Link></li>
           {
             (function() {
               if (window.localStorage.getItem("nick_name") == undefined) return (<li><Link to='/login'>LOGIN</Link></li>);
@@ -45,7 +45,7 @@ function Navbar() {
       </div>
           
       <div className="navbar_menu">
-        <li><Link to ="/">Search</Link></li>
+        <li><Link to ="/search/title">Search</Link></li>
         <li><Link to ="/course">Course</Link></li>
         <li><Link to ="/recommend">Recommend</Link></li>
         <li><Link to ="/community">Community</Link></li>
